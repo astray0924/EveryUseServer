@@ -1,6 +1,9 @@
 <p id="notice">
 	<%= notice %>
 </p>
+
+<%= image_tag @use_case.photo.url(:small) %>
+
 <p>
 	<b>Writer:</b>
 	<%= User.find(@use_case.user_id).username %>
