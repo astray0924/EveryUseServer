@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Writer</th>
     <th>Product</th>
     <th>Function</th>
     <th>Place</th>
@@ -12,6 +13,7 @@
 
 <% @use_cases.each do |use_case| %>
   <tr>
+    <td><%= current_user.username %></td>
     <td><%= use_case.product %></td>
     <td><%= use_case.function %></td>
     <td><%= use_case.place %></td>

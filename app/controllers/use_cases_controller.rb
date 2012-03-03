@@ -1,4 +1,6 @@
 class UseCasesController < ApplicationController
+  helper :all
+  
   # GET /use_cases
   # GET /use_cases.json
   def index
@@ -44,7 +46,7 @@ class UseCasesController < ApplicationController
 
     respond_to do |format|
       if @use_case.save
-        format.html { redirect_to @use_case, notice: 'Use case was successfully created.' }
+        format.html { redirect_to @use_case, notice: 'Use case was successfully created.'}
         format.json { render json: @use_case, status: :created, location: @use_case }
       else
         format.html { render action: "new" }
