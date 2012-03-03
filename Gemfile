@@ -21,6 +21,8 @@ gem 'jquery-rails'
 
 gem 'authlogic'
 
+gem 'paperclip'
+
 group :development, :test do
   gem 'sqlite3'
 end
