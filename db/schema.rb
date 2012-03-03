@@ -10,3 +10,15 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
+
+ActiveRecord::Schema.define(:version => 20120303084718) do
+
+  create_table "use_cases", :force => true do |t|
+    t.string   "product"
+    t.string   "function"
+    t.string   "place"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+end

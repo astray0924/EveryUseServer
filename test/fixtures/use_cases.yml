@@ -3,13 +3,9 @@
 one:
   product: MyString
   function: MyString
-  place: MyString
-  tags: MyString
-  uploadDateTime: 2012-03-03 14:13:05
+  place: 
 
 two:
   product: MyString
   function: MyString
-  place: MyString
-  tags: MyString
-  uploadDateTime: 2012-03-03 14:13:05
+  place: 

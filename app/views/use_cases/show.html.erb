@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Product:</b>
+  <%= @use_case.product %>
+</p>
+
+<p>
+  <b>Function:</b>
+  <%= @use_case.function %>
+</p>
+
+<p>
+  <b>Place:</b>
+  <%= @use_case.place %>
+</p>
+
+
+<%= link_to 'Edit', edit_use_case_path(@use_case) %> |
+<%= link_to 'Back', use_cases_path %>
