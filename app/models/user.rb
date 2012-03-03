@@ -1,6 +1,3 @@
 class User < ActiveRecord::Base
-  acts_as_authentic do |config|
-    # Add custom configuration options here.
-    config.crypto_provider = Authlogic::CryptoProviders::MD5
-  end
+  acts_as_authentic
 end
