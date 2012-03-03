@@ -18,8 +18,8 @@ test:
   pool: 5
   timeout: 5000
 
-development:
-  adapter: mysql2
+production:
+  adapter: mysql
   encoding: utf8
   database: wikiuse
   pool: 5

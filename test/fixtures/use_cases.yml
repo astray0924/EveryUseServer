@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product: MyString
+  function: MyString
+  place: MyString
+  tags: MyString
+  uploadDateTime: 2012-03-03 14:13:05
+
+two:
+  product: MyString
+  function: MyString
+  place: MyString
+  tags: MyString
+  uploadDateTime: 2012-03-03 14:13:05
