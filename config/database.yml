@@ -19,7 +19,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql
+  adapter: postgresql
   encoding: utf8
   database: wikiuse
   pool: 5
