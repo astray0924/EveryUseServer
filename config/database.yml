@@ -21,8 +21,3 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  database: wikiuse
-  pool: 5
-  username: wikiuse
-  password: wikiusedb
-  socket: /tmp/mysql.sock
