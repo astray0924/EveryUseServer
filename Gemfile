@@ -25,6 +25,8 @@ gem 'paperclip'
 
 gem "cancan"
 
+gem "will_paginate"
+
 group :development, :test do
   gem 'sqlite3'
 end
