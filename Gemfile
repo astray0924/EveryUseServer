@@ -23,6 +23,8 @@ gem 'authlogic'
 
 gem 'paperclip'
 
+gem "cancan"
+
 group :development, :test do
   gem 'sqlite3'
 end
