@@ -43,6 +43,9 @@ class UseCasesController < ApplicationController
   # POST /use_cases
   # POST /use_cases.json
   def create
+    # user_id 를 현재 사용자의 것으로 입력.
+    # TODO: 좀더 깔끔하게 하기 위해 UseCase의 생성자로 넘기는 방법 연구 필요
+    params[:use_case][:user_id] = current_user.id
     @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|
