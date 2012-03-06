@@ -1,4 +1,5 @@
 class UseCase < ActiveRecord::Base
+  has_many :comment
   belongs_to :user, :dependent => :destroy
 
   has_attached_file :photo, :styles => {:thumb => "100x100#", :large => "400x400>"},
