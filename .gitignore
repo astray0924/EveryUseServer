@@ -26,3 +26,4 @@
 _svn
 svn-commit*.tmp
 public/photos
+db/development.sqlite3

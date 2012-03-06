@@ -1,4 +1,6 @@
 WikiUse::Application.routes.draw do
+  resources :comments
+
   resources :users, :user_sessions
   resources :use_cases
   
