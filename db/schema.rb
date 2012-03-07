@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307112929) do
+ActiveRecord::Schema.define(:version => 20120307123228) do
 
   create_table "comments", :force => true do |t|
     t.boolean  "fun",         :default => false, :null => false
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20120307112929) do
     t.integer  "user_id"
     t.integer  "use_case_id"
   end
+
+  add_index "comments", ["user_id", "use_case_id"], :name => "index_comments_on_user_id_and_use_case_id", :unique => true
 
   create_table "use_cases", :force => true do |t|
     t.string   "product"
