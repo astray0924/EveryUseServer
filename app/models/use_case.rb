@@ -1,6 +1,6 @@
 class UseCase < ActiveRecord::Base
-  has_many :comment
-  belongs_to :user, :dependent => :destroy
+  has_many :comment, :dependent => :destroy
+  belongs_to :user
 
   has_attached_file :photo, :styles => {:thumb => "100x100#", :large => "400x400>"},
                     :url => "/:attachment/:id/:style/:basename.:extension",
