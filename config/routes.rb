@@ -1,7 +1,7 @@
 WikiUse::Application.routes.draw do
   resources :comments
-
-  resources :users, :user_sessions
+  resources :users 
+  resources :user_sessions
   resources :use_cases
   
   match 'login' => 'user_sessions#new', :as => :login

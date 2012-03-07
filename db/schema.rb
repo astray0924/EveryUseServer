@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120306172302) do
+ActiveRecord::Schema.define(:version => 20120307112929) do
 
   create_table "comments", :force => true do |t|
     t.boolean  "fun",         :default => false, :null => false
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20120306172302) do
   create_table "use_cases", :force => true do |t|
     t.string   "product"
     t.string   "function"
-    t.string   "place"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.integer  "user_id"
