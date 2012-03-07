@@ -1,7 +1,8 @@
 <h1>Listing use_cases</h1>
 
-<table>
+<table class='cases'>
   <tr>
+  	<th>Id</th>
     <th>Photo</th>
     <th>Writer</th>
     <th>Product</th>
@@ -13,6 +14,7 @@
 
 <% @use_cases.each do |use_case| %>
   <tr>
+  	<td><%= use_case.id %></td>
     <td><%= image_tag use_case.photo.url(:thumb) %></td>
 	<td><%= User.find(use_case.user_id).username %></td>
     <td><%= use_case.product %></td>

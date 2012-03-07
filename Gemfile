@@ -32,8 +32,7 @@ group :development, :test do
 end
 
 group :production do
-# gems specifically for Heroku go here
-  gem "pg"
+  gem "mysql2"
 end
 
 # To use ActiveModel has_secure_password

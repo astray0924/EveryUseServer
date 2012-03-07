@@ -19,5 +19,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
+  adapter: mysql2
+  host: localhost
+  username: root
+  password: root
+  database: wikiuse
   encoding: utf8
+  pool: 5
+  timeout: 5000
