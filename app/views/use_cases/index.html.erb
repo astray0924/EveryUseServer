@@ -6,7 +6,6 @@
     <th>Writer</th>
     <th>Product</th>
     <th>Function</th>
-    <th>Place</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +17,6 @@
 	<td><%= User.find(use_case.user_id).username %></td>
     <td><%= use_case.product %></td>
     <td><%= use_case.function %></td>
-    <td><%= use_case.place %></td>
     <td><%= link_to 'Show', use_case %></td>
     <td><%= link_to 'Edit', edit_use_case_path(use_case) %></td>
     <td><%= link_to 'Destroy', use_case, confirm: 'Are you sure?', method: :delete %></td>
