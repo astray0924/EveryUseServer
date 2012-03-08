@@ -27,7 +27,7 @@ gem "cancan"
 
 gem 'will_paginate', '~> 3.0'
 
-gem "eventmachine"
+gem "eventmachine", '1.0.0.beta.4.1'
 
 gem "thin"
 
