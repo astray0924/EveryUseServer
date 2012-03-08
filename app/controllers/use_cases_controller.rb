@@ -1,15 +1,6 @@
 class UseCasesController < ApplicationController
   helper :all
   before_filter :require_login, :only => [:new, :edit, :create, :update]
-  
-  def product
-    
-  end
-  
-  def function
-    
-  end
-  
   # GET /use_cases
   # GET /use_cases.json
   def index
@@ -94,4 +85,53 @@ class UseCasesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # Grouped View
+  def product
+    @grouped = get_grouped_data('product')
+
+    respond_to do |format|
+      format.html { render 'group.html.erb' }
+      format.json { render json: @grouped }
+    end
+  end
+
+  def function
+    @grouped = get_grouped_data('function')
+
+    respond_to do |format|
+      format.html { render 'group.html.erb' }
+      format.json { render json: @grouped }
+    end
+  end
+
+  def user
+    @grouped = get_grouped_data('user_id')
+
+    respond_to do |format|
+      format.html { render 'group.html.erb' }
+      format.json { render json: @grouped }
+    end
+  end
+
+  private
+
+  def get_grouped_data(key_name)
+    @reduced = UseCase.group(key_name)
+    @nested = Hash.new
+
+    @reduced.each do |use_case|
+      @key = use_case[key_name]
+
+      if @nested[@key].nil?
+        @nested[@key] = Array.new
+      end
+
+      @data = UseCase.where(key_name + " = ?", @key)
+      @nested[@key].push(@data)
+    end
+    
+    return @nested
+  end
+
 end

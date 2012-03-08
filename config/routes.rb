@@ -9,6 +9,7 @@ WikiUse::Application.routes.draw do
     collection do
       get 'product'
       get 'function'
+      get 'user'
     end
   end
   

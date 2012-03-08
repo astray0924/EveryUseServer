@@ -124,6 +124,7 @@ DEPENDENCIES
   authlogic
   cancan
   coffee-rails (~> 3.2.1)
+  eventmachine
   jquery-rails
   mysql2
   paperclip
