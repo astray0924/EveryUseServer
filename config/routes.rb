@@ -1,10 +1,10 @@
 WikiUse::Application.routes.draw do
   resources :comments
-  
-  resources :users 
-  
+
+  resources :users
+
   resources :user_sessions
-  
+
   resources :use_cases do
     collection do
       get 'product'
@@ -12,11 +12,10 @@ WikiUse::Application.routes.draw do
       get 'user'
     end
   end
-  
+
   # login/logout routing
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
-  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -69,9 +68,9 @@ WikiUse::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'use_cases#index'
 
-  # See how all your routes lay out with "rake routes"
+# See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+# This is a legacy wild controller route that's not recommended for RESTful applications.
+# Note: This route will make all actions in every controller accessible via GET requests.
+# match ':controller(/:action(/:id))(.:format)'
 end
