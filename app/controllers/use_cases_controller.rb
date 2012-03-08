@@ -2,6 +2,14 @@ class UseCasesController < ApplicationController
   helper :all
   before_filter :require_login, :only => [:new, :edit, :create, :update]
   
+  def product
+    
+  end
+  
+  def function
+    
+  end
+  
   # GET /use_cases
   # GET /use_cases.json
   def index

@@ -27,6 +27,10 @@ gem "cancan"
 
 gem "will_paginate"
 
+gem "eventmachine"
+
+gem "thin"
+
 group :development, :test do
   gem 'sqlite3'
 end
