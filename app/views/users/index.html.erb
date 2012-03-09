@@ -1,5 +1,7 @@
 <h1>Listing users</h1>
-<p id="notice"><%= notice %></p>
+<p id="notice">
+	<%= notice %>
+</p>
 <table>
 	<tr>
 		<th>Username</th>
@@ -18,5 +20,10 @@
 	</tr>
 	<% end %>
 </table>
-<br />
-<%= link_to 'New User', new_user_path %> 
+
+<!-- Pagination -->
+<%= will_paginate @users, :class => 'digg_pagination' %>
+
+<p>
+	<%= link_to 'New User', new_user_path %>
+</p>
