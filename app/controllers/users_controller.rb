@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @page, @limit = get_pagination_params(params)
-    @users = User.page(@page).order('id DESC')
+    @users = User.paginate(:page => @page, :per_page => @limit).order('id DESC')
 
     respond_to do |format|
       format.html # index.html.erb

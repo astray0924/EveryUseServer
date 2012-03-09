@@ -4,8 +4,8 @@ class UseCasesController < ApplicationController
   # GET /use_cases
   # GET /use_cases.json
   def index
-    @page, @limit = get_pagination_params(params)
-    @use_cases = UseCase.page(@page).order('id DESC')
+    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
+    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -86,7 +86,7 @@ class UseCasesController < ApplicationController
 
   # Grouped View
   def product
-    @page, @limit = get_pagination_params(params)
+    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit)
     @grouped, @reduced = get_grouped_data('product', @page)
 
     respond_to do |format|
@@ -96,7 +96,7 @@ class UseCasesController < ApplicationController
   end
 
   def function
-    @page, @limit = get_pagination_params(params)
+    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit)
     @grouped, @reduced = get_grouped_data('function', @page)
 
     respond_to do |format|
@@ -106,7 +106,7 @@ class UseCasesController < ApplicationController
   end
 
   def user
-    @page, @limit = get_pagination_params(params)
+    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit)
     @grouped, @reduced = get_grouped_data('user_id', @page)
 
     respond_to do |format|
