@@ -1,72 +1,84 @@
 WikiUse::Application.routes.draw do
-  resources :comments
+	resources :comments do
+		# match 'page/:page' => 'comments#index', :via => :get, :constraints => { :page => /\d+/ }
+		# match ':action/page/:page', :via => :get, :constraints => { :page => /\d+/ }
+	end
 
-  resources :users
+	resources :users do
+		# match 'page/:page' => 'users#index', :via => :get, :constraints => { :page => /\d+/ }
+		# match ':action/page/:page', :via => :get, :constraints => { :page => /\d+/ }
+	end
 
-  resources :user_sessions
+	resources :user_sessions
 
-  resources :use_cases do
-    collection do
-      get 'product'
-      get 'function'
-      get 'user'
-    end
-  end
+	resources :use_cases do
+		collection do
+			# match 'page/:page' => 'use_cases#index', :via => :get, :constraints => { :page => /\d+/ }
+			# match ':action/page/:page', :via => :get, :constraints => { :page => /\d+/ }
+			get 'product'
+			get 'function'
+			get 'user'
+		end
+	end
+	
+	# pagination
+	match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
+	match ':controller/:action/page/:page' => ':controller#:action', :via => :get, :constraints => { :page => /\d+/ }
 
-  # login/logout routing
-  match 'login' => 'user_sessions#new', :as => :login
-  match 'logout' => 'user_sessions#destroy', :as => :logout
+	# login/logout routing
+	match 'login' => 'user_sessions#new', :as => :login
+	match 'logout' => 'user_sessions#destroy', :as => :logout
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+	# The priority is based upon order of creation:
+	# first created -> highest priority.
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+	# Sample of regular route:
+	#   match 'products/:id' => 'catalog#view'
+	# Keep in mind you can assign values other than :controller and :action
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+	# Sample of named route:
+	#   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+	# This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+	# Sample resource route (maps HTTP verbs to controller actions automatically):
+	#   resources :products
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+	# Sample resource route with options:
+	#   resources :products do
+	#     member do
+	#       get 'short'
+	#       post 'toggle'
+	#     end
+	#
+	#     collection do
+	#       get 'sold'
+	#     end
+	#   end
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+	# Sample resource route with sub-resources:
+	#   resources :products do
+	#     resources :comments, :sales
+	#     resource :seller
+	#   end
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+	# Sample resource route with more complex sub-resources
+	#   resources :products do
+	#     resources :comments
+	#     resources :sales do
+	#       get 'recent', :on => :collection
+	#     end
+	#   end
 
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+	# Sample resource route within a namespace:
+	#   namespace :admin do
+	#     # Directs /admin/products/* to Admin::ProductsController
+	#     # (app/controllers/admin/products_controller.rb)
+	#     resources :products
+	#   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'use_cases#index'
+	# You can have the root of your site routed with "root"
+	# just remember to delete public/index.html.
+	root :to => 'use_cases#index'
 
 # See how all your routes lay out with "rake routes"
 
