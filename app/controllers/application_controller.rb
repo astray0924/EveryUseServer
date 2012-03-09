@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
-	protect_from_forgery
+	# protect_from_forgery
 	helper_method :current_user
+	
 	# set per_page globally
 	WillPaginate.per_page = 10
-
+	
 	protected
 	def current_user_session
 		return @current_user_session if defined?(@current_user_session)
