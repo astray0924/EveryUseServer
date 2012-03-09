@@ -4,7 +4,7 @@ class UseCasesController < ApplicationController
   # GET /use_cases
   # GET /use_cases.json
   def index
-    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
+    @page, @limit = get_pagination_params(params)
     @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
 
     respond_to do |format|
@@ -86,8 +86,8 @@ class UseCasesController < ApplicationController
 
   # Grouped View
   def product
-    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit)
-    @grouped, @reduced = get_grouped_data('product', @page)
+    @page, @limit = get_pagination_params(params)
+    @grouped, @reduced = get_grouped_data('product', @page, @limit)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -96,8 +96,7 @@ class UseCasesController < ApplicationController
   end
 
   def function
-    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit)
-    @grouped, @reduced = get_grouped_data('function', @page)
+    @grouped, @reduced = get_grouped_data('function', @page, @limit)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -106,8 +105,7 @@ class UseCasesController < ApplicationController
   end
 
   def user
-    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit)
-    @grouped, @reduced = get_grouped_data('user_id', @page)
+    @grouped, @reduced = get_grouped_data('user_id', @page, @limit)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -117,8 +115,8 @@ class UseCasesController < ApplicationController
 
   private
 
-  def get_grouped_data(key_name, page)
-    @reduced = UseCase.group(key_name).page(page)
+  def get_grouped_data(key_name, page, limit)
+    @reduced = UseCase.group(key_name).paginate(:page => @page, :per_page => @limit)
     @nested = Hash.new
 
     @reduced.each do |use_case|
