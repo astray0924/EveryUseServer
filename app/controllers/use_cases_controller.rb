@@ -4,7 +4,8 @@ class UseCasesController < ApplicationController
   # GET /use_cases
   # GET /use_cases.json
   def index
-    @use_cases = UseCase.all
+    @page = (params[:page] || 1)
+    @use_cases = UseCase.page(@page).order('id DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -88,7 +89,8 @@ class UseCasesController < ApplicationController
 
   # Grouped View
   def product
-    @grouped = get_grouped_data('product')
+    @page = params[:page]
+    @grouped, @reduced = get_grouped_data('product', @page)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -97,7 +99,8 @@ class UseCasesController < ApplicationController
   end
 
   def function
-    @grouped = get_grouped_data('function')
+    @page = params[:page]
+    @grouped, @reduced = get_grouped_data('function', @page)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -106,7 +109,8 @@ class UseCasesController < ApplicationController
   end
 
   def user
-    @grouped = get_grouped_data('user_id')
+    @page = params[:page]
+    @grouped, @reduced = get_grouped_data('user_id', @page)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -116,8 +120,8 @@ class UseCasesController < ApplicationController
 
   private
 
-  def get_grouped_data(key_name)
-    @reduced = UseCase.group(key_name)
+  def get_grouped_data(key_name, page)
+    @reduced = UseCase.group(key_name).page(page)
     @nested = Hash.new
 
     @reduced.each do |use_case|
@@ -131,7 +135,7 @@ class UseCasesController < ApplicationController
       @nested[@key].push(@data)
     end
     
-    return @nested
+    return [@nested, @reduced]
   end
 
 end

@@ -1,20 +1,12 @@
 WikiUse::Application.routes.draw do
-	resources :comments do
-		# match 'page/:page' => 'comments#index', :via => :get, :constraints => { :page => /\d+/ }
-		# match ':action/page/:page', :via => :get, :constraints => { :page => /\d+/ }
-	end
+	resources :comments
 
-	resources :users do
-		# match 'page/:page' => 'users#index', :via => :get, :constraints => { :page => /\d+/ }
-		# match ':action/page/:page', :via => :get, :constraints => { :page => /\d+/ }
-	end
+	resources :users
 
 	resources :user_sessions
 
 	resources :use_cases do
 		collection do
-			# match 'page/:page' => 'use_cases#index', :via => :get, :constraints => { :page => /\d+/ }
-			# match ':action/page/:page', :via => :get, :constraints => { :page => /\d+/ }
 			get 'product'
 			get 'function'
 			get 'user'
@@ -22,8 +14,8 @@ WikiUse::Application.routes.draw do
 	end
 	
 	# pagination
-	match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
-	match ':controller/:action/page/:page' => ':controller#:action', :via => :get, :constraints => { :page => /\d+/ }
+	# match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
+	# match ':controller/:action/page/:page' => ':controller#:action', :via => :get, :constraints => { :page => /\d+/ }
 
 	# login/logout routing
 	match 'login' => 'user_sessions#new', :as => :login

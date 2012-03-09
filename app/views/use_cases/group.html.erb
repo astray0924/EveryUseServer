@@ -1,11 +1,11 @@
 <h1>Grouped use_case</h1>
-
-<% @grouped.each_key do |key| %>
-<h2><%= key %></h2>
-
+<% @grouped.each_key do |key| %> <h2><%= key %></h2>
 <ul>
 	<% @grouped[key].each do |item| %>
-	
+
 	<% end %>
 </ul>
 <% end %>
+
+<!-- Pagination -->
+<%= will_paginate @reduced, :class => 'digg_pagination' %>

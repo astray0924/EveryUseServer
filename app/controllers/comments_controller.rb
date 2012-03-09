@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all
+    @page = params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
