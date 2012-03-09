@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
+  helper :all
   # GET /comments
   # GET /comments.json
   def index
+    @page, @limit = get_pagination_params(params)
     @comments = Comment.all
-    @page = params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

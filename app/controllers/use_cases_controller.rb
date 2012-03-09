@@ -4,7 +4,7 @@ class UseCasesController < ApplicationController
   # GET /use_cases
   # GET /use_cases.json
   def index
-    @page = (params[:page] || 1)
+    @page, @limit = get_pagination_params(params)
     @use_cases = UseCase.page(@page).order('id DESC')
 
     respond_to do |format|
@@ -43,10 +43,7 @@ class UseCasesController < ApplicationController
   # POST /use_cases
   # POST /use_cases.json
   def create
-    # user_id 를 현재 사용자의 것으로 입력.
-    # TODO: 좀더 깔끔하게 하기 위해 UseCase의 생성자로 넘기는 방법 연구 필요
     params[:use_case][:user_id] = current_user.id
-    @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|
       if @use_case.save
@@ -89,7 +86,7 @@ class UseCasesController < ApplicationController
 
   # Grouped View
   def product
-    @page = params[:page]
+    @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('product', @page)
 
     respond_to do |format|
@@ -99,7 +96,7 @@ class UseCasesController < ApplicationController
   end
 
   def function
-    @page = params[:page]
+    @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('function', @page)
 
     respond_to do |format|
@@ -109,7 +106,7 @@ class UseCasesController < ApplicationController
   end
 
   def user
-    @page = params[:page]
+    @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('user_id', @page)
 
     respond_to do |format|
@@ -134,7 +131,7 @@ class UseCasesController < ApplicationController
       @data = UseCase.where(key_name + " = ?", @key)
       @nested[@key].push(@data)
     end
-    
+
     return [@nested, @reduced]
   end
 

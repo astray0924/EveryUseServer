@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	# protect_from_forgery
-	helper_method :current_user
+	helper_method :current_user, :get_pagination_params
 	
 	# set per_page globally
 	WillPaginate.per_page = 10
@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
 		return @current_user if defined?(@current_user)
 		@current_user = current_user_session && current_user_session.record
 	end
+	  
+  def get_pagination_params(params)
+    @page = (params[:page] || 1)
+    @limit = (params[:limit] || 10)
+    
+    return @page, @limit
+  end
 
 	private
 

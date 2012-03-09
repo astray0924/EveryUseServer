@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  helper :all
   # GET /users
   # GET /users.json
   def index
-    @page = params[:page]
+    @page, @limit = get_pagination_params(params)
     @users = User.page(@page).order('id DESC')
 
     respond_to do |format|
