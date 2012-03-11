@@ -96,6 +96,7 @@ class UseCasesController < ApplicationController
   end
 
   def function
+    @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('function', @page, @limit)
 
     respond_to do |format|
@@ -105,6 +106,7 @@ class UseCasesController < ApplicationController
   end
 
   def user
+    @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('user_id', @page, @limit)
 
     respond_to do |format|
@@ -116,7 +118,7 @@ class UseCasesController < ApplicationController
   private
 
   def get_grouped_data(key_name, page, limit)
-    @reduced = UseCase.group(key_name).paginate(:page => @page, :per_page => @limit)
+    @reduced = UseCase.group(key_name).paginate(:page => page, :per_page => limit)
     @nested = Hash.new
 
     @reduced.each do |use_case|
