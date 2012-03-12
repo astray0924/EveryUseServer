@@ -7,6 +7,12 @@ class UseCasesController < ApplicationController
     @page, @limit = get_pagination_params(params)
     @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
 
+    if params[:user_id]
+      @use_cases = @use_cases.where("user_id = ?", params[:user_id])
+    else
+    @use_cases = @use_cases.all
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @use_cases }
