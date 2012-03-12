@@ -112,16 +112,6 @@ class UseCasesController < ApplicationController
     end
   end
 
-  def user
-    @page, @limit = get_pagination_params(params)
-    @grouped, @reduced = get_grouped_data('user_id', @page, @limit)
-
-    respond_to do |format|
-      format.html { render 'group.html.erb' }
-      format.json { render json: @grouped }
-    end
-  end
-
   private
 
   def get_grouped_data(key_name, page, limit)
