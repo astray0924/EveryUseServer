@@ -2,7 +2,7 @@ WikiUse::Application.routes.draw do
 	resources :comments
 
 	resources :users do
-	  resources :use_cases
+		resources :use_cases
 	end
 
 	resources :user_sessions
@@ -14,7 +14,7 @@ WikiUse::Application.routes.draw do
 			get 'user'
 		end
 	end
-	
+
 	# pagination
 	# match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
 	# match ':controller/:action/page/:page' => ':controller#:action', :via => :get, :constraints => { :page => /\d+/ }
