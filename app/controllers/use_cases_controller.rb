@@ -49,7 +49,8 @@ class UseCasesController < ApplicationController
   # POST /use_cases
   # POST /use_cases.json
   def create
-    params[:use_case][:user_id] = current_user.id
+  	params[:use_case][:user_id] = current_user.id
+    @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|
       if @use_case.save
