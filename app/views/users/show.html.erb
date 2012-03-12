@@ -10,5 +10,10 @@
   <%= @user.email %>
 </p>
 
+<p>
+	<b>Use Cases:</b>
+	<%= link_to 'See use cases', user_use_cases_path(@user) %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
