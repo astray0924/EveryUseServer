@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
 	end
 	  
   def get_pagination_params(params)
-    @page = (Integer(params[:page]) || 1)
+    @page = (params[:page] || 1)
+    @page = Integer(@page)
     
     # filter the page value
     if @page <= 0
