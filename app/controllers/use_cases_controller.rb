@@ -125,21 +125,29 @@ class UseCasesController < ApplicationController
   private
 
   def get_grouped_data(key_name, page, limit)
-    @reduced = UseCase.group(key_name).paginate(:page => page, :per_page => limit)
+    @use_cases = UseCase.order(key_name)
     @nested = Hash.new
-
-    @reduced.each do |use_case|
+    @reduced = Array.new
+    
+    @use_cases.each do |use_case|
       @key = use_case[key_name]
-
+      
       if @nested[@key].nil?
         @nested[@key] = Array.new
       end
-
-      @data = UseCase.where(key_name + " = ?", @key)
-      @nested[@key].push(@data)
+      
+      @nested[@key].push(use_case)
     end
-
-    return [@nested, @reduced]
+    
+    
+    @reduced = @nested.keys.paginate(:page => @page, :per_page => @limit)
+    
+    @paged_nested = Hash.new
+    @reduced.each do |key|
+      @paged_nested[key] = @nested[key]
+    end
+       
+    return @paged_nested, @reduced
   end
 
 end

@@ -1,10 +1,11 @@
 <h1>Grouped use_case</h1>
-<% @grouped.each_key do |key| %> <h2><%= key %></h2>
-<ul>
-	<% @grouped[key].each do |item| %>
-
-	<% end %>
-</ul>
+<% @grouped.each do |key, value| %>
+	<h2><%= key %></h2>
+	<ul>
+		<% value.each do |use_case| %>
+		<li><%= [use_case.product, use_case.function] %></li>
+		<% end %>
+	</ul>
 <% end %>
 
 <!-- Pagination -->

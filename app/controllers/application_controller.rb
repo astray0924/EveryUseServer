@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  require 'will_paginate/array'
+  
 	# protect_from_forgery
 	helper_method :current_user, :get_pagination_params
 	
