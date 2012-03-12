@@ -125,7 +125,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   eventmachine (= 1.0.0.beta.4.1)
-  jquery-rails
+  jquery-rails (>= 1.0.12)
   mysql2
   paperclip
   rails (= 3.2.1)
