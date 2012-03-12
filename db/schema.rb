@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307123228) do
+ActiveRecord::Schema.define(:version => 20120312013128) do
 
   create_table "comments", :force => true do |t|
     t.boolean  "fun",         :default => false, :null => false
@@ -28,13 +28,14 @@ ActiveRecord::Schema.define(:version => 20120307123228) do
   create_table "use_cases", :force => true do |t|
     t.string   "product"
     t.string   "function"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "user_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "comments_count",     :default => 0
   end
 
   create_table "user_sessions", :force => true do |t|
@@ -48,8 +49,10 @@ ActiveRecord::Schema.define(:version => 20120307123228) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "comments_count",    :default => 0
+    t.integer  "use_cases_count",   :default => 0
   end
 
 end

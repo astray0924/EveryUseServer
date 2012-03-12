@@ -1,11 +1,16 @@
 WikiUse::Application.routes.draw do
 	resources :comments
 
-	resources :users
+	resources :users do
+	  resources :use_cases
+	  resources :comments
+	end
 
 	resources :user_sessions
 
 	resources :use_cases do
+	  resources :comments
+	  
 		collection do
 			get 'product'
 			get 'function'
