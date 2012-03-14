@@ -1,5 +1,5 @@
 class UseCase < ActiveRecord::Base
-  belongs_to :user, :counter_cache => true
+  belongs_to :user, :counter_cache => true, :include => :user
   has_many :comments, :dependent => :nullify
 
   has_attached_file :photo, :styles => {:thumb => "50x50#", :large => "400x400>"},
@@ -10,4 +10,12 @@ class UseCase < ActiveRecord::Base
   # validates_attachment_size :photo, :less_than => 5.megabytes 
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/bmp']
   validates :user_id, :presence => true
+  
+  def as_json(options)
+  	super(:methods => [:username])
+  end
+  
+  def username
+  	@username = User.find(user_id).username
+  end
 end
