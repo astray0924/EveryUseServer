@@ -1,5 +1,5 @@
 class UseCase < ActiveRecord::Base
-  belongs_to :user, :counter_cache => true, :include => :user
+  belongs_to :user, :counter_cache => true
   has_many :comments, :dependent => :nullify
 
   has_attached_file :photo, :styles => {:thumb => "50x50#", :large => "400x400>"},
