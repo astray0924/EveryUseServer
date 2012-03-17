@@ -7,15 +7,6 @@ class ApplicationController < ActionController::Base
   # set per_page globally
   WillPaginate.per_page = 10
 
-  # UTF-8 이슈 해결?
-  require 'iconv' unless String.method_defined?(:encode)
-  if String.method_defined?(:encode)
-    file_contents.encode!('UTF-8', 'UTF-8', :invalid => :replace)
-  else
-    ic = Iconv.new('UTF-8', 'UTF-8//IGNORE')
-  file_contents = ic.iconv(file_contents)
-  end
-
   protected
 
   def current_user_session
