@@ -50,17 +50,6 @@ class UseCasesController < ApplicationController
   # POST /use_cases.json
   def create
     params[:use_case][:user_id] = 1   # for test
-
-    # UTF-8 이슈 해결?
-    require 'iconv' unless String.method_defined?(:encode)
-    file_contents = params[:use_case][:photo]
-    if String.method_defined?(:encode)
-      file_contents.encode!('UTF-8', 'UTF-8', :invalid => :replace)
-    else
-      ic = Iconv.new('UTF-8', 'UTF-8//IGNORE')
-      file_contents = ic.iconv(file_contents)
-    end
-
     @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|
