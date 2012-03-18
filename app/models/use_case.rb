@@ -1,6 +1,5 @@
 class UseCase < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
-  has_many :dependent => :nullify
 
   has_attached_file :photo, :styles => {:thumb => "50x50#", :large => "400x400>"},
                     :url => "/:attachment/:id/:style/:basename.:extension",
