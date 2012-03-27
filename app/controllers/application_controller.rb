@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   require 'will_paginate/array'
 
   # protect_from_forgery
-  helper_method :current_user, :get_pagination_params
+  helper_method :current_user, :current_user_session, :get_pagination_params
 
   # set per_page globally
   WillPaginate.per_page = 10

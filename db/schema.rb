@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312102913) do
+ActiveRecord::Schema.define(:version => 20120327000348) do
 
   create_table "use_cases", :force => true do |t|
     t.string   "product"
@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(:version => 20120312102913) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.integer  "use_cases_count",   :default => 0
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "use_cases_count",     :default => 0
+    t.string   "single_access_token", :default => "", :null => false
   end
 
 end
