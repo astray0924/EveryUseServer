@@ -1,6 +1,6 @@
 class UseCasesController < ApplicationController
   helper :all
-  # before_filter :require_login, :only => [:new, :edit, :create, :update] # for test
+  before_filter :require_login, :only => [:new, :edit, :create, :update] # for test
   # GET /use_cases
   # GET /use_cases.json
   def index
@@ -49,7 +49,7 @@ class UseCasesController < ApplicationController
   # POST /use_cases
   # POST /use_cases.json
   def create
-    params[:use_case][:user_id] = 1   # for test
+    params[:use_case][:user_id] = current_user.id   # for test
     @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|
