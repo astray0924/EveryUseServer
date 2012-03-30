@@ -12,8 +12,8 @@ WikiUse::Application.routes.draw do
 	  resources :comments
 	  
 		collection do
-			get 'product'
-			get 'function'
+			get 'item'
+			get 'purpose'
 		end
 	end
 
