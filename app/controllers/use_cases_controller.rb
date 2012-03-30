@@ -92,7 +92,7 @@ class UseCasesController < ApplicationController
   end
 
   # Grouped View
-  def product
+  def item
     @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('product', @page, @limit)
 
@@ -102,7 +102,7 @@ class UseCasesController < ApplicationController
     end
   end
 
-  def function
+  def purpose
     @page, @limit = get_pagination_params(params)
     @grouped, @reduced = get_grouped_data('function', @page, @limit)
 
