@@ -5,9 +5,9 @@
 </form>
 <h2>Result</h2>
 <ul>
-	<% @result.each do |value| %>
+	<% @result.each do |key, value| %>
 	<li>
-		<%= value.item + ", " + value.purpose %>
+		<%= value %>
 	</li>
 	<% end %>
 </ul>
