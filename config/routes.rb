@@ -19,8 +19,9 @@ WikiUse::Application.routes.draw do
   # login/logout routing
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
+  
+  # search
   match 'search' => 'search#index'
-  match 'search/:query' => 'search#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

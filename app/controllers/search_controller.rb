@@ -1,18 +1,17 @@
 class SearchController < ApplicationController
   def index
+    @query = params[:query]
+    @type = params[:type]
+    
+    if not @query.nil? and not @type.nil?
+      @result = UseCase.where(@type + " = ?", @query);
+    else
+      @result = {}
+    end
+
     respond_to do |format|
       format.html # index.html.erb
-    end
-  end
-
-  def search
-    @query = params[:query]
-    
-    # @item_result = UseCase.where();
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @use_cases }
+      format.json { render json: @result }
     end
   end
 end
