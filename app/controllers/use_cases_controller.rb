@@ -94,7 +94,7 @@ class UseCasesController < ApplicationController
   # Grouped View
   def item
     @page, @limit = get_pagination_params(params)
-    @grouped, @reduced = get_grouped_data('product', @page, @limit)
+    @grouped, @reduced = get_grouped_data('item', @page, @limit)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
@@ -104,7 +104,7 @@ class UseCasesController < ApplicationController
 
   def purpose
     @page, @limit = get_pagination_params(params)
-    @grouped, @reduced = get_grouped_data('function', @page, @limit)
+    @grouped, @reduced = get_grouped_data('purpose', @page, @limit)
 
     respond_to do |format|
       format.html { render 'group.html.erb' }
