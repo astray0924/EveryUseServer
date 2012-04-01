@@ -1,9 +1,7 @@
 <p id="notice">
 	<%= notice %>
 </p>
-
 <%= image_tag @use_case.photo.url(:large) %>
-
 <p>
 	<b>Writer:</b>
 	<%= User.find(@use_case.user_id).username %>
@@ -17,4 +15,8 @@
 	<%= @use_case.purpose %>
 </p>
 <%= link_to 'Edit', edit_use_case_path(@use_case) %> |
-<%= link_to 'Back', use_cases_path %> 
+<%= link_to 'Back', use_cases_path %>
+<p>
+	<label>Favorite Count:</label>
+	<span><%= @favorites.length %></span>
+</p>

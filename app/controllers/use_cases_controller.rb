@@ -31,7 +31,8 @@ class UseCasesController < ApplicationController
   # GET /use_cases/1.json
   def show
     @use_case = UseCase.find(params[:id])
-
+    @favorites = @use_case.favorite
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @use_case }
