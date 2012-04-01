@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  before_filter :require_login, :only => [:new, :create] # for test
+  before_filter :require_login, :only => [:new, :create, :destroy] # for test
   def index
     render :nothing => true
   end
@@ -30,10 +30,8 @@ class FavoritesController < ApplicationController
 
     respond_to do |format|
       if @favorite.save
-        format.html { redirect_to @favorite, notice: 'Favorite was successfully created.'}
-        format.json { render json: @favorite, status: :created, location: @use_case }
+        format.json { render json: @favorite, status: :created }
       else
-        format.html { render action: "new" }
         format.json { render json: @favorite.errors, status: :unprocessable_entity }
       end
     end
