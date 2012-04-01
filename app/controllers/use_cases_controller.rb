@@ -10,7 +10,7 @@ class UseCasesController < ApplicationController
     if params[:user_id]
       @use_cases = @use_cases.where("user_id = ?", params[:user_id])
     else
-    @use_cases = @use_cases.all
+      @use_cases = @use_cases.all
     end
 
     respond_to do |format|
