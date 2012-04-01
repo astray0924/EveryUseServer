@@ -13,7 +13,11 @@ WikiUse::Application.routes.draw do
     end
   end
   
-  resources :favorites
+  resources :favorites do
+    collection do
+      get 'find'
+    end
+  end
 
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
