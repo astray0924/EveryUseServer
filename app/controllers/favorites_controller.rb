@@ -24,7 +24,7 @@ class FavoritesController < ApplicationController
     @user_id = params[:user_id]
     @use_case_id = params[:use_case_id]
 
-    @favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first;
+    @favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).limit(1);
     
     respond_to do |format|
       format.json { render json: @favorite }
