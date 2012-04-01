@@ -12,6 +12,8 @@ WikiUse::Application.routes.draw do
       get 'top'
     end
   end
+  
+  resources :favorites
 
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }

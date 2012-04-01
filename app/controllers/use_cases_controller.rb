@@ -1,6 +1,6 @@
 class UseCasesController < ApplicationController
   helper :all
-  before_filter :require_login, :only => [:new, :edit, :create, :update] # for test
+  before_filter :require_login, :only => [:new, :edit, :create, :update]
   # GET /use_cases
   # GET /use_cases.json
   def index
