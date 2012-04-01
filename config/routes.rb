@@ -9,6 +9,7 @@ WikiUse::Application.routes.draw do
     collection do
       get 'item'
       get 'purpose'
+      get 'top'
     end
   end
 

@@ -19,6 +19,14 @@ class UseCasesController < ApplicationController
     end
   end
 
+  def top
+    @use_cases = UseCase.order("id").limit(10)
+
+    respond_to do |format|
+      format.json { render json: @use_cases }
+    end
+  end
+
   # GET /use_cases/1
   # GET /use_cases/1.json
   def show
