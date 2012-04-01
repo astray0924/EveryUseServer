@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120331135802) do
+ActiveRecord::Schema.define(:version => 20120401092252) do
+
+  create_table "favorites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "use_case_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "favorites", ["user_id", "use_case_id"], :name => "index_favorites_on_user_id_and_use_case_id", :unique => true
 
   create_table "use_cases", :force => true do |t|
     t.string   "item"
@@ -23,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20120331135802) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "favorites_count"
   end
 
   create_table "user_sessions", :force => true do |t|
@@ -40,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20120331135802) do
     t.datetime "updated_at",                          :null => false
     t.integer  "use_cases_count",     :default => 0
     t.string   "single_access_token", :default => "", :null => false
+    t.integer  "favorites_count"
   end
 
 end
