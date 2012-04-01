@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  before_filter :require_login, :only => [:new, :create, :destroy] # for test
+  before_filter :require_login, :only => [:new, :create] # for test
   def index
     render :nothing => true
   end
