@@ -1,6 +1,5 @@
 class FavoritesController < ApplicationController
   before_filter :require_login, :only => [:new, :create] # for test
-  
   def index
     render :nothing => true
   end
@@ -37,6 +36,15 @@ class FavoritesController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @favorite.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @favorite = Favorite.find(params[:id])
+    @favorite.destroy
+
+    respond_to do |format|
+      format.json { head :no_content }
     end
   end
 end
