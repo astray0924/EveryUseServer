@@ -29,6 +29,8 @@ class SearchController < ApplicationController
         @grouped_purpose[@key].push(value);
       end
 
+      # build result object
+      @result[:query] = @query
       @result[:item] = @grouped_item
       @result[:purpose] = @grouped_purpose
     end
