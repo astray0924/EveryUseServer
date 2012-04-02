@@ -39,13 +39,13 @@ seed_file.each do |l|
 	end
 	
 	user_id = User.where('username = ?', 'olduser')
-	product = json['product']
-	function = json['function']
+	item = json['item']
+	purpose = json['purpose']
 	uploadDateTime = json['uploadDateTime']
 	
-	use_case = UseCase.new(:user_id => user_id, :product => product, :function => function, :photo => photo, :created_at => uploadDateTime)
+	use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :created_at => uploadDateTime)
 	
-	if !UseCase.where("product = ? AND function = ?", product, function).exists?
+	if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
 		use_case.save()
 	end
 	

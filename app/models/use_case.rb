@@ -16,6 +16,11 @@ class UseCase < ActiveRecord::Base
   end
   
   def username
-  	@username = User.find(user_id).username
+  	if user_id.blank?
+  		@username = nil
+  	else
+  		@username = User.find(user_id).username  		
+  	end
+  		
   end
 end
