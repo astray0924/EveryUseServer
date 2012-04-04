@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404162357) do
+ActiveRecord::Schema.define(:version => 20120404162953) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(:version => 20120404162357) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.integer  "favorites_count",    :default => 0
+    t.integer  "favorites_count",    :default => 0, :null => false
     t.integer  "funs_count",         :default => 0, :null => false
-    t.integer  "metooss_count",      :default => 0, :null => false
+    t.integer  "metoos_count",       :default => 0, :null => false
   end
 
   create_table "user_sessions", :force => true do |t|
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20120404162357) do
     t.datetime "updated_at",                          :null => false
     t.integer  "use_cases_count",     :default => 0
     t.string   "single_access_token", :default => "", :null => false
-    t.integer  "favorites_count",     :default => 0
+    t.integer  "favorites_count",     :default => 0,  :null => false
     t.integer  "funs_count",          :default => 0,  :null => false
-    t.integer  "metooss_count",       :default => 0,  :null => false
+    t.integer  "metoos_count",        :default => 0,  :null => false
   end
 
 end
