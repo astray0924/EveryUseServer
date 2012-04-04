@@ -1,7 +1,15 @@
 class FavoritesController < ApplicationController
-  before_filter :require_login, :only => [:new, :create] # for test
+  before_filter :require_login, :only => [:new, :create]
   def index
     render :nothing => true
+  end
+  
+  def my_favorites
+    @favorite = Favorite.all
+    
+    respond_to do |format|
+      format.json {render json: @favorite}
+    end
   end
 
   def show

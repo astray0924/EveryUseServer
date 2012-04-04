@@ -16,6 +16,7 @@ WikiUse::Application.routes.draw do
   resources :favorites do
     collection do
       get 'find'
+      get 'my_favorites', :as => :my_favorites
     end
   end
 
