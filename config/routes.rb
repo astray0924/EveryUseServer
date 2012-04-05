@@ -1,6 +1,10 @@
 WikiUse::Application.routes.draw do
   resources :users do
     resources :use_cases
+    
+    member do
+      get 'favorites'  
+    end
   end
 
   resources :user_sessions

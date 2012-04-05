@@ -12,6 +12,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def favorites
+    @user = User.find(params[:id])
+    @favorites = @user.favorite
+    
+    @use_cases = Array.new
+    @favorites.each do |favorite|
+      @use_cases.append(favorite)
+    end
+
+    respond_to do |format|
+      format.json { render json: @use_cases }
+    end
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
