@@ -18,15 +18,16 @@
 <%= link_to 'Back', use_cases_path %>
 
 <p>
+	<h2>Comments</h2>
 	<input type="checkbox" id="favorite" class="comment_btn" />
-	<label for="favorite">Favorite</label>
+	<label for="favorite">Favorite (<%= @favorites_count %>)</label>
 	<span class="count"></span>
 	
 	<input type="checkbox" id="fun" class="comment_btn" />
-	<label for="fun">Fun</label>
+	<label for="fun">Fun (<%= @funs_count %>)</label>
 	<span class="count"></span>
 	
 	<input type="checkbox" id="metoo" class="comment_btn" />
-	<label for="metoo">Me Too</label>
+	<label for="metoo">Me Too (<%= $metoos_count %>)</label>
 	<span class="count"></span>
 </p>

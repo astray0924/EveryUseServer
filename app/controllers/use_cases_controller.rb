@@ -31,6 +31,11 @@ class UseCasesController < ApplicationController
     @use_case = UseCase.find(params[:id])
     @favorites = @use_case.favorite
     
+    # comments
+    @favorites_count = Favorite.where("use_case_id = ?", params[:id]).length
+    @funs_count = Fun.where("use_case_id = ?", params[:id]).length
+    $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @use_case }
