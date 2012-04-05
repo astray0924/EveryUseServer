@@ -60,18 +60,4 @@ class CommentsController < ApplicationController
 	def metoo_delete
 
 	end
-
-	private
-
-	def make_comments_object(favorites, funs, metoos)
-		@comments = Hash.new
-		@comments[:favorites] = favorites
-		@comments[:favorites_count] = favorites.length
-		@comments[:funs] = funs
-		@comments[:funs_count] = funs.length
-		@comments[:metoos] = metoos
-		@comments[:metoos_count] = metoos.length
-
-		return @comments
-	end
 end
