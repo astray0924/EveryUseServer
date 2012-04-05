@@ -9,8 +9,11 @@ class CommentsController < ApplicationController
 
     @comments = Hash.new
     @comments[:favorites] = @favorites
+    @comments[:favorites_count] = @favorites.length
     @comments[:funs] = @funs
+    @comments[:funs_count] = @funs.length
     @comments[:metoos] = @metoos
+    @comments[:metoos_count] = @metoos.length
 
     respond_to do |format|
       format.html

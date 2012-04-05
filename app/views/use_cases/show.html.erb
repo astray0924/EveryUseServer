@@ -16,7 +16,17 @@
 </p>
 <%= link_to 'Edit', edit_use_case_path(@use_case) %> |
 <%= link_to 'Back', use_cases_path %>
+
 <p>
-	<label>Favorite Count:</label>
-	<span><%= @favorites.length %></span>
+	<input type="checkbox" id="favorite" class="comment_btn" />
+	<label for="favorite">Favorite</label>
+	<span class="count"></span>
+	
+	<input type="checkbox" id="fun" class="comment_btn" />
+	<label for="fun">Fun</label>
+	<span class="count"></span>
+	
+	<input type="checkbox" id="metoo" class="comment_btn" />
+	<label for="metoo">Me Too</label>
+	<span class="count"></span>
 </p>
