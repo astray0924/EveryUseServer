@@ -26,8 +26,8 @@ WikiUse::Application.routes.draw do
   
   # comments
   match 'comments' => 'comments#index', :via => :get
-  match 'comments/favorite/add' => 'comments#favorite_add', :via => :post
-  match 'comments/favorite/delete' => 'comments#favorite_delete', :via => :post
+  match 'favorite/add' => 'comments#favorite_add', :via => :post
+  match 'favorite/delete' => 'comments#favorite_delete', :via => :post
   
 
   # The priority is based upon order of creation:
