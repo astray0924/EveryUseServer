@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     
     @use_cases = Array.new
     @favorites.each do |favorite|
-      @use_cases.append(favorite)
+      @use_cases.append(favorite.use_case)
     end
 
     respond_to do |format|
