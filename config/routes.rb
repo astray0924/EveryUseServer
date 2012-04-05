@@ -23,6 +23,9 @@ WikiUse::Application.routes.draw do
   
   # search
   match 'search' => 'search#index'
+  
+  # comments
+  match 'comments' => 'comments#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
