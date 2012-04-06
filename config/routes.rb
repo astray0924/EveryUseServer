@@ -3,7 +3,8 @@ WikiUse::Application.routes.draw do
     resources :use_cases
     
     member do
-      get 'favorites'  
+      get 'favorited'
+      get 'commented'
     end
   end
 

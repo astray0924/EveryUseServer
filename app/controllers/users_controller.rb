@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def favorites
+  def favorited
     @user = User.find(params[:id])
     @favorites = @user.favorite
     
@@ -23,6 +23,30 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @use_cases }
+    end
+  end
+  
+  def commented
+    @user = User.find(params[:id])
+    @fun = @user.fun
+    @metoo = @user.metoo
+    
+    @use_case_fun = Array.new
+    @use_case_metoo = Array.new
+    
+    @fun.each do |fun|
+      @use_case_fun.append(fun)
+    end
+    @metoo.each do |metoo|
+      @use_case_metoo.append(metoo)
+    end
+    
+    @commented = Hash.new
+    @commented[:fun] = @use_case_fun
+    @commented[:metoo] = @use_case_metoo
+    
+    respond_to do |format|
+      format.json { render json: @commented }
     end
   end
 
