@@ -8,7 +8,7 @@ class UseCasesController < ApplicationController
     @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
 
     if params[:user_id]
-      @use_cases = @use_cases.where("user_id = ?", params[:user_id])
+      @use_cases = UseCase.where("user_id = ?", params[:user_id]).paginate(:page => @page, :per_page => @limit).order('id DESC')
     end
 
     respond_to do |format|
