@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   end
 
   def fun_add
-    @fun = Favorite.new(params[:fun])
+    @fun = Fun.new(params[:fun])
 
     respond_to do |format|
       if @fun.save
@@ -76,7 +76,7 @@ class CommentsController < ApplicationController
   end
 
   def metoo_add
-    @metoo = Favorite.new(params[:metoo])
+    @metoo = Metoo.new(params[:metoo])
 
     respond_to do |format|
       if @metoo.save
