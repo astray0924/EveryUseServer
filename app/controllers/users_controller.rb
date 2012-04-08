@@ -35,10 +35,10 @@ class UsersController < ApplicationController
     @use_case_metoo = Array.new
     
     @fun.each do |fun|
-      @use_case_fun.append(fun)
+      @use_case_fun.append(fun.use_case)
     end
     @metoo.each do |metoo|
-      @use_case_metoo.append(metoo)
+      @use_case_metoo.append(metoo.use_case)
     end
     
     @commented = Hash.new
