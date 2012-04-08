@@ -33,6 +33,10 @@ WikiUse::Application.routes.draw do
   match 'comments' => 'comments#index', :via => :get
   match 'favorite/add' => 'comments#favorite_add', :via => :post
   match 'favorite/delete' => 'comments#favorite_delete', :via => :post
+  match 'fun/add' => 'comments#fun_add', :via => :post
+  match 'fun/delete' => 'comments#fun_delete', :via => :post
+  match 'metoo/add' => 'comments#metoo_add', :via => :post
+  match 'metoo/delete' => 'comments#metoo_delete', :via => :post
   
 
   # The priority is based upon order of creation:

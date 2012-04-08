@@ -1,63 +1,95 @@
 class CommentsController < ApplicationController
-	helper :all
-	def index
-		# HTTP param
-		@user_id = params[:user_id]
-		@use_case_id = params[:use_case_id]
+  helper :all
+  def index
+    # HTTP param
+    @user_id = params[:user_id]
+    @use_case_id = params[:use_case_id]
 
-		# data
-		@user_favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-		@user_fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-		@user_metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+    # data
+    @user_favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+    @user_fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+    @user_metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
 
-		# response
-		@comment = Hash.new
-		@comment[:favorites_count] = @user_favorite
-		@comment[:funs_count] = @user_fun
-		@comment[:metoos_count] = @user_metoo
+    # response
+    @comment = Hash.new
+    @comment[:favorites_count] = @user_favorite
+    @comment[:funs_count] = @user_fun
+    @comment[:metoos_count] = @user_metoo
 
-		respond_to do |format|
-			format.json { render json: @comment}
-		end
-	end
+    respond_to do |format|
+      format.json { render json: @comment}
+    end
+  end
 
-	def favorite_add
-		@favorite = Favorite.new(params[:favorite])
+  def favorite_add
+    @favorite = Favorite.new(params[:favorite])
 
-		respond_to do |format|
-			if @favorite.save
-				format.json { render json: Favorite.count, status: :created }
-			else
-				format.json { render json: @favorite.errors, status: :unprocessable_entity }
-			end
-		end
-	end
+    respond_to do |format|
+      if @favorite.save
+        format.json { render json: Favorite.count, status: :created }
+      else
+        format.json { render json: @favorite.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-	def favorite_delete
-		@user_id = params[:favorite][:user_id]
-		@use_case_id = params[:favorite][:use_case_id]
+  def favorite_delete
+    @user_id = params[:favorite][:user_id]
+    @use_case_id = params[:favorite][:use_case_id]
 
-		@favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
-		@favorite.destroy if !@favorite.blank? 
+    @favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
+    @favorite.destroy if !@favorite.blank?
 
-		respond_to do |format|
-			format.json { render json: Favorite.count }
-		end
-	end
+    respond_to do |format|
+      format.json { render json: Favorite.count }
+    end
+  end
 
-	def fun_add
+  def fun_add
+    @fun = Favorite.new(params[:fun])
 
-	end
+    respond_to do |format|
+      if @fun.save
+        format.json { render json: Fun.count, status: :created }
+      else
+        format.json { render json: @fun.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-	def fun_delete
+  def fun_delete
+    @user_id = params[:fun][:user_id]
+    @use_case_id = params[:fun][:use_case_id]
 
-	end
+    @fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
+    @fun.destroy if !@fun.blank?
 
-	def metoo_add
+    respond_to do |format|
+      format.json { render json: Fun.count }
+    end
+  end
 
-	end
+  def metoo_add
+    @metoo = Favorite.new(params[:metoo])
 
-	def metoo_delete
+    respond_to do |format|
+      if @metoo.save
+        format.json { render json: Metoo.count, status: :created }
+      else
+        format.json { render json: @metoo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-	end
+  def metoo_delete
+    @user_id = params[:metoo][:user_id]
+    @use_case_id = params[:metoo][:use_case_id]
+
+    @metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
+    @metoo.destroy if !@metoo.blank?
+
+    respond_to do |format|
+      format.json { render json: Metoo.count }
+    end
+  end
 end
