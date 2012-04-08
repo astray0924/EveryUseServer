@@ -6,10 +6,16 @@ class CommentsController < ApplicationController
     @use_case_id = params[:use_case_id]
 
     # data
-    @user_favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-    @user_fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-    @user_metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-
+    if !@user_id.blank? and !@use_case_id.blank?
+    	@user_favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+	    @user_fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+	    @user_metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length	    
+	else
+		@user_favorite = Favorite.all.count
+		@user_fun = Fun.all.count
+		@user_metoo = Metoo.all.count 
+	end
+	
     # response
     @comment = Hash.new
     @comment[:favorites_count] = @user_favorite
