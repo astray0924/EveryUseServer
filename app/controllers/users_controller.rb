@@ -13,8 +13,10 @@ class UsersController < ApplicationController
   end
 
   def favorited
+  	@page, @limit = get_pagination_params(params)
+  	
     @user = User.find(params[:id])
-    @favorites = @user.favorite
+    @favorites = @user.favorite.paginate(:page => @page, :per_page => @limit).order('id DESC')
     
     @use_cases = Array.new
     @favorites.each do |favorite|
