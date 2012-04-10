@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
       if @favorite.save
         format.json { render json: Favorite.count, status: :created }
       else
-        format.json { render json: Favorite.count, status: :unprocessable_entity }
+        format.json { render json: @favorite.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
       if @fun.save
         format.json { render json: Fun.count, status: :created }
       else
-        format.json { render json: Fun.count, status: :unprocessable_entity }
+        format.json { render json: @fun.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -82,7 +82,7 @@ class CommentsController < ApplicationController
       if @metoo.save
         format.json { render json: Metoo.count, status: :created }
       else
-        format.json { render json: Metoo.count, status: :unprocessable_entity }
+        format.json { render json: @metoo.errors, status: :unprocessable_entity }
       end
     end
   end
