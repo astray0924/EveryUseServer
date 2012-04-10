@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   end
 
   def favorite_add
-    @favorite = Favorite.new(params[:favorite])
+    @favorite = Favorite.new(params[:comment])
 
     respond_to do |format|
       if @favorite.save
@@ -40,8 +40,8 @@ class CommentsController < ApplicationController
   end
 
   def favorite_delete
-    @user_id = params[:favorite][:user_id]
-    @use_case_id = params[:favorite][:use_case_id]
+    @user_id = params[:comment][:user_id]
+    @use_case_id = params[:comment][:use_case_id]
 
     @favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
     @favorite.destroy if !@favorite.blank?
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   end
 
   def fun_add
-    @fun = Fun.new(params[:fun])
+    @fun = Fun.new(params[:comment])
 
     respond_to do |format|
       if @fun.save
@@ -64,8 +64,8 @@ class CommentsController < ApplicationController
   end
 
   def fun_delete
-    @user_id = params[:fun][:user_id]
-    @use_case_id = params[:fun][:use_case_id]
+    @user_id = params[:comment][:user_id]
+    @use_case_id = params[:comment][:use_case_id]
 
     @fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
     @fun.destroy if !@fun.blank?
@@ -76,7 +76,7 @@ class CommentsController < ApplicationController
   end
 
   def metoo_add
-    @metoo = Metoo.new(params[:metoo])
+    @metoo = Metoo.new(params[:comment])
 
     respond_to do |format|
       if @metoo.save
@@ -88,8 +88,8 @@ class CommentsController < ApplicationController
   end
 
   def metoo_delete
-    @user_id = params[:metoo][:user_id]
-    @use_case_id = params[:metoo][:use_case_id]
+    @user_id = params[:comment][:user_id]
+    @use_case_id = params[:comment][:use_case_id]
 
     @metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
     @metoo.destroy if !@metoo.blank?
