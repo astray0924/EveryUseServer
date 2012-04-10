@@ -4,7 +4,7 @@ class UseCase < ActiveRecord::Base
   has_many :fun, :dependent => :destroy
   has_many :metoo, :dependent => :destroy
 
-  has_attached_file :photo, :styles => {:thumb => "100x100#", :large => "400x400>"},
+  has_attached_file :photo, :styles => {:thumb => ["100x100#", :jpg], :large => ["400x400>", :jpg]},
                     :url => "/:attachment/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/:attachment/:id/:style/:basename.:extension"
 
