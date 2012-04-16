@@ -13,6 +13,9 @@ class UseCase < ActiveRecord::Base
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/bmp']
   validates :user_id, :presence => true
+  validates :item, :presence => true
+  validates :purpose, :presence => true
+  
   def as_json(options)
     super(:methods => [:username, :converted_file_name])
   end
