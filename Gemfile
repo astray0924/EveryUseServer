@@ -29,6 +29,8 @@ gem "eventmachine", '1.0.0.beta.4.1'
 
 gem "thin"
 
+gem 'jquery-rails'
+
 group :development, :test do
   gem 'sqlite3'
 end
