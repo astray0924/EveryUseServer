@@ -36,8 +36,18 @@ class UsersController < ApplicationController
 		@metoos = @user.metoo.order('id DESC')
 		
 		@use_cases = Hash.new
-		@use_cases[:fun] = @funs.use_case
-		@use_cases[:metoo] = @metoos.use_case
+		
+	  @use_cases[:fun] = Array.new
+		@funs.each do |fun| 
+		  @use_case = fun.use_case
+		  @use_cases[:fun].append(@use_case)
+		end
+
+	  @use_cases[:metoo] = Array.new
+	  @metoos.each do |metoo| 
+	    @use_case = metoo.use_case
+	    @use_cases[:metoo].append(@use_case)
+	  end
 
 		respond_to do |format|
 			format.json { render json: @use_cases }
