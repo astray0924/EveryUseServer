@@ -32,23 +32,12 @@ class UsersController < ApplicationController
 		@page, @limit = get_pagination_params(params)
 
 		@user = User.find(params[:id])
-		@fun = @user.fun
-		@metoo = @user.metoo
-
-		@commented_use_cases = Array.new
-
-		@fun.each do |fun|
-			@commented_use_cases.append(fun.use_case)
-		end
-		@metoo.each do |metoo|
-			@commented_use_cases.append(metoo.use_case)
-		end
-
-		# uniq, sort 수행
-		@response = @commented_use_cases.uniq.sort_by {|use_case| -use_case.id}
+		@fun = @user.fun.order('id DESC')
+		@metoo = @user.metoo.order('id DESC')
 		
-		# array에 대해 pagination 수행
-		@response = @response.paginate(:page => @page, :per_page => @limit)
+		@use_cases = Hash.new
+		@use_cases[:fun] = @fun
+		@use_cases[:metoo] = @metoo
 
 		respond_to do |format|
 			format.json { render json: @response }
