@@ -32,12 +32,12 @@ class UsersController < ApplicationController
 		@page, @limit = get_pagination_params(params)
 
 		@user = User.find(params[:id])
-		@fun = @user.fun.order('id DESC')
-		@metoo = @user.metoo.order('id DESC')
+		@funs = @user.fun.order('id DESC')
+		@metoos = @user.metoo.order('id DESC')
 		
 		@use_cases = Hash.new
-		@use_cases[:fun] = @fun
-		@use_cases[:metoo] = @metoo
+		@use_cases[:fun] = @funs.use_case
+		@use_cases[:metoo] = @metoos.use_case
 
 		respond_to do |format|
 			format.json { render json: @use_cases }
