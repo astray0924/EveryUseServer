@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 		@use_cases[:metoo] = @metoo
 
 		respond_to do |format|
-			format.json { render json: @response }
+			format.json { render json: @use_cases }
 		end
 	end
 
