@@ -28,3 +28,4 @@ svn-commit*.tmp
 public/photos
 db/development.sqlite3
 public/photos
+vendor
