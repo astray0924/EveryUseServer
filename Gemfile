@@ -25,7 +25,7 @@ gem "cancan"
 
 gem 'will_paginate', '~> 3.0'
 
-gem "eventmachine", '1.0.0.beta.4.1'
+gem "eventmachine", '1.0.0.beta.4.1', :platforms => [:mswin, :mingw]
 
 gem "thin"
 
