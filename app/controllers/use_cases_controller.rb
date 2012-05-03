@@ -22,11 +22,11 @@ class UseCasesController < ApplicationController
 		@use_cases = nil
 		
 		if @type == 'fun'
-			@use_cases = UseCase.order('funs_count DESC').limit(10)
+			@use_cases = UseCase.order('funs_count DESC').limit(10).where("funs_count > ?", 0)
 		elsif @type == 'metoo'
-			@use_cases = UseCase.order('metoos_count DESC').limit(10)
+			@use_cases = UseCase.order('metoos_count DESC').limit(10).where("metoos_count > ?", 0)
 		else
-			@use_cases = UseCase.order('favorites_count DESC').limit(10)
+			@use_cases = UseCase.order('favorites_count DESC').limit(10).where("favorites_count > ?", 0)
 		end
 
 		respond_to do |format|
