@@ -46,7 +46,11 @@ seed_file.each do |l|
 	use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :created_at => uploadDateTime)
 	
 	if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
-		use_case.save()
+	  if use_case.valid?
+  		use_case.save()
+    else
+      print use_case
+	  end
 	end
 	
 	# close the photo file
