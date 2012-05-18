@@ -2,6 +2,10 @@ WikiUse::Application.routes.draw do
   resources :users do
     resources :use_cases
     
+    collection do
+      get 'stats'
+    end
+    
     member do
       get 'favorited'
       get 'commented'
