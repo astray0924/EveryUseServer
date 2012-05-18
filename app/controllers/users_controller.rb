@@ -20,8 +20,10 @@ class UsersController < ApplicationController
 	    @use_cases = user.use_cases
 	    @use_cases_count = @use_cases.count    # 작성한 use_case 갯수
 	    
-	    @received_metoo_count = 0              # 사용자가 받은 metoo 갯수
-	    @received_fun_count = 0                # 사용자가 받은 fun 갯수
+	    @performed_metoo_count = user.metoos.count # 사용자가 한 metoo 갯수
+	    @performed_fun_count = user.funs.count     # 사용자가 한 fun 갯수
+	    @received_metoo_count = 0                  # 사용자가 받은 metoo 갯수
+	    @received_fun_count = 0                    # 사용자가 받은 fun 갯수
 	    
 	    @use_cases.each do |use_case|
 	      @received_metoo_count += use_case.metoos_count
@@ -31,6 +33,8 @@ class UsersController < ApplicationController
 	    @stat = Hash.new
 	    @stat[:username] = user.username
 	    @stat[:use_case_count] = @use_cases_count
+	    @stat[:performed_metoo_count] = @performed_metoo_count
+	    @stat[:performed_fun_count] = @performed_fun_count
 	    @stat[:received_metoo_count] = @received_metoo_count
 	    @stat[:received_fun_count] = @received_fun_count
 	    
