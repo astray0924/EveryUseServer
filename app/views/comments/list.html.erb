@@ -1,0 +1,21 @@
+<h1>Comment History</h1>
+
+<h2 style="color: blue;">Me, too</h2>
+<% @metoos_grouped.each do |username, list_of_date| %>
+	<h3><%= username %></h3>
+	<ul>
+		<% list_of_date.each do |date| %>
+			<li><%= date %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<h2 style="color: blue;">Fun</h2>
+<% @funs_grouped.each do |username, list_of_date| %>
+	<h3><%= username %></h3>
+	<ul>
+		<% list_of_date.each do |date| %>
+			<li><%= date %></li>
+		<% end %>
+	</ul>
+<% end %>

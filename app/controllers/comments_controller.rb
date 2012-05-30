@@ -7,15 +7,15 @@ class CommentsController < ApplicationController
 
     # data
     if !@user_id.blank? and !@use_case_id.blank?
-    	@user_favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-	    @user_fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
-	    @user_metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length	    
-	else
-		@user_favorite = Favorite.all.count
-		@user_fun = Fun.all.count
-		@user_metoo = Metoo.all.count 
-	end
-	
+      @user_favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+      @user_fun = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+      @user_metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).length
+    else
+      @user_favorite = Favorite.all.count
+      @user_fun = Fun.all.count
+      @user_metoo = Metoo.all.count
+    end
+
     # response
     @comment = Hash.new
     @comment[:favorites_count] = @user_favorite
@@ -24,6 +24,34 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @comment}
+    end
+  end
+  
+  def list
+    @funs = Fun.all
+    @metoos = Metoo.all
+    
+    @funs_grouped = Hash.new
+    @funs.each do |fun|
+      if not @funs_grouped.has_key?(fun.user.username)        
+        @funs_grouped[fun.user.username] = Array.new
+      end
+        
+      @funs_grouped[fun.user.username].push(fun.created_at)
+    end
+    
+    @metoos_grouped = Hash.new
+    @metoos.each do |metoo|
+      if not @metoos_grouped.has_key?(metoo.user.username)
+        @metoos_grouped[metoo.user.username] = Array.new
+      end
+      
+      @metoos_grouped[metoo.user.username].push(metoo.created_at)
+    end
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @metoos_grouped}
     end
   end
 
