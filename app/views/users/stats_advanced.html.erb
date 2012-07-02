@@ -1,25 +1,27 @@
 <h1>사용자 통계</h1>
-<p id="notice">
-	<%= notice %>
-</p>
-<table>
-	<tr>
-		<th>사용자명</th>
-		<th>글 올린 갯수</th>
-		<th>metoo 한 갯수</th>
-		<th>fun 한 갯수</th>
-		<th>metoo 받은 갯수</th>
-		<th>fun 받은 갯수</th>
-	</tr>
-	
-	<% @stats.each do |stat| %>
-	<tr>
-		<td><%= stat[:username] %></td>
-		<td><%= stat[:use_case_count] %></td>
-		<td><%= stat[:performed_metoo_count] %></td>
-		<td><%= stat[:performed_fun_count] %></td>
-		<td><%= stat[:received_metoo_count] %></td>
-		<td><%= stat[:received_fun_count] %></td>		
-	</tr>
+<p>
+	<% @users_stats.each do |username, stats| %>
+		<table>
+			<title>Stats for <%= username %></title>
+			<tr>
+				<th>User ID</th>
+				<th>DateTime</th>
+				<th>Activity</th>
+				<th>TargetCase ID</th>
+				<th>TargetCase Item</th>
+				<th>TargetCase Purpose</th>
+			</tr>
+			
+			<% stats.each do |stat_item| %>
+			<tr>
+				<td><%= stat_item.user_id %></td>
+				<td><%= stat_item.created_at %></td>
+				<td><%= stat_item.activity %></td>				
+				<td><%= stat_item.target_case.id %></td>				
+				<td><%= stat_item.target_case.item %></td>				
+				<td><%= stat_item.target_case.purpose %></td>				
+			</tr>
+			<% end %>
+		</table>
 	<% end %>
-</table>
+</p>

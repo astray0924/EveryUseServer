@@ -13,10 +13,10 @@ class UsersController < ApplicationController
 	end
 	
 	def stats_advanced
-	  users = User.all
-	  users_stats = Hash.new
+	  @users = User.all
+	  @users_stats = Hash.new
 	  
-	  users.each do |user|
+	  @users.each do |user|
 	    # 필요한 데이터 수집
       list_givefun = user.fun           # GiveFun
       list_givemetoo = user.metoo       # GiveMetoo
@@ -34,31 +34,31 @@ class UsersController < ApplicationController
       
       # GiveFun 변환
       list_givefun.each do |give_fun|
-        stat_item = AdvancedStatItem.new(give_fun.user_id, give_fun.created_at, "GiveFun", give_fun.use_case_id)
+        stat_item = AdvancedStatItem.new(user.id, give_fun.created_at, "GiveFun", give_fun.use_case)
         stats.append(stat_item)
       end
       
       # GiveMetoo 변환
       list_givemetoo.each do |give_metoo|
-        stat_item = AdvancedStatItem.new(give_metoo.user_id, give_metoo.created_at, "GiveMetoo", give_metoo.use_case_id)
+        stat_item = AdvancedStatItem.new(user.id, give_metoo.created_at, "GiveMetoo", give_metoo.use_case)
         stats.append(stat_item)
       end
       
       # GetFun 변환
       list_getfun.each do |get_fun|
-        stat_item = AdvancedStatItem.new(get_fun.user_id, get_fun.created_at, "GetFun", get_fun.use_case_id)
+        stat_item = AdvancedStatItem.new(user.id, get_fun.created_at, "GetFun", get_fun.use_case)
         stats.append(stat_item)
       end
       
       # GetMetoo 변환
       list_getmetoo.each do |get_metoo|
-        stat_item = AdvancedStatItem.new(get_metoo.user_id, get_metoo.created_at, "GetMetoo", get_metoo.use_case_id)
+        stat_item = AdvancedStatItem.new(user.id, get_metoo.created_at, "GetMetoo", get_metoo.use_case)
         stats.append(stat_item)
       end
       
       # UploadCase 변환
       list_uploadcase.each do |upload_case|
-        stat_item = AdvancedStatItem.new(upload_case.user_id, upload_case.created_at, "UploadCase", upload_case.id)
+        stat_item = AdvancedStatItem.new(user.id, upload_case.created_at, "UploadCase", upload_case)
         stats.append(stat_item)
       end
       
@@ -67,12 +67,12 @@ class UsersController < ApplicationController
       
       # users_stats에 stats 추가
       username = user.username
-      users_stats[username] = stats
+      @users_stats[username] = stats
 	  end
 
 	  respond_to do |format|
       format.html
-      format.json { render json: users_stats }
+      format.json { render json: @users_stats }
     end
 	end
 
@@ -227,12 +227,12 @@ class UsersController < ApplicationController
 end
 
 class AdvancedStatItem
-  attr_accessor :user_id, :created_at, :activity, :target_case_id
+  attr_accessor :user_id, :created_at, :activity, :target_case
   
-  def initialize(user_id, created_at, activity, target_case_id)
+  def initialize(user_id, created_at, activity, target_case)
     @user_id = user_id
     @created_at = created_at
     @activity = activity
-    @target_case_id= target_case_id
+    @target_case= target_case
   end
 end
