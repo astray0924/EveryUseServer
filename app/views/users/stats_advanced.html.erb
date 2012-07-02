@@ -1,15 +1,15 @@
 <h1>사용자 통계</h1>
-<h2>Navigator</h2>
-<ol>
+<h2>Move to Stats Table (olduser는 기존 테스트 데이터를 위한 dummy 사용자입니다.)</h2>
+<ol style="width: 50%;">
 <% @users_stats.each do |username, stats| %>
-	<li><a href="#<%= username %>">See stats for <b><%= username %></b></a></li>
+	<li><a style="display: block;" href="#<%= username %>"><%= username %></a></li>
 <% end %>
 </ol>
 
 <div>
 	<% @users_stats.each do |username, stats| %>
 		<table class="cases">
-			<caption id="<%= username %>" style="font-size: 1.5em; color: blue;">Stats for <%= username %></caption>
+			<caption id="<%= username %>" style="font-size: 1.5em; color: blue;">Stats for <%= username %> (<a href="#TOP">Back to top</a>)</caption>
 			<tr>
 				<th>User ID</th>
 				<th>DateTime</th>
