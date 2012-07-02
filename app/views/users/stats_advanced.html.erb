@@ -1,8 +1,15 @@
 <h1>사용자 통계</h1>
-<p>
+<h2>Navigator</h2>
+<li>
+<% @users_stats.each do |username, stats| %>
+	<li><a href="#<%= username %>">See stats for <b><%= username %></b></a></li>
+<% end %>
+</li>
+
+<div>
 	<% @users_stats.each do |username, stats| %>
-		<table>
-			<title>Stats for <%= username %></title>
+		<table class="cases">
+			<caption id="<%= username %>" style="font-size: 1.5em; color: blue;">Stats for <%= username %></caption>
 			<tr>
 				<th>User ID</th>
 				<th>DateTime</th>
@@ -17,11 +24,11 @@
 				<td><%= stat_item.user.username %></td>
 				<td><%= stat_item.created_at %></td>
 				<td><%= stat_item.activity %></td>				
-				<td><%= stat_item.target_case.id %></td>				
+				<td><%= stat_item.target_case.id %> (<%= link_to 'link', stat_item.target_case, :target => "link" %>)</td>				
 				<td><%= stat_item.target_case.item %></td>				
 				<td><%= stat_item.target_case.purpose %></td>				
 			</tr>
 			<% end %>
 		</table>
 	<% end %>
-</p>
+</div>
