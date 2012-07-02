@@ -14,7 +14,7 @@
 			
 			<% stats.each do |stat_item| %>
 			<tr>
-				<td><%= stat_item.user_id %></td>
+				<td><%= stat_item.user.username %></td>
 				<td><%= stat_item.created_at %></td>
 				<td><%= stat_item.activity %></td>				
 				<td><%= stat_item.target_case.id %></td>				
