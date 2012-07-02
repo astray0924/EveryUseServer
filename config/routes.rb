@@ -4,6 +4,7 @@ WikiUse::Application.routes.draw do
     
     collection do
       get 'stats'
+      get 'stats_advanced'
     end
     
     member do

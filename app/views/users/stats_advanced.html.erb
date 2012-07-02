@@ -1,0 +1,25 @@
+<h1>사용자 통계</h1>
+<p id="notice">
+	<%= notice %>
+</p>
+<table>
+	<tr>
+		<th>사용자명</th>
+		<th>글 올린 갯수</th>
+		<th>metoo 한 갯수</th>
+		<th>fun 한 갯수</th>
+		<th>metoo 받은 갯수</th>
+		<th>fun 받은 갯수</th>
+	</tr>
+	
+	<% @stats.each do |stat| %>
+	<tr>
+		<td><%= stat[:username] %></td>
+		<td><%= stat[:use_case_count] %></td>
+		<td><%= stat[:performed_metoo_count] %></td>
+		<td><%= stat[:performed_fun_count] %></td>
+		<td><%= stat[:received_metoo_count] %></td>
+		<td><%= stat[:received_fun_count] %></td>		
+	</tr>
+	<% end %>
+</table>

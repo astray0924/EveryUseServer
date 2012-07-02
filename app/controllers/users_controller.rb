@@ -12,16 +12,80 @@ class UsersController < ApplicationController
 		end
 	end
 	
+	def stats_advanced
+	  users = User.all
+	  users_stats = Hash.new
+	  
+	  users.each do |user|
+	    # 필요한 데이터 수집
+      list_givefun = user.fun           # GiveFun
+      list_givemetoo = user.metoo       # GiveMetoo
+      
+      list_getfun = Array.new                 # GetFun
+      list_getmetoo = Array.new               # GetMetoo
+      user.use_cases.each do |use_case|
+        list_getfun += use_case.fun
+        list_getmetoo += use_case.metoo
+      end
+      list_uploadcase = user.use_cases  # UploadCase
+      
+      # 수집한 데이터를 AdvancedStatItem 클래스로 변환해서 하나의 array에 저장
+      stats = Array.new
+      
+      # GiveFun 변환
+      list_givefun.each do |give_fun|
+        stat_item = AdvancedStatItem.new(give_fun.user_id, give_fun.created_at, "GiveFun", give_fun.use_case_id)
+        stats.append(stat_item)
+      end
+      
+      # GiveMetoo 변환
+      list_givemetoo.each do |give_metoo|
+        stat_item = AdvancedStatItem.new(give_metoo.user_id, give_metoo.created_at, "GiveMetoo", give_metoo.use_case_id)
+        stats.append(stat_item)
+      end
+      
+      # GetFun 변환
+      list_getfun.each do |get_fun|
+        stat_item = AdvancedStatItem.new(get_fun.user_id, get_fun.created_at, "GetFun", get_fun.use_case_id)
+        stats.append(stat_item)
+      end
+      
+      # GetMetoo 변환
+      list_getmetoo.each do |get_metoo|
+        stat_item = AdvancedStatItem.new(get_metoo.user_id, get_metoo.created_at, "GetMetoo", get_metoo.use_case_id)
+        stats.append(stat_item)
+      end
+      
+      # UploadCase 변환
+      list_uploadcase.each do |upload_case|
+        stat_item = AdvancedStatItem.new(upload_case.user_id, upload_case.created_at, "UploadCase", upload_case.id)
+        stats.append(stat_item)
+      end
+      
+      # stat 아이템을 날짜로 정렬
+      stats.sort! { |a, b| a.created_at <=> b.created_at }
+      
+      # users_stats에 stats 추가
+      username = user.username
+      users_stats[username] = stats
+	  end
+
+	  respond_to do |format|
+      format.html
+      format.json { render json: users_stats }
+    end
+	end
+
 	def stats
 	  @users = User.all
 	  @stats = Array.new
 	  
 	  @users.each do |user|
 	    @use_cases = user.use_cases
-	    @use_cases_count = @use_cases.count    # 작성한 use_case 갯수
+	    @use_cases_count = @use_cases.count        # 작성한 use_case 갯수
 	    
-	    @performed_metoo_count = user.metoo.count # 사용자가 한 metoo 갯수
-	    @performed_fun_count = user.fun.count     # 사용자가 한 fun 갯수
+	    @performed_metoo_count = user.metoo.count  # 사용자가 한 metoo 갯수
+	    @performed_fun_count = user.fun.count      # 사용자가 한 fun 갯수
 	    @received_metoo_count = 0                  # 사용자가 받은 metoo 갯수
 	    @received_fun_count = 0                    # 사용자가 받은 fun 갯수
 	    
@@ -160,4 +224,15 @@ class UsersController < ApplicationController
 			format.json { head :no_content }
 		end
 	end
+end
+
+class AdvancedStatItem
+  attr_accessor :user_id, :created_at, :activity, :target_case_id
+  
+  def initialize(user_id, created_at, activity, target_case_id)
+    @user_id = user_id
+    @created_at = created_at
+    @activity = activity
+    @target_case_id= target_case_id
+  end
 end
