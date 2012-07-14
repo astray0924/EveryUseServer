@@ -18,15 +18,16 @@ class UseCasesController < ApplicationController
   end
 
   def top
+    @page, @limit = get_pagination_params(params)
     @type = (params[:type] || 'fun')
     @use_cases = nil
 
     if @type == 'fun'
-      @use_cases = UseCase.order('funs_count DESC').limit(10).where("funs_count > ?", 0)
+      @use_cases = UseCase.order('funs_count DESC').where("funs_count > ?", 0).paginate(:page => @page, :per_page => @limit)
     elsif @type == 'metoo'
-      @use_cases = UseCase.order('metoos_count DESC').limit(10).where("metoos_count > ?", 0)
+      @use_cases = UseCase.order('metoos_count DESC').where("metoos_count > ?", 0).paginate(:page => @page, :per_page => @limit)
     else
-      @use_cases = UseCase.order('favorites_count DESC').limit(10).where("favorites_count > ?", 0)
+      @use_cases = UseCase.order('favorites_count DESC').where("funs_count > ?", 0).paginate(:page => @page, :per_page => @limit)
     end
 
     respond_to do |format|
