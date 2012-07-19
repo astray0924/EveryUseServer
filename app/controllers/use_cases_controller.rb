@@ -45,6 +45,17 @@ class UseCasesController < ApplicationController
     @favorites_count = Favorite.where("use_case_id = ?", params[:id]).length
     @funs_count = Fun.where("use_case_id = ?", params[:id]).length
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
+    
+    # comments of current user
+    user_id = current_user.id
+    user_favorite = @use_case.favorite.where('user_id = ?', user_id)
+    user_fun = @use_case.fun.where('user_id = ?', user_id)
+    user_metoo = @use_case.metoo.where('user_id = ?', user_id)
+    
+    # extend the use_case instance to include current user's comments
+    @use_case.current_user_favorite = user_favorite
+    @use_case.current_user_fun = user_fun
+    @use_case.current_user_metoo = user_metoo
 
     respond_to do |format|
       format.html # show.html.erb
@@ -133,29 +144,6 @@ class UseCasesController < ApplicationController
       format.json { render json: @grouped }
     end
   end
-  
-  def divide_purpose_type
-    @use_cases = UseCase.all
-    
-    @use_cases.each do |use_case|
-      @split = use_case.purpose.split(':')
-      
-      @purpose_type = @split[0]
-      @purpose = @split[@split.length-1]
-      
-      if @purpose_type.eql?('as') || @purpose_type.eql?('to')
-        # use_case.purpose = @purpose
-        # use_case.purpose_type = @purpose_type
-#         
-        @result = UseCase.update(use_case.id, :purpose => @purpose, :purpose_type => @purpose_type)
-      end         
-    end 
-    
-    respond_to do |format|
-      format.json { render json: @use_cases }
-    end
-  end
-
 
   private
 
