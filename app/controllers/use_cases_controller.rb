@@ -53,9 +53,9 @@ class UseCasesController < ApplicationController
     user_metoo = @use_case.metoo.where('user_id = ?', user_id)
     
     # extend the use_case instance to include current user's comments
-    @use_case.current_user_favorite = user_favorite
-    @use_case.current_user_fun = user_fun
-    @use_case.current_user_metoo = user_metoo
+    @use_case.current_user_favorite = (user_favorite|false)
+    @use_case.current_user_fun = (user_fun|false)
+    @use_case.current_user_metoo = (user_metoo|false)
 
     respond_to do |format|
       format.html # show.html.erb
