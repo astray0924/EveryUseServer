@@ -47,15 +47,15 @@ class UseCasesController < ApplicationController
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
     
     # comments of current user
-    user_id = current_user.id
-    user_favorite = @use_case.favorite.where('user_id = ?', user_id)
-    user_fun = @use_case.fun.where('user_id = ?', user_id)
-    user_metoo = @use_case.metoo.where('user_id = ?', user_id)
-    
-    # extend the use_case instance to include current user's comments
-    @use_case.current_user_favorite = (user_favorite|false)
-    @use_case.current_user_fun = (user_fun|false)
-    @use_case.current_user_metoo = (user_metoo|false)
+    # user_id = current_user.id
+    # user_favorite = @use_case.favorite.where('user_id = ?', user_id)
+    # user_fun = @use_case.fun.where('user_id = ?', user_id)
+    # user_metoo = @use_case.metoo.where('user_id = ?', user_id)
+#     
+    # # extend the use_case instance to include current user's comments
+    # @use_case.current_user_favorite = (user_favorite|false)
+    # @use_case.current_user_fun = (user_fun|false)
+    # @use_case.current_user_metoo = (user_metoo|false)
 
     respond_to do |format|
       format.html # show.html.erb
