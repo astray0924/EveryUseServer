@@ -1,12 +1,7 @@
 WikiUse::Application.routes.draw do
   resources :users do
     resources :use_cases
-    
-    collection do
-      get 'stats'
-      get 'stats_advanced'
-    end
-    
+
     member do
       get 'favorited'
       get 'commented'
@@ -24,6 +19,13 @@ WikiUse::Application.routes.draw do
     end
   end
 
+  resources :stats do
+    collection do
+      get 'stats'
+      get 'stats_advanced'
+    end
+  end
+
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
   # match ':controller/:action/page/:page' => ':controller#:action', :via => :get, :constraints => { :page => /\d+/ }
@@ -31,10 +33,10 @@ WikiUse::Application.routes.draw do
   # login/logout routing
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
-  
+
   # search
   match 'search' => 'search#index'
-  
+
   # comments
   match 'comments' => 'comments#index', :via => :get
   match 'comments/list' => 'comments#list', :via => :get
@@ -44,7 +46,6 @@ WikiUse::Application.routes.draw do
   match 'fun/delete' => 'comments#fun_delete', :via => :post
   match 'metoo/add' => 'comments#metoo_add', :via => :post
   match 'metoo/delete' => 'comments#metoo_delete', :via => :post
-  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
