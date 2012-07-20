@@ -31,19 +31,22 @@ class UsersController < ApplicationController
   def commented
     @page, @limit = get_pagination_params(params)
 
-    @user = User.find(params[:id])
-    type = params[:type]
+    user = User.find(params[:id])
+    type = params[:type].to_s.strip
+    use_case = Array.new
 
-    @use_case = Array.new
-
-    if type.eql?("fun")
-      @use_case = @user.fun.order('id DESC')
+    if type == "fun"
+      use_case = user.fun.order('id DESC').paginate(:page => @page, :per_page => @limit)
     elsif type.eql?("metoo")
-      @use_case = @user.metoo.order('id DESC')
+      use_case = user.metoo.order('id DESC').paginate(:page => @page, :per_page => @limit)
+    else
+      use_case = Array.new
     end
+    
+    use_case = use_case.map{ |x| x.use_case }
 
     respond_to do |format|
-      format.json { render json: @use_cases }
+      format.json { render json: use_case }
     end
   end
 
