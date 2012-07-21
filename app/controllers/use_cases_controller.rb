@@ -136,14 +136,7 @@ class UseCasesController < ApplicationController
 
   # newn API
   def groups
-    page, limit = get_pagination_params(params)
-    type = params[:type]
-
-    groups = UseCase.all.group_by("item")
-
-    respond_to do |format|
-      format.json { render json: groups }
-    end
+    
   end
 
   private
