@@ -14,6 +14,7 @@ WikiUse::Application.routes.draw do
     collection do
       get 'item'
       get 'purpose'
+      get 'groups'
       get 'top'
       get 'divide_purpose_type'
     end

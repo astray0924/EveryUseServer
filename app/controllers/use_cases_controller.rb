@@ -134,6 +134,21 @@ class UseCasesController < ApplicationController
     end
   end
 
+  # newn API
+  def groups
+    page, limit = get_pagination_params(params)
+    type = params[:type]
+
+    groups = Hash.new
+    groups.default = Array.new
+    
+    groups[:test].push("test")
+
+    respond_to do |format|
+      format.json { render json: groups }
+    end
+  end
+
   private
 
   def get_grouped_data(key_name, page, limit)
