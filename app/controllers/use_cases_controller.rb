@@ -142,7 +142,7 @@ class UseCasesController < ApplicationController
     groups = Hash.new
     groups.default = Array.new
     
-    groups[:test].push("test")
+    groups[":test]"].push("test")
 
     respond_to do |format|
       format.json { render json: groups }
