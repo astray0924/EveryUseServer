@@ -136,7 +136,36 @@ class UseCasesController < ApplicationController
 
   # newn API
   def groups
-    
+    @page, @limit = get_pagination_params(params)
+    @field = (params[:type] || "item")
+
+    @temp = Hash.new
+
+    @use_cases = UseCase.order(@field)
+    @use_cases.each do |use_case|
+      @title = use_case[@field]
+
+      if @temp[@title].nil?
+        @temp[@title] = Array.new
+      end
+
+      @temp[@title].push(use_case)
+    end
+
+    @paged_keys = @temp.keys.paginate(:page => @page, :per_page => @limit)
+
+    @groups = Array.new
+    @paged_keys.each do |title|
+      @group = Hash.new
+      @group[:title] = title
+      @group[:children] = @temp[title]
+
+      @groups.push(@group)
+    end
+
+    respond_to do |format|
+      format.json { render json: @groups }
+    end
   end
 
   private
@@ -165,5 +194,4 @@ class UseCasesController < ApplicationController
 
     return @paged_nested, @reduced
   end
-
 end
