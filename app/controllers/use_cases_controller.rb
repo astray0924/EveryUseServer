@@ -139,10 +139,7 @@ class UseCasesController < ApplicationController
     page, limit = get_pagination_params(params)
     type = params[:type]
 
-    groups = Hash.new
-    groups.default = Array.new
-    
-    groups[":test]"].push("test")
+    groups = UseCase.all.group("item")
 
     respond_to do |format|
       format.json { render json: groups }
