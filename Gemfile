@@ -19,7 +19,7 @@ end
 
 gem 'authlogic'
 
-gem 'paperclip'
+gem "paperclip", "~> 3.0"
 
 gem "cancan"
 
