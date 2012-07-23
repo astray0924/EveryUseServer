@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   helper :all
+ 
+
   # GET /users
   # GET /users.json
   def index
@@ -42,7 +44,7 @@ class UsersController < ApplicationController
     else
       use_case = Array.new
     end
-    
+
     use_case = use_case.map{ |x| x.use_case }
 
     respond_to do |format|

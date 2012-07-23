@@ -6,6 +6,11 @@ WikiUse::Application.routes.draw do
       get 'favorited'
       get 'commented'
     end
+    
+    collection do
+      get 'stats_advanced'
+      get 'stats'
+    end
   end
 
   resources :user_sessions
@@ -17,15 +22,12 @@ WikiUse::Application.routes.draw do
       get 'groups'
       get 'top'
       get 'divide_purpose_type'
-    end
-  end
-
-  resources :stats do
-    collection do
-      get 'stats'
       get 'stats_advanced'
     end
   end
+
+  match 'stats/basic' => 'stats#stats'
+  match 'stats/advanced' => 'stats#stats_advanced'
 
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
