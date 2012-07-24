@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724145853) do
+ActiveRecord::Schema.define(:version => 20120724150142) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(:version => 20120724145853) do
   end
 
   add_index "metoos", ["user_id", "use_case_id"], :name => "index_metoos_on_user_id_and_use_case_id", :unique => true
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
+  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "use_cases", :force => true do |t|
     t.string   "item"
