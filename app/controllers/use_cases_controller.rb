@@ -5,19 +5,20 @@ class UseCasesController < ApplicationController
   # GET /use_cases.json
   def index
     @page, @limit = get_pagination_params(params)
-    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('id DESC')
+    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('created_at desc')
 
     if params[:user_id]
-      @use_cases = UseCase.where("user_id = ?", params[:user_id]).paginate(:page => @page, :per_page => @limit).order('id DESC')
+      @use_cases = @use_cases.where("user_id = ?", params[:user_id])
     end
-
+ 
     if params[:type]
-      type = params[:type]
+      type = params[:type].to_s
 
-      @use_case = case type
-        when "item" then @use_case.order('item DESC')
-        when 'purpose' then @use_case.order('purpose DESC')
-        when 'time' then @use_case.order('created_at DESC')
+      @use_cases = case type
+          when 'item' then @use_cases.reorder('item')
+          when 'purpose' then @use_cases.reorder('purpose')
+          when 'time' then @use_cases.reorder('created_at')
+          else @use_cases
       end
     end
 
