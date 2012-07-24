@@ -11,14 +11,23 @@ class UserRelationsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @follower_id = params[:user_relation][:follower_id]
-    @relation = UserRelation.where("follower_id = ?", @follower_id).first
+    @followee_id = params[:user_relation][:followee_id]
+
+    @relation = UserRelation.where("follower_id = ? AND followee_id = ?", @follower_id, @followee_id).first
     @relation.destroy unless @relation.blank?
 
     respond_to do |format|
       render :nothing => true, status: :accepted
     end
 
+  end
+
+  def index
+    @relations = UserRelation.all
+    respond_to do |format|
+      format.json { render json: @relations }
+    end
   end
 end

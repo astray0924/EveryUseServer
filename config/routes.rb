@@ -49,6 +49,11 @@ WikiUse::Application.routes.draw do
   match 'fun/delete' => 'comments#fun_delete', :via => :post
   match 'metoo/add' => 'comments#metoo_add', :via => :post
   match 'metoo/delete' => 'comments#metoo_delete', :via => :post
+  
+  # relations
+  match 'relation' => 'user_relations#index'
+  match 'relation/add' => 'user_relations#add', :via => :post
+  match 'relation/destroy' => 'user_relations#destroy', :via => :post
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
