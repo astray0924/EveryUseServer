@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724113647) do
+ActiveRecord::Schema.define(:version => 20120724145853) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -75,14 +75,5 @@ ActiveRecord::Schema.define(:version => 20120724113647) do
     t.integer  "funs_count",          :default => 0,  :null => false
     t.integer  "metoos_count",        :default => 0,  :null => false
   end
-
-  create_table "users_followings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "following_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "users_followings", ["user_id", "following_id"], :name => "index_followings", :unique => true
 
 end

@@ -12,6 +12,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def followeds
+    
+  end
+
+  def followers
+
+  end
+
   def favorited
     @page, @limit = get_pagination_params(params)
 
