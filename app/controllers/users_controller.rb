@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   helper :all
- 
-
   # GET /users
   # GET /users.json
   def index
@@ -23,6 +21,15 @@ class UsersController < ApplicationController
     @use_cases = Array.new
     @favorites.each do |favorite|
       @use_cases.append(favorite.use_case)
+    end
+
+    if type = params[:type]
+      @use_cases = case type
+      when 'item' then @use_cases.sort! {|a, b| a.item.downcase <=> b.item.downcase }
+          when 'purpose' then @use_cases.sort! {|a, b| a.purpose.downcase <=> b.purpose.downcase }
+          when 'time' then @use_cases.sort! {|a, b| b.created_at <=> a.created_at }
+          else @use_cases
+      end
     end
 
     respond_to do |format|
