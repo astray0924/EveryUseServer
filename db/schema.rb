@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612113828) do
+ActiveRecord::Schema.define(:version => 20120724081053) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(:version => 20120612113828) do
   end
 
   add_index "favorites", ["user_id", "use_case_id"], :name => "index_favorites_on_user_id_and_use_case_id", :unique => true
+
+  create_table "followings", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followee_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "funs", :force => true do |t|
     t.integer  "user_id"
@@ -43,17 +50,17 @@ ActiveRecord::Schema.define(:version => 20120612113828) do
   create_table "use_cases", :force => true do |t|
     t.string   "item"
     t.string   "purpose"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.string   "purpose_type"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "user_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.integer  "favorites_count",    :default => 0,  :null => false
-    t.integer  "funs_count",         :default => 0,  :null => false
-    t.integer  "metoos_count",       :default => 0,  :null => false
-    t.string   "purpose_type",       :default => ""
+    t.integer  "favorites_count",    :default => 0, :null => false
+    t.integer  "funs_count",         :default => 0, :null => false
+    t.integer  "metoos_count",       :default => 0, :null => false
   end
 
   create_table "user_sessions", :force => true do |t|
