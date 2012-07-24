@@ -17,7 +17,7 @@ class UseCasesController < ApplicationController
       @use_cases = case type
           when 'item' then @use_cases.reorder('item')
           when 'purpose' then @use_cases.reorder('purpose')
-          when 'time' then @use_cases.reorder('created_at')
+          when 'time' then @use_cases.reorder('created_at desc')
           else @use_cases
       end
     end
