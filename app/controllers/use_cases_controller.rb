@@ -11,6 +11,16 @@ class UseCasesController < ApplicationController
       @use_cases = UseCase.where("user_id = ?", params[:user_id]).paginate(:page => @page, :per_page => @limit).order('id DESC')
     end
 
+    if params[:type]
+      type = params[:type]
+
+      @use_case = case type
+        when "item" then @use_case.order('item DESC')
+        when 'purpose' then @use_case.order('purpose DESC')
+        when 'time' then @use_case.order('created_at DESC')
+      end
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @use_cases }
