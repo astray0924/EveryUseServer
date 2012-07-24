@@ -27,6 +27,10 @@ WikiUse::Application.routes.draw do
       get 'stats_advanced'
     end
   end
+  
+  resources :relationships do
+    
+  end
 
   match 'stats/basic' => 'stats#stats'
   match 'stats/advanced' => 'stats#stats_advanced'
