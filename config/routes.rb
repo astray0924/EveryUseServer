@@ -5,7 +5,7 @@ WikiUse::Application.routes.draw do
     member do
       get 'favorited'
       get 'commented'
-      get 'followeds'
+      get 'followings'
       get 'followers'
     end
     

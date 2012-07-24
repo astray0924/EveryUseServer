@@ -12,12 +12,22 @@ class UsersController < ApplicationController
     end
   end
 
-  def followeds
-    
+  def followings
+    @user = User.find(params[:id])
+    @followeds = @user.followed_users
+
+    respond_to do |format|
+      format.json { render json: @followeds }
+    end
   end
 
   def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers
 
+    respond_to do |format|
+      format.json { render json: @followers }
+    end
   end
 
   def favorited
