@@ -19,14 +19,14 @@ class User < ActiveRecord::Base
   validates :username, :uniqueness => true, :presence => true
   validates :email, :uniqueness => true, :presence => true
   validates :password, :presence => true
-  def feed
-    @feed = Array.new
+  def feeds
+    @feeds = Array.new
 
     followed_users.each do |user|
       @use_cases += user.use_cases
     end
 
-    return @feed.sort! {|x, y| x.created_at <=> y.created_at}
+    return @feeds.sort! {|x, y| x.created_at <=> y.created_at}
   end
 
   def following?(other_user)

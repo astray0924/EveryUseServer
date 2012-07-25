@@ -12,12 +12,12 @@ class UsersController < ApplicationController
     end
   end
   
-  def feed
+  def feeds
     @user = User.find(params[:id])
-    @feed = @user.feed
+    @feeds = @user.feeds
     
     respond_to do |format|
-      format.json { render json: @feed }
+      format.json { render json: @feeds }
     end
   end
 
