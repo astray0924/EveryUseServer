@@ -11,6 +11,15 @@ class UsersController < ApplicationController
       format.json { render json: @users }
     end
   end
+  
+  def feed
+    @user = User.find(params[:id])
+    @feed = @user.feed
+    
+    respond_to do |format|
+      format.json { render json: @feed }
+    end
+  end
 
   def followings
     @user = User.find(params[:id])

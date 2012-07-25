@@ -7,6 +7,7 @@ WikiUse::Application.routes.draw do
       get 'commented'
       get 'followings'
       get 'followers'
+      get 'feed'
     end
     
     collection do
