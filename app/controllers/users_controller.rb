@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   
   def feeds
     @user = User.find(params[:id])
-    @feeds = @user.feeds
+    @page, @limit = get_pagination_params(params)
+    @feeds = @user.feeds(@page, @limit)
     
     respond_to do |format|
       format.json { render json: @feeds }

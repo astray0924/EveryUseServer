@@ -19,14 +19,14 @@ class User < ActiveRecord::Base
   validates :username, :uniqueness => true, :presence => true
   validates :email, :uniqueness => true, :presence => true
   validates :password, :presence => true
-  def feeds
+  def feeds(page, limit)
     @feeds = Array.new
 
     followed_users.each do |user|
-      @use_cases += user.use_cases
+      @feeds |= user.use_cases
     end
 
-    return @feeds.sort! {|x, y| x.created_at <=> y.created_at}
+    return @feeds.sort! {|x, y| y.created_at <=> x.created_at}.paginate(:page => @page, :per_page => @limit)
   end
 
   def following?(other_user)
