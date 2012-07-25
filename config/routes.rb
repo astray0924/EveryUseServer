@@ -58,9 +58,9 @@ WikiUse::Application.routes.draw do
   match 'metoo/delete' => 'comments#metoo_delete', :via => :post
   
   # relations
-  match 'followings' => 'users_followings#index'
-  match 'followings/create' => 'users_followings#create', :via => :post
-  match 'followings/destroy' => 'users_followings#destroy', :via => :post
+  match 'relationship' => 'relationships#index', :via => :get
+  match 'relationship' => 'relationships#create', :via => :post
+  match 'relationship' => 'relationships#destroy', :via => :destroy
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
