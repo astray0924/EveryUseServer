@@ -72,8 +72,8 @@ class UsersController < ApplicationController
     type = params[:type].to_s.strip
     use_case = Array.new
 
-    if type == "fun"
-      use_case = user.fun.order('id DESC').paginate(:page => @page, :per_page => @limit)
+    if type == "wow"
+      use_case = user.wow.order('id DESC').paginate(:page => @page, :per_page => @limit)
     elsif type.eql?("metoo")
       use_case = user.metoo.order('id DESC').paginate(:page => @page, :per_page => @limit)
     else

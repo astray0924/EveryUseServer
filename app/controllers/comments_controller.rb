@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
     @user_id = params[:comment][:user_id]
     @use_case_id = params[:comment][:use_case_id]
 
-    @wow = Fun.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
+    @wow = Wow.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
     @wow.destroy if @wow.blank?
 
     respond_to do |format|
