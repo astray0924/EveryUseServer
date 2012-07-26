@@ -61,9 +61,9 @@ class UseCasesController < ApplicationController
     use_case_id = @use_case.id
     
     if user_id
-      @use_case.current_favorite = Favorite.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
-      @use_case.current_wow = Wow.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
-      @use_case.current_metoo = Metoo.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
+      @use_case.current_user_favorite = Favorite.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
+      @use_case.current_user_wow = Wow.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
+      @use_case.current_user_metoo = Metoo.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
     end
     
     respond_to do |format|
