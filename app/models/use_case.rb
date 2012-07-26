@@ -15,6 +15,9 @@ class UseCase < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :item, :presence => true, :length => { :maximum => 35 }
   validates :purpose, :presence => true, :length => { :maximum => 40 }
+  
+  attr_accessor :current_favorite, :current_wow, :current_metoo
+  
   def as_json(options)
     super(:methods => [:username, :converted_file_name])
   end

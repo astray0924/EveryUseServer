@@ -50,12 +50,24 @@ class UseCasesController < ApplicationController
   # GET /use_cases/1.json
   def show
     @use_case = UseCase.find(params[:id])
-    @favorites = @use_case.favorite
 
-    # comments
+    # 코멘트 갯수 가져옴
     @favorites_count = Favorite.where("use_case_id = ?", params[:id]).length
     @wows_count = Wow.where("use_case_id = ?", params[:id]).length
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
+    
+    # 현재 사용자가 단 코멘트 조사
+    user_id = current_user.id or nil
+    use_case_id = @use_case.id
+    
+    if user_id
+      @comments = Hash.new
+      @comments[:favorite] = Favorite.where('user_id = ? AND use_case_id = ?', user_id, use_case_id)
+      @comments[:wow] = Wow.where('user_id = ? AND use_case_id = ?', user_id, use_case_id)
+      @comments[:metoo] = Metoo.where('user_id = ? AND use_case_id = ?', user_id, use_case_id)
+    end
+    
+    # @comments.merge!(@use_case)
 
     respond_to do |format|
       format.html # show.html.erb
