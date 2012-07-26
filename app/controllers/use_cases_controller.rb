@@ -57,13 +57,12 @@ class UseCasesController < ApplicationController
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
     
     # 현재 사용자가 단 코멘트 조사
-    user_id = (current_user.id||nil)
-    use_case_id = @use_case.id
+    user_id = if logged_in? then current_user.id end
     
     if user_id
-      @use_case.current_user_favorite = Favorite.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
-      @use_case.current_user_wow = Wow.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
-      @use_case.current_user_metoo = Metoo.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
+      @use_case.current_user_favorite = @use_case.favorites.where('user_id = ?', user_id).first
+      @use_case.current_user_wow = @use_case.wows.where('user_id = ?', user_id).first
+      @use_case.current_user_metoo = @use_case.metoos.where('user_id = ?', user_id).first
     end
     
     respond_to do |format|
