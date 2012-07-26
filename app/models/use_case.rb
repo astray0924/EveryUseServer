@@ -19,7 +19,16 @@ class UseCase < ActiveRecord::Base
   attr_accessor :current_favorite, :current_wow, :current_metoo
   
   def as_json(options)
-    super(:methods => [:username, :converted_file_name])
+    super(:methods => [:username, :converted_file_name, :current_user_comment])
+  end
+  
+  def current_user_comment
+    @comments = Hash.new
+    @comments[:current_favorite] = self.current_favorite
+    @comments[:current_wow] = self.current_wow
+    @comments[:current_metoo] = self.current_metoo
+    
+    return @comments
   end
 
   def username

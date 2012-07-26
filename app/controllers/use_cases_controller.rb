@@ -61,14 +61,11 @@ class UseCasesController < ApplicationController
     use_case_id = @use_case.id
     
     if user_id
-      @comments = Hash.new
-      @comments[:favorite] = Favorite.where('user_id = ? AND use_case_id = ?', user_id, use_case_id)
-      @comments[:wow] = Wow.where('user_id = ? AND use_case_id = ?', user_id, use_case_id)
-      @comments[:metoo] = Metoo.where('user_id = ? AND use_case_id = ?', user_id, use_case_id)
+      @use_case.current_favorite = Favorite.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
+      @use_case.current_wow = Wow.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
+      @use_case.current_metoo = Metoo.where('user_id = ? AND use_case_id = ?', user_id, use_case_id).first
     end
     
-    # @comments.merge!(@use_case)
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @use_case }
