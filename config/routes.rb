@@ -28,10 +28,6 @@ WikiUse::Application.routes.draw do
       get 'stats_advanced'
     end
   end
-  
-  resources :relationships do
-    
-  end
 
   match 'stats/basic' => 'stats#stats'
   match 'stats/advanced' => 'stats#stats_advanced'
@@ -48,14 +44,17 @@ WikiUse::Application.routes.draw do
   match 'search' => 'search#index'
 
   # comments
-  match 'comments' => 'comments#index', :via => :get
-  match 'comments/list' => 'comments#list', :via => :get
-  match 'favorite/add' => 'comments#favorite_add', :via => :post
-  match 'favorite/delete' => 'comments#favorite_delete', :via => :post
-  match 'fun/add' => 'comments#fun_add', :via => :post
-  match 'fun/delete' => 'comments#fun_delete', :via => :post
-  match 'metoo/add' => 'comments#metoo_add', :via => :post
-  match 'metoo/delete' => 'comments#metoo_delete', :via => :post
+  match 'comments/favorite' => 'comments#favorite_show', :via => :get
+  match 'comments/favorite' => 'comments#favorite_add', :via => :post
+  match 'comments/favorite' => 'comments#favorite_destroy', :via => :delete
+  
+  match 'comments/wow' => 'comments#wow_show', :via => :get
+  match 'comments/wow' => 'comments#wow_add', :via => :post
+  match 'comments/wow' => 'comments#wow_destroy', :via => :delete
+  
+  match 'comments/metoo' => 'comments#metoo_show', :via => :get
+  match 'comments/metoo' => 'comments#metoo_add', :via => :post
+  match 'comments/metoo' => 'comments#metoo_destroy', :via => :delete
   
   # relations
   match 'relationship' => 'relationships#index', :via => :get
