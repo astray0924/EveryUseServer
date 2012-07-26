@@ -10,7 +10,7 @@ class UseCasesController < ApplicationController
     if params[:user_id]
       @use_cases = @use_cases.where("user_id = ?", params[:user_id])
     end
- 
+
     if params[:type]
       type = params[:type].to_s
 
@@ -30,15 +30,15 @@ class UseCasesController < ApplicationController
 
   def top
     @page, @limit = get_pagination_params(params)
-    @type = (params[:type] || 'fun')
+    @type = (params[:type] || 'wow')
     @use_cases = nil
 
-    if @type == 'fun'
-      @use_cases = UseCase.order('funs_count DESC').where("funs_count > ?", 0).paginate(:page => @page, :per_page => @limit)
+    if @type == 'wow'
+      @use_cases = UseCase.order('wows_count DESC').where("wows_count > ?", 0).paginate(:page => @page, :per_page => @limit)
     elsif @type == 'metoo'
       @use_cases = UseCase.order('metoos_count DESC').where("metoos_count > ?", 0).paginate(:page => @page, :per_page => @limit)
     else
-      @use_cases = UseCase.order('favorites_count DESC').where("funs_count > ?", 0).paginate(:page => @page, :per_page => @limit)
+      @use_cases = UseCase.order('wows_count DESC').where("wows_count > ?", 0).paginate(:page => @page, :per_page => @limit)
     end
 
     respond_to do |format|
@@ -54,7 +54,7 @@ class UseCasesController < ApplicationController
 
     # comments
     @favorites_count = Favorite.where("use_case_id = ?", params[:id]).length
-    @funs_count = Fun.where("use_case_id = ?", params[:id]).length
+    @wows_count = Wow.where("use_case_id = ?", params[:id]).length
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
 
     respond_to do |format|

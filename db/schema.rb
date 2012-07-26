@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726011623) do
+ActiveRecord::Schema.define(:version => 20120726015528) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -21,15 +21,6 @@ ActiveRecord::Schema.define(:version => 20120726011623) do
   end
 
   add_index "favorites", ["user_id", "use_case_id"], :name => "index_favorites_on_user_id_and_use_case_id", :unique => true
-
-  create_table "funs", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "use_case_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "funs", ["user_id", "use_case_id"], :name => "index_funs_on_user_id_and_use_case_id", :unique => true
 
   create_table "metoos", :force => true do |t|
     t.integer  "user_id"
@@ -63,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20120726011623) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "favorites_count",    :default => 0,  :null => false
-    t.integer  "funs_count",         :default => 0,  :null => false
+    t.integer  "wows_count",         :default => 0,  :null => false
     t.integer  "metoos_count",       :default => 0,  :null => false
     t.string   "user_group",         :default => ""
   end
@@ -84,8 +75,17 @@ ActiveRecord::Schema.define(:version => 20120726011623) do
     t.integer  "use_cases_count",     :default => 0
     t.string   "single_access_token", :default => "", :null => false
     t.integer  "favorites_count",     :default => 0,  :null => false
-    t.integer  "funs_count",          :default => 0,  :null => false
+    t.integer  "wows_count",          :default => 0,  :null => false
     t.integer  "metoos_count",        :default => 0,  :null => false
   end
+
+  create_table "wows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "use_case_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "wows", ["user_id", "use_case_id"], :name => "index_funs_on_user_id_and_use_case_id", :unique => true
 
 end

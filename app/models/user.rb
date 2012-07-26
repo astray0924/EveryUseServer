@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :use_cases, :dependent => :destroy, :order => 'updated_at DESC'
   has_many :favorite, :dependent => :destroy
-  has_many :fun, :dependent => :destroy
+  has_many :wow, :dependent => :destroy
   has_many :metoo, :dependent => :destroy
 
   # 친구 관계

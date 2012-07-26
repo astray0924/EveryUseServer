@@ -1,4 +1,4 @@
-class Fun < ActiveRecord::Base
+class Wow < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => :use_case_id
   
   belongs_to :user, :counter_cache => true

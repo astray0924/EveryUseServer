@@ -1,7 +1,7 @@
 class UseCase < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   has_many :favorite, :dependent => :destroy
-  has_many :fun, :dependent => :destroy
+  has_many :wow, :dependent => :destroy
   has_many :metoo, :dependent => :destroy
 
   has_attached_file :photo, :styles => {:thumb => ["100x100#", :jpg], :large => ["400x400>", :jpg]},
