@@ -57,7 +57,7 @@ class UseCasesController < ApplicationController
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
     
     # 현재 사용자가 단 코멘트 조사
-    user_id = current_user.id or nil
+    user_id = (current_user.id||nil)
     use_case_id = @use_case.id
     
     if user_id
