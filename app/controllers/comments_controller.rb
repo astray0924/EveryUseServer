@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   helper :all
-  before_filter :require_login, :only => [:favorite_add, :wow_add, :metoo_add]
+  # before_filter :require_login, :only => [:favorite_add, :wow_add, :metoo_add]
   def favorite_show
     user_id = params[:comment][:user_id]
     use_case_id = params[:comment][:use_case_id]
