@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
   helper :all
-  before_filter :require_login
+  before_filter :require_login, :only => [:favorite_add, :wow_add, :metoo_add]
   def favorite_show
-    user_id = current_user.id
-    use_case_id = if params[:comment][:use_case_id] then params[:comment][:use_case_id] end
+    user_id = params[:comment][:user_id]
+    use_case_id = params[:comment][:use_case_id]
 
-    if use_case_id
+    if user_id and use_case_id
       @fav = Favorite.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
     else
       @fav = nil
@@ -17,10 +17,10 @@ class CommentsController < ApplicationController
   end
 
   def wow_show
-    user_id = current_user.id
-    use_case_id = if params[:comment][:use_case_id] then params[:comment][:use_case_id] end
+    user_id = params[:comment][:user_id]
+    use_case_id = params[:comment][:use_case_id]
 
-    if use_case_id
+    if user_id and use_case_id
       @wow = Wow.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
     else
       @wow = nil
@@ -32,9 +32,10 @@ class CommentsController < ApplicationController
   end
 
   def metoo_show
-    user_id = current_user.id
-    use_case_id = if params[:comment][:use_case_id] then params[:comment][:use_case_id] end
-    if use_case_id
+    user_id = params[:comment][:user_id]
+    use_case_id = params[:comment][:use_case_id]
+
+    if user_id and use_case_id
       @metoo = Metoo.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
     else
       @metoo = nil
@@ -47,6 +48,7 @@ class CommentsController < ApplicationController
   end
 
   def favorite_add
+    params[:comment][:user_id] = current_user.id
     @favorite = Favorite.new(params[:comment])
 
     respond_to do |format|
@@ -59,6 +61,7 @@ class CommentsController < ApplicationController
   end
 
   def wow_add
+    params[:comment][:user_id] = current_user.id
     @wow = Wow.new(params[:comment])
 
     respond_to do |format|
@@ -71,6 +74,7 @@ class CommentsController < ApplicationController
   end
 
   def metoo_add
+    params[:comment][:user_id] = current_user.id
     @metoo = Metoo.new(params[:comment])
 
     respond_to do |format|
@@ -83,23 +87,17 @@ class CommentsController < ApplicationController
   end
 
   def favorite_delete
-    @user_id = params[:comment][:user_id]
-    @use_case_id = params[:comment][:use_case_id]
-
-    @favorite = Favorite.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
-    @favorite.destroy if !@favorite.blank?
+    @favorite = Favorite.find(params[:id])
+    @favorite.destroy unless @favorite.blank?
 
     respond_to do |format|
-      format.json { render json: Favorite.count }
+      format.json { render json: Favorite.count}
     end
   end
 
   def wow_delete
-    @user_id = params[:comment][:user_id]
-    @use_case_id = params[:comment][:use_case_id]
-
-    @wow = Wow.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
-    @wow.destroy if @wow.blank?
+    @wow = Wow.find(params[:id])
+    @wow.destroy unless @wow.blank?
 
     respond_to do |format|
       format.json { render json: Wow.count }
@@ -107,11 +105,8 @@ class CommentsController < ApplicationController
   end
 
   def metoo_delete
-    @user_id = params[:comment][:user_id]
-    @use_case_id = params[:comment][:use_case_id]
-
-    @metoo = Metoo.where("user_id = ? AND use_case_id = ?", @user_id, @use_case_id).first
-    @metoo.destroy if !@metoo.blank?
+    @metoo = Metoo.find(params[:id])
+    @metoo.destroy unless @metoo.blank?
 
     respond_to do |format|
       format.json { render json: Metoo.count }

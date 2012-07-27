@@ -60,9 +60,9 @@ class UseCasesController < ApplicationController
     user_id = if logged_in? then current_user.id end
     
     if user_id
-      @use_case.current_user_favorite = @use_case.favorites.where('user_id = ?', user_id).first
-      @use_case.current_user_wow = @use_case.wows.where('user_id = ?', user_id).first
-      @use_case.current_user_metoo = @use_case.metoos.where('user_id = ?', user_id).first
+      @use_case.current_user_favorite = @use_case.favorite.where('user_id = ?', user_id).first
+      @use_case.current_user_wow = @use_case.wow.where('user_id = ?', user_id).first
+      @use_case.current_user_metoo = @use_case.metoo.where('user_id = ?', user_id).first
     end
     
     respond_to do |format|
