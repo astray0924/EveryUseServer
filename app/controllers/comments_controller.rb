@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_filter :require_login
   def favorite_show
     user_id = current_user.id
-    use_case_id = params[:use_case_id] or nil
+    use_case_id = if params[:comment][:use_case_id] then params[:comment][:use_case_id] end
 
     if use_case_id
       @fav = Favorite.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 
   def wow_show
     user_id = current_user.id
-    use_case_id = params[:use_case_id] or nil
+    use_case_id = if params[:comment][:use_case_id] then params[:comment][:use_case_id] end
 
     if use_case_id
       @wow = Wow.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
 
   def metoo_show
     user_id = current_user.id
-    use_case_id = params[:use_case_id] or nil
+    use_case_id = if params[:comment][:use_case_id] then params[:comment][:use_case_id] end
     if use_case_id
       @metoo = Metoo.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
     else
