@@ -48,7 +48,6 @@ class CommentsController < ApplicationController
   end
 
   def favorite_add
-    params[:comment][:user_id] = current_user.id
     @favorite = Favorite.new(params[:comment])
 
     respond_to do |format|
@@ -61,7 +60,6 @@ class CommentsController < ApplicationController
   end
 
   def wow_add
-    params[:comment][:user_id] = current_user.id
     @wow = Wow.new(params[:comment])
 
     respond_to do |format|
@@ -74,7 +72,6 @@ class CommentsController < ApplicationController
   end
 
   def metoo_add
-    params[:comment][:user_id] = current_user.id
     @metoo = Metoo.new(params[:comment])
 
     respond_to do |format|
