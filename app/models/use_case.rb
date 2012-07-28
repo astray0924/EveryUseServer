@@ -15,20 +15,22 @@ class UseCase < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :item, :presence => true, :length => { :maximum => 35 }
   validates :purpose, :presence => true, :length => { :maximum => 40 }
-  
+
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
-  
   def as_json(options)
-    super(:methods => [:username, :converted_file_name, :current_user_comment])
+    super(:methods => [:username, :converted_file_name, :user_favorite, :user_wow, :user_metoo])
   end
-  
-  def current_user_comment
-    @comments = Hash.new
-    @comments[:favorite] = self.current_user_favorite
-    @comments[:wow] = self.current_user_wow
-    @comments[:metoo] = self.current_user_metoo
-    
-    return @comments
+
+  def user_favorite
+    return self.current_user_favorite
+  end
+
+  def user_wow
+    return self.current_user_wow
+  end
+
+  def user_metoo
+    return self.current_user_metoo
   end
 
   def username
