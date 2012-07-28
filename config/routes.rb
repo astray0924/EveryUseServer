@@ -44,15 +44,14 @@ WikiUse::Application.routes.draw do
   match 'search' => 'search#index'
 
   # comments
-  match 'comments/favorite/:id' => 'comments#favorite_show', :via => :get
+  match 'comments' => 'comments#show', :via => :get
+  
   match 'comments/favorite' => 'comments#favorite_add', :via => :post
   match 'comments/favorite/:id' => 'comments#favorite_destroy', :via => :delete
   
-  match 'comments/wow/:id' => 'comments#wow_show', :via => :get
   match 'comments/wow' => 'comments#wow_add', :via => :post
   match 'comments/wow/:id' => 'comments#wow_destroy', :via => :delete
   
-  match 'comments/metoo/:id' => 'comments#metoo_show', :via => :get
   match 'comments/metoo' => 'comments#metoo_add', :via => :post
   match 'comments/metoo/:id' => 'comments#metoo_destroy', :via => :delete
   

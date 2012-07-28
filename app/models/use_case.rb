@@ -19,8 +19,6 @@ class UseCase < ActiveRecord::Base
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
   
   def as_json(options)
-    self.fill_user_comment
-    
     super(:methods => [:username, :converted_file_name])
   end
   

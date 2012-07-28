@@ -1,50 +1,28 @@
 class CommentsController < ApplicationController
   helper :all
   # before_filter :require_login, :only => [:favorite_add, :wow_add, :metoo_add]
-  def favorite_show
+  def show
     user_id = params[:comment][:user_id]
     use_case_id = params[:comment][:use_case_id]
 
     if user_id and use_case_id
-      @fav = Favorite.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
+      @fav = Favorite.where("user_id = ? AND use_case_id = ?", user_id, use_case_id).first
+      @wow = Wow.where("user_id = ? AND use_case_id = ?", user_id, use_case_id).first
+      @metoo = Metoo.where("user_id = ? AND use_case_id = ?", user_id, use_case_id).first
     else
       @fav = nil
-    end
-
-    respond_to do |format|
-      format.json { render json: @fav }
-    end
-  end
-
-  def wow_show
-    user_id = params[:comment][:user_id]
-    use_case_id = params[:comment][:use_case_id]
-
-    if user_id and use_case_id
-      @wow = Wow.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
-    else
       @wow = nil
-    end
-
-    respond_to do |format|
-      format.json { render json: @wow }
-    end
-  end
-
-  def metoo_show
-    user_id = params[:comment][:user_id]
-    use_case_id = params[:comment][:use_case_id]
-
-    if user_id and use_case_id
-      @metoo = Metoo.where("user_id = ? AND use_case_id = ?", user_id, use_case_id)
-    else
       @metoo = nil
     end
 
-    respond_to do |format|
-      format.json { render json: @metoo }
-    end
+    @comments = Hash.new
+    @comments[:current_user_favorite] = @fav
+    @comments[:current_user_wow] = @wow
+    @comments[:current_user_metoo] = @metoo
 
+    respond_to do |format|
+      format.json { render json: @comments }
+    end
   end
 
   def favorite_add
