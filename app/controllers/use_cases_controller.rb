@@ -56,15 +56,6 @@ class UseCasesController < ApplicationController
     @wows_count = Wow.where("use_case_id = ?", params[:id]).length
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
     
-    # 현재 사용자가 단 코멘트 조사
-    user_id = if logged_in? then current_user.id end
-    
-    if user_id
-      @use_case.current_user_favorite = @use_case.favorite.where('user_id = ?', user_id).first
-      @use_case.current_user_wow = @use_case.wow.where('user_id = ?', user_id).first
-      @use_case.current_user_metoo = @use_case.metoo.where('user_id = ?', user_id).first
-    end
-    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @use_case }

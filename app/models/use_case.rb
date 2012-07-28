@@ -17,22 +17,13 @@ class UseCase < ActiveRecord::Base
   validates :purpose, :presence => true, :length => { :maximum => 40 }
 
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
+  
   def as_json(options)
-    super(:methods => [:username, :converted_file_name, :user_favorite, :user_wow, :user_metoo])
+    self.fill_user_comment
+    
+    super(:methods => [:username, :converted_file_name])
   end
-
-  def user_favorite
-    return self.current_user_favorite
-  end
-
-  def user_wow
-    return self.current_user_wow
-  end
-
-  def user_metoo
-    return self.current_user_metoo
-  end
-
+  
   def username
     if user_id.blank?
       @username = nil
