@@ -16,9 +16,9 @@ class CommentsController < ApplicationController
     end
 
     @comments = Hash.new
-    @comments[:current_user_favorite] = @fav
-    @comments[:current_user_wow] = @wow
-    @comments[:current_user_metoo] = @metoo
+    @comments[:favorite] = @fav
+    @comments[:wow] = @wow
+    @comments[:metoo] = @metoo
 
     respond_to do |format|
       format.json { render json: @comments }
