@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def favorite_delete
+  def favorite_destroy
     @favorite = Favorite.find(params[:id])
     @favorite.destroy unless @favorite.blank?
 
@@ -70,7 +70,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def wow_delete
+  def wow_destroy
     @wow = Wow.find(params[:id])
     @wow.destroy unless @wow.blank?
 
@@ -79,7 +79,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def metoo_delete
+  def metoo_destroy
     @metoo = Metoo.find(params[:id])
     @metoo.destroy unless @metoo.blank?
 
