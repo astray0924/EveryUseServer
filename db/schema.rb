@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726022127) do
+ActiveRecord::Schema.define(:version => 20120731172842) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -45,17 +45,17 @@ ActiveRecord::Schema.define(:version => 20120726022127) do
   create_table "use_cases", :force => true do |t|
     t.string   "item"
     t.string   "purpose"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.string   "purpose_type"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "user_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.integer  "favorites_count",    :default => 0,  :null => false
-    t.integer  "wows_count",         :default => 0,  :null => false
-    t.integer  "metoos_count",       :default => 0,  :null => false
-    t.string   "purpose_type",       :default => ""
+    t.integer  "favorites_count",    :default => 0, :null => false
+    t.integer  "wows_count",         :default => 0, :null => false
+    t.integer  "metoos_count",       :default => 0, :null => false
   end
 
   create_table "user_sessions", :force => true do |t|
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20120726022127) do
     t.integer  "favorites_count",     :default => 0,  :null => false
     t.integer  "wows_count",          :default => 0,  :null => false
     t.integer  "metoos_count",        :default => 0,  :null => false
+    t.string   "user_group",          :default => ""
   end
 
   create_table "wows", :force => true do |t|
