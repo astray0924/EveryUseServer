@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726022127) do
+ActiveRecord::Schema.define(:version => 20120801152427) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20120726022127) do
     t.integer  "wows_count",         :default => 0,  :null => false
     t.integer  "metoos_count",       :default => 0,  :null => false
     t.string   "purpose_type",       :default => ""
+    t.string   "place",              :default => ""
   end
 
   create_table "user_sessions", :force => true do |t|
