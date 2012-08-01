@@ -5,13 +5,13 @@ class StatsController < ApplicationController
     
     @users.each do |user|
       # 필요한 데이터 수집
-      list_givefun = user.fun           # GiveFun
+      list_givefun = user.wow           # GiveFun
       list_givemetoo = user.metoo       # GiveMetoo
       
-      list_getfun = Array.new                 # GetFun
+      list_getwow = Array.new                 # GetFun
       list_getmetoo = Array.new               # GetMetoo
       user.use_cases.each do |use_case|
-        list_getfun += use_case.fun
+        list_getwow += use_case.wow
         list_getmetoo += use_case.metoo
       end
       list_uploadcase = user.use_cases  # UploadCase
@@ -32,7 +32,7 @@ class StatsController < ApplicationController
       end
       
       # GetFun 변환
-      list_getfun.each do |get_fun|
+      list_getwow.each do |get_fun|
         stat_item = AdvancedStatItem.new(user, get_fun.created_at, "GetFun", get_fun.use_case)
         stats.append(stat_item)
       end
