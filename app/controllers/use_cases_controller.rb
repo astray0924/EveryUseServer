@@ -5,10 +5,18 @@ class UseCasesController < ApplicationController
   # GET /use_cases.json
   def index
     @page, @limit = get_pagination_params(params)
-    @use_cases = UseCase.paginate(:page => @page, :per_page => @limit).order('created_at desc')
+	
+	@user_group = params[:user_group]
+	if @user_group.blank?
+		@use_cases = UseCase.all
+	else
+		@use_cases = UseCase.filter_by_user_group(@user_group)
+	end
+	
+    @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
 
     if params[:user_id]
-      @use_cases = @use_cases.where("user_id = ?", params[:user_id])
+      @use_cases = UseCase.where("user_id = ?", params[:user_id]).paginate(:page => @page, :per_page => @limit)
     end
 
     if params[:type]
@@ -32,6 +40,7 @@ class UseCasesController < ApplicationController
     @page, @limit = get_pagination_params(params)
     @type = (params[:type] || 'wow')
     @use_cases = nil
+	@user_group = params[:user_group]
 
     if @type == 'wow'
       @use_cases = UseCase.order('wows_count DESC').where("wows_count > ?", 0).paginate(:page => @page, :per_page => @limit)

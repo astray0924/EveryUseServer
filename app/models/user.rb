@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   validates :username, :uniqueness => true, :presence => true
   validates :email, :uniqueness => true, :presence => true
   validates :password, :presence => true
+  
+  # default order
+  default_scope :order => 'created_at DESC'
+  
   def feeds(page, limit)
     @feeds = Array.new
 

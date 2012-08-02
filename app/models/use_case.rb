@@ -3,6 +3,9 @@ class UseCase < ActiveRecord::Base
   has_many :favorite, :dependent => :destroy
   has_many :wow, :dependent => :destroy
   has_many :metoo, :dependent => :destroy
+  
+  # default order
+  default_scope :order => 'created_at DESC'
 
   has_attached_file :photo, :styles => {:thumb => ["100x100#", :jpg], :large => ["400x400>", :jpg]},
   					:default_style => :thumb,
@@ -17,6 +20,10 @@ class UseCase < ActiveRecord::Base
   validates :purpose, :presence => true, :length => { :maximum => 40 }
 
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
+  
+  def UseCase.filter_by_user_group(user_group)
+	return UseCase.includes(:user).find_all{ |use_case| use_case.user.user_group.eql?(user_group) }
+  end
   
   def as_json(options)
     super(:methods => [:username, :user_group, :converted_file_name])
