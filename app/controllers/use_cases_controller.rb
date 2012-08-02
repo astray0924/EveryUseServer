@@ -54,7 +54,8 @@ class UseCasesController < ApplicationController
 
 	# parameter: type
 	# default ordering is by 'wow'
-	@type = (params[:type] || 'wow')
+	params[:type] ||= 'wow'
+	@type = params[:type].to_s
     if @type == 'wow'
 		@temp = @use_cases.select{ |use_case| use_case.wows_count > 0 }
 		@use_cases = @temp.sort_by(&:wows_count).reverse
@@ -86,7 +87,8 @@ class UseCasesController < ApplicationController
 	
 		
 	# parameter: field
-    @field = (params[:type].to_s || "item")
+	params[:type] ||= "item" 
+    @field = params[:type].to_s
 	if @field.eql?("item")
 		@use_cases.sort_by(&:item)
 	elsif @field.eql?("purpose")
