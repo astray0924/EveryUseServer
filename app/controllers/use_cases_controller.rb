@@ -123,27 +123,6 @@ class UseCasesController < ApplicationController
     end
   end
 
-  # Grouped View
-  def item
-    @page, @limit = get_pagination_params(params)
-    @grouped, @reduced = get_grouped_data('item', @page, @limit)
-
-    respond_to do |format|
-      format.html { render 'group.html.erb' }
-      format.json { render json: @grouped }
-    end
-  end
-
-  def purpose
-    @page, @limit = get_pagination_params(params)
-    @grouped, @reduced = get_grouped_data('purpose', @page, @limit)
-
-    respond_to do |format|
-      format.html { render 'group.html.erb' }
-      format.json { render json: @grouped }
-    end
-  end
-
   # newn API
   def groups
     @page, @limit = get_pagination_params(params)
@@ -179,29 +158,4 @@ class UseCasesController < ApplicationController
   end
 
   private
-
-  def get_grouped_data(key_name, page, limit)
-    @use_cases = UseCase.order(key_name)
-    @nested = Hash.new
-    @reduced = Array.new
-
-    @use_cases.each do |use_case|
-      @key = use_case[key_name]
-
-      if @nested[@key].nil?
-        @nested[@key] = Array.new
-      end
-
-      @nested[@key].push(use_case)
-    end
-
-    @reduced = @nested.keys.paginate(:page => @page, :per_page => @limit)
-
-    @paged_nested = Hash.new
-    @reduced.each do |key|
-      @paged_nested[key] = @nested[key]
-    end
-
-    return @paged_nested, @reduced
-  end
 end

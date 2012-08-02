@@ -19,7 +19,7 @@ class UseCase < ActiveRecord::Base
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
   
   def as_json(options)
-    super(:methods => [:username, :converted_file_name])
+    super(:methods => [:username, :user_group, :converted_file_name])
   end
   
   def username
@@ -28,6 +28,12 @@ class UseCase < ActiveRecord::Base
     else
       @username = User.find(user_id).username
     end
+  end
+  
+  def user_group
+	if not self.user.blank?
+		@user_group = self.user.user_group
+	end
   end
 
   def converted_file_name
