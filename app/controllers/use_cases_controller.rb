@@ -12,8 +12,14 @@ class UseCasesController < ApplicationController
   	else
   		@use_cases = UseCase.all
   	end
-  	
-  	# parameter: type
+      
+  	# if user_id is provided, show only the user's use cases
+  	# it discards the previous sorting/filtering settings
+    if params[:user_id]
+      @use_cases = UseCase.where("user_id = ?", params[:user_id])
+    end
+	
+	# parameter: type
   	if params[:type]
         type = params[:type].to_s
   
@@ -29,12 +35,6 @@ class UseCasesController < ApplicationController
   	if @use_cases
   		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
   	end
-      
-  	# if user_id is provided, show only the user's use cases
-  	# it discards the previous sorting/filtering settings
-    if params[:user_id]
-      @use_cases = UseCase.where("user_id = ?", params[:user_id]).paginate(:page => @page, :per_page => @limit)
-    end
 
     respond_to do |format|
       format.html # index.html.erb
