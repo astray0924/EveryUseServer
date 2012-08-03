@@ -1,6 +1,4 @@
 class RelationshipsController < ApplicationController
-  before_filter :require_login
-  
   def index
     @relationships = Relationship.all;
     
@@ -13,7 +11,7 @@ class RelationshipsController < ApplicationController
     follower_id = params[:relationship][:follower_id]
     followed_id = params[:relationship][:followed_id]
     
-    @relationship = Relationship.where("follower_id = ? AND followed_id = ?", follower_id, followed_id)
+    @relationship = Relationship.where("follower_id = ? AND followed_id = ?", follower_id, followed_id).first
     
     respond_to do |format|
       format.json { render json: @relationship }
@@ -26,7 +24,6 @@ class RelationshipsController < ApplicationController
     @relationship = @follower.follow!(@followed)
     
     respond_to do |format|
-      format.html { redirect_to @user }
       format.json { render json: @relationship }
     end
   end
@@ -36,7 +33,6 @@ class RelationshipsController < ApplicationController
     if not @relationship.blank? then @relationship.destroy end
     
     respond_to do |format|
-      format.html { redirect_to @user }
       format.json
     end
   end

@@ -58,7 +58,7 @@ WikiUse::Application.routes.draw do
   # relations
   match 'relationship' => 'relationships#show', :via => :get
   match 'relationship' => 'relationships#create', :via => :post
-  match 'relationship' => 'relationships#destroy', :via => :destroy
+  match 'relationship/:id' => 'relationships#destroy', :via => :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

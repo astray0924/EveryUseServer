@@ -22,14 +22,20 @@ class UseCase < ActiveRecord::Base
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
   
   def UseCase.filter_by_user_group(user_group)
-	return UseCase.includes(:user).find_all{ |use_case| use_case.user.user_group.eql?(user_group) }
+	return UseCase.includes(:user).all.select{ |use_case| use_case.user.user_group.eql?(user_group) }
   end
   
   def as_json(options)
-    super(:methods => [:username, :user_group, :converted_file_name])
+    super(:methods => [:writer_id, :writer_name, :user_group, :converted_file_name])
   end
   
-  def username
+  def writer_id
+	if not user_id.blank? 
+		return user_id
+	end
+  end
+  
+  def writer_name
     if user_id.blank?
       @username = nil
     else
