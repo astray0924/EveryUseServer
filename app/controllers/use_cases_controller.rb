@@ -6,32 +6,32 @@ class UseCasesController < ApplicationController
   def index
     @page, @limit = get_pagination_params(params)
 
-	# parameter: user_group
-	if params[:user_group]
-		@use_cases = UseCase.filter_by_user_group(params[:user_group])
-	else
-		@use_cases = UseCase.all
-	end
-	
-	# parameter: type
-	if params[:type]
-      type = params[:type].to_s
-
-      @use_cases = case type
-          when 'item' then @use_cases.sort_by { |use_case| use_case.item.downcase }
-          when 'purpose' then @use_cases.sort_by { |use_case| use_case.purpose.downcase }
-          when 'time' then @use_cases.sort_by(&:created_at).reverse
-          else @use_cases
+  	# parameter: user_group
+  	if params[:user_group]
+  		@use_cases = UseCase.filter_by_user_group(params[:user_group])
+  	else
+  		@use_cases = UseCase.all
+  	end
+  	
+  	# parameter: type
+  	if params[:type]
+        type = params[:type].to_s
+  
+        @use_cases = case type
+            when 'item' then @use_cases.sort_by { |use_case| use_case.item.downcase }
+            when 'purpose' then @use_cases.sort_by { |use_case| use_case.purpose.downcase }
+            when 'time' then @use_cases.sort_by(&:created_at).reverse
+            else @use_cases
+        end
       end
-    end
-	
-	# pagination
-	if @use_cases
-		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
-	end
-    
-	# if user_id is provided, show only the user's use cases
-	# it discards the previous sorting/filtering settings
+  	
+  	# pagination
+  	if @use_cases
+  		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+  	end
+      
+  	# if user_id is provided, show only the user's use cases
+  	# it discards the previous sorting/filtering settings
     if params[:user_id]
       @use_cases = UseCase.where("user_id = ?", params[:user_id]).paginate(:page => @page, :per_page => @limit)
     end
@@ -45,29 +45,29 @@ class UseCasesController < ApplicationController
   def top
     @page, @limit = get_pagination_params(params)
     
-	# parameter: user_group
-	if params[:user_group]
-		@use_cases = UseCase.filter_by_user_group(params[:user_group])
-	else
-		@use_cases = UseCase.all
-	end
-
-	# parameter: type
-	# default ordering is by 'wow'
-	params[:type] ||= 'wow'
-	@type = params[:type].to_s
-    if @type == 'wow'
-		@temp = @use_cases.select{ |use_case| use_case.wows_count > 0 }
-		@use_cases = @temp.sort_by(&:wows_count).reverse
-    elsif @type == 'metoo'
-		@temp = @use_cases.select{ |use_case| use_case.metoos_count > 0 }
-		@use_cases = @temp.sort_by(&:metoos_count).reverse
-    end
-	
-	# pagination
-	if @use_cases
-		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
-	end
+  	# parameter: user_group
+  	if params[:user_group]
+  		@use_cases = UseCase.filter_by_user_group(params[:user_group])
+  	else
+  		@use_cases = UseCase.all
+  	end
+  
+  	# parameter: type
+  	# default ordering is by 'wow'
+  	params[:type] ||= 'wow'
+  	@type = params[:type].to_s
+      if @type == 'wow'
+  		@temp = @use_cases.select{ |use_case| use_case.wows_count > 0 }
+  		@use_cases = @temp.sort_by(&:wows_count).reverse
+      elsif @type == 'metoo'
+  		@temp = @use_cases.select{ |use_case| use_case.metoos_count > 0 }
+  		@use_cases = @temp.sort_by(&:metoos_count).reverse
+      end
+  	
+  	# pagination
+  	if @use_cases
+  		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+  	end
 
     respond_to do |format|
       format.json { render json: @use_cases }

@@ -9,18 +9,32 @@ class RelationshipsController < ApplicationController
     end
   end
   
+  def show
+    follower_id = params[:relationship][:follower_id]
+    followed_id = params[:relationship][:followed_id]
+    
+    @relationship = Relationship.where("follower_id = ? AND followed_id = ?", follower_id, followed_id)
+    
+    respond_to do |format|
+      format.json { render json: @relationship }
+    end
+  end
+  
   def create
-    @user = User.find(params[:relationship][:followed_id])
-    current_user.follow!(@user)
+    @followed = User.find(params[:relationship][:followed_id])
+    @follower = User.find(params[:relationship][:follower_id])
+    @relationship = @follower.follow!(@followed)
+    
     respond_to do |format|
       format.html { redirect_to @user }
-      format.json { render json: current_user.followed_users }
+      format.json { render json: @relationship }
     end
   end
 
   def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow!(@user)
+    @relationship = Relationship.find(params[:id])
+    if not @relationship.blank? then @relationship.destroy end
+    
     respond_to do |format|
       format.html { redirect_to @user }
       format.json

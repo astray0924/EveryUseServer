@@ -56,7 +56,7 @@ WikiUse::Application.routes.draw do
   match 'comments/metoo/:id' => 'comments#metoo_destroy', :via => :delete
   
   # relations
-  match 'relationship' => 'relationships#index', :via => :get
+  match 'relationship' => 'relationships#show', :via => :get
   match 'relationship' => 'relationships#create', :via => :post
   match 'relationship' => 'relationships#destroy', :via => :destroy
 
