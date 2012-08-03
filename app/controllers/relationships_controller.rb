@@ -33,7 +33,7 @@ class RelationshipsController < ApplicationController
     if not @relationship.blank? then @relationship.destroy end
     
     respond_to do |format|
-      format.json
+      format.json {render json: 1}	# temporary
     end
   end
 end
