@@ -23,14 +23,14 @@ class User < ActiveRecord::Base
   # default order
   default_scope :order => 'created_at DESC'
   
-  def feeds(page, limit)
+  def feeds
     @feeds = Array.new
 
     followed_users.each do |user|
       @feeds |= user.use_cases
     end
 
-    return @feeds.sort! {|x, y| y.created_at <=> x.created_at}.paginate(:page => @page, :per_page => @limit)
+    return @feeds.sort! {|x, y| y.created_at <=> x.created_at}
   end
 
   def following?(other_user)
