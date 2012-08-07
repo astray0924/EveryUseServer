@@ -8,7 +8,7 @@
 require 'json'
 
 # create new user 'olduser'
-old_user = User.new(username: 'olduser', email: 'old@old.com', password: 'olduser', password_confirmation: 'olduser')
+old_user = User.new(username: 'olduser', email: 'old@old.com', password: 'olduser', password_confirmation: 'olduser', user_group: 'housewife')
 if old_user.valid?
 	old_user.save()
 else
@@ -16,7 +16,7 @@ else
 end
 
 # create test user
-test_user = User.new(username: 'test', email: 'test@test.com', password: 'test', password_confirmation: 'test')
+test_user = User.new(username: 'test', email: 'test@test.com', password: 'test', password_confirmation: 'test', user_group: 'student')
 if test_user.valid?
   test_user.save()
 else
@@ -24,37 +24,37 @@ else
 end
 
 # parse seed JSON
-seed_file = File.open('db/seed/seed.json', 'r')
-
-seed_file.each do |l|
-	json = JSON.parse(l)
-	
-	id = json['id']	# 이건 case의 고유 아이디. 일단 받아옴
-	dummy = File.open("db/seed/photo/dummy.png", 'rb')
-	
-	begin
-		photo = File.open("db/seed/photo/#{id}.png", 'rb')
-	rescue
-		photo = dummy
-	end
-	
-	user_id = User.where('username = ?', 'olduser')
-	item = json['item']
-	purpose = json['purpose']
-	uploadDateTime = json['uploadDateTime']
-	
-	use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :created_at => uploadDateTime)
-	
-	if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
-	  if use_case.valid?
-  		use_case.save()
-    else
-      print use_case
-	  end
-	end
-	
-	# close the photo file
-	if !photo.nil?
-		photo.close
-	end
-end
+# seed_file = File.open('db/seed/seed.json', 'r')
+# 
+# seed_file.each do |l|
+	# json = JSON.parse(l)
+# 	
+	# id = json['id']	# 이건 case의 고유 아이디. 일단 받아옴
+	# dummy = File.open("db/seed/photo/dummy.png", 'rb')
+# 	
+	# begin
+		# photo = File.open("db/seed/photo/#{id}.png", 'rb')
+	# rescue
+		# photo = dummy
+	# end
+# 	
+	# user_id = User.where('username = ?', 'olduser')
+	# item = json['item']
+	# purpose = json['purpose']
+	# uploadDateTime = json['uploadDateTime']
+# 	
+	# use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :created_at => uploadDateTime)
+# 	
+	# if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
+	  # if use_case.valid?
+  		# use_case.save()
+    # else
+      # print use_case
+	  # end
+	# end
+# 	
+	# # close the photo file
+	# if !photo.nil?
+		# photo.close
+	# end
+# end

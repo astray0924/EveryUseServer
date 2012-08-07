@@ -31,7 +31,7 @@ gem "thin"
 
 gem 'jquery-rails'
 
-gem 'searchlogic'
+# gem 'searchlogic'
 
 group :development, :test do
   gem 'sqlite3'
