@@ -1,4 +1,35 @@
 class StatsController < ApplicationController
+  def user_stats
+    @users = User.all
+    @stats = Hash.new()
+    
+    @users.each do |user| 
+      username = user.username
+      @stats[username] = Hash.new
+      
+      # follower
+      followers = user.followers.all 
+      @stats[username][:followers] = followers.sort_by { |item| item.id }
+      
+      # wow
+      wows = user.wow.all
+      @stats[username][:wows] = wows.sort_by { |item| item.id }
+      
+      # metoo
+      metoos = user.metoo.all
+      @stats[username][:metoos] = metoos.sort_by { |item| item.id }
+      
+      # scrap 
+      scraps = user.favorite.all
+      @stats[username][:scraps] = scraps.sort_by { |item| item.id }
+    end
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @stats }
+    end
+  end
+  
   def stats_advanced
     @users = User.all
     @users_stats = Hash.new

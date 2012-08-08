@@ -1,0 +1,99 @@
+<% content_for :head do %>
+<style type="text/css">
+</style>
+<% end %>
+
+<h1>사용자 통계</h1>
+<p id="notice">
+	<%= notice %>
+</p>
+<h2>Move to Stats Table (olduser는 dummy 사용자입니다.)</h2>
+<ol style="width: 50%;">
+	<% @stats.each do |username, value| %>
+	<li>
+		<a style="display: block;" href="#<%= username %>"><%= username %></a>
+	</li>
+	<% end %>
+</ol>
+
+<% @stats.each do |username, stats| %>
+<h2 id="<%= username %>" style="color: blue;"><%= username %> (<a href="#TOP">Back to top</a>)</h2>
+
+<h3>Follower</h3>
+<ul>
+	<% if stats[:followers].empty? %>
+		<b>없음</b>
+	<%end %>
+	<% stats[:followers].each do |follower| %>
+	<li>
+		<%= follower.username %>
+	</li>
+	<% end %>
+</ul>
+
+<table class="cases" style="font-size: 1.5em; color: red;">
+	<caption>
+		Wow
+	</caption>
+	<tr>
+		<th>Writer</th>
+		<th>DateTime</th>
+		<th>UseCase ID</th>
+		<th>UseCase Item</th>
+		<th>UseCase Purpose</th>
+	</tr>
+	<% stats[:wows].each do |comment| %>
+	<tr>
+		<td><%= comment.use_case.user.username %></td>
+		<td><%= comment.created_at %></td>
+		<td><%= comment.use_case.id %></td>
+		<td><%= comment.use_case.item %></td>
+		<td><%= comment.use_case.purpose %></td>
+	</tr>
+	<% end %>
+</table>
+
+<table  class="cases">
+	<caption style="font-size: 1.5em; color: red;">
+		Me, too
+	</caption>
+	<tr>
+		<th>Writer</th>
+		<th>DateTime</th>
+		<th>UseCase ID</th>
+		<th>UseCase Item</th>
+		<th>UseCase Purpose</th>
+	</tr>
+	<% stats[:metoos].each do |comment| %>
+	<tr>
+		<td><%= comment.use_case.user.username %></td>
+		<td><%= comment.created_at %></td>
+		<td><%= comment.use_case.id %></td>
+		<td><%= comment.use_case.item %></td>
+		<td><%= comment.use_case.purpose %></td>
+	</tr>
+	<% end %>
+</table>
+
+<table  class="cases">
+	<caption style="font-size: 1.5em; color: red;">
+		Scrap
+	</caption>
+	<tr>
+		<th>Writer</th>
+		<th>DateTime</th>
+		<th>UseCase ID</th>
+		<th>UseCase Item</th>
+		<th>UseCase Purpose</th>
+	</tr>
+	<% stats[:scraps].each do |comment| %>
+	<tr>
+		<td><%= comment.use_case.user.username %></td>
+		<td><%= comment.created_at %></td>
+		<td><%= comment.use_case.id %></td>
+		<td><%= comment.use_case.item %></td>
+		<td><%= comment.use_case.purpose %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
