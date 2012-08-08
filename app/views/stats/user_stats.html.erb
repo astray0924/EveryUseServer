@@ -46,7 +46,7 @@
 	<tr>
 		<td><%= comment.use_case.user.username %></td>
 		<td><%= comment.created_at %></td>
-		<td><%= comment.use_case.id %></td>
+		<td><%= link_to comment.use_case.id, comment.use_case, :target => "link" %></td>
 		<td><%= comment.use_case.item %></td>
 		<td><%= comment.use_case.purpose %></td>
 	</tr>
@@ -68,7 +68,7 @@
 	<tr>
 		<td><%= comment.use_case.user.username %></td>
 		<td><%= comment.created_at %></td>
-		<td><%= comment.use_case.id %></td>
+		<td><%= link_to comment.use_case.id, comment.use_case, :target => "link" %></td>
 		<td><%= comment.use_case.item %></td>
 		<td><%= comment.use_case.purpose %></td>
 	</tr>
@@ -90,7 +90,7 @@
 	<tr>
 		<td><%= comment.use_case.user.username %></td>
 		<td><%= comment.created_at %></td>
-		<td><%= comment.use_case.id %></td>
+		<td><%= link_to comment.use_case.id, comment.use_case, :target => "link" %></td>
 		<td><%= comment.use_case.item %></td>
 		<td><%= comment.use_case.purpose %></td>
 	</tr>
