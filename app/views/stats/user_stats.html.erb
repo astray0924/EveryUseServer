@@ -1,105 +1,53 @@
-<% content_for :head do %>
-<style type="text/css">
-</style>
-<% end %>
-
 <h1>사용자 통계</h1>
 <p id="notice">
 	<%= notice %>
 </p>
-<h2>Move to Stats Table (olduser는 dummy 사용자입니다.)</h2>
-<ol style="width: 50%;">
-	<% @stats.each do |username, value| %>
-	<li>
-		<a style="display: block;" href="#<%= username %>"><%= username %></a>
-	</li>
-	<% end %>
-</ol>
 
-<% @stats.each do |username, stats| %>
-<h2 id="<%= username %>" style="color: blue;"><%= username %> (<a href="#TOP">Back to top</a>)</h2>
-
-<h3>Follower</h3>
-<ul>
-	<% if stats[:followers].empty? %>
-	<b>없음</b>
-	<%end %>
-	<% stats[:followers].each do |follower| %>
-	<li>
-		<%= follower.username %>
-	</li>
-	<% end %>
-</ul>
-
-<table class="cases" style="font-size: 1.5em; color: red;">
-	<caption>
-		Wow
-	</caption>
-	<tr>
-		<th>Writer</th>
-		<th>UseCase ID</th>
-		<th>UseCase Item</th>
-		<th>UseCase Purpose</th>
-		<th>created at (댓글)</th>
-		<th>created at (usecase)</th>
-	</tr>
-	<% stats[:wows].each do |wow| %>
-	<tr>
-		<td><%= wow.use_case.user.username %></td>
-		<td><%= link_to wow.use_case.id, wow.use_case, :target => "link" %></td>
-		<td><%= wow.use_case.item %></td>
-		<td><%= wow.use_case.purpose %></td>
-		<td><%= l wow.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-		<td><%= l wow.use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-	</tr>
-	<% end %>
-</table>
-
-<table  class="cases">
-	<caption style="font-size: 1.5em; color: red;">
-		Me, too
-	</caption>
-	<tr>
-		<th>Writer</th>
-		<th>UseCase ID</th>
-		<th>UseCase Item</th>
-		<th>UseCase Purpose</th>
-		<th>created at (댓글)</th>
-		<th>created at (usecase)</th>
-	</tr>
-	<% stats[:metoos].each do |metoo| %>
-	<tr>
-		<td><%= metoo.use_case.user.username %></td>
-		<td><%= link_to metoo.use_case.id, metoo.use_case, :target => "link" %></td>
-		<td><%= metoo.use_case.item %></td>
-		<td><%= metoo.use_case.purpose %></td>
-		<td><%= l metoo.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-		<td><%= l metoo.use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-	</tr>
-	<% end %>
-</table>
-
-<table  class="cases">
-	<caption style="font-size: 1.5em; color: red;">
-		Scrap
-	</caption>
-	<tr>
-		<th>Writer</th>
-		<th>UseCase ID</th>
-		<th>UseCase Item</th>
-		<th>UseCase Purpose</th>
-		<th>created at (댓글)</th>
-		<th>created at (usecase)</th>
-	</tr>
-	<% stats[:scraps].each do |scrap| %>
-	<tr>
-		<td><%= scrap.use_case.user.username %></td>
-		<td><%= link_to scrap.use_case.id, scrap.use_case, :target => "link" %></td>
-		<td><%= scrap.use_case.item %></td>
-		<td><%= scrap.use_case.purpose %></td>
-		<td><%= l scrap.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-		<td><%= l scrap.use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-	</tr>
-	<% end %>
-</table>
+<h2>유저 선택</h2>
+<%= form_tag({:action => :user_stats}, {:method => 'get'}) do %>
+<%= label_tag 'user_id', 'Select User:' %>
+<%= select_tag 'user_id', options_from_collection_for_select(@users, "id", "username") %>
+<%= submit_tag 'Show Stats' %>
 <% end %>
+
+<div id="stat_result">
+	<% if @stats %>
+	<h2 style="text-align: center; color: blue;"><%= @user.username %>'s Statistic</h2>
+
+	<h3>Followings</h3>
+	<ul>
+		<% @followings.each do |following| %>
+		<li>
+			<%= link_to following.username, following %>
+		</li>
+		<% end %>
+	</ul>
+
+	<h3>Comment Logs</h3>
+	<table class="comment_log">
+		<caption>
+			Comment Logs
+		</caption>
+		<tr>
+			<th>Activity</th>
+			<th>Target</th>
+			<th>Created at</th>
+		</tr>
+		<% @comments.each do |comment, comment_type| %>
+		<tr>
+			<td><%= comment_type %></td>
+
+			<% if comment_type.eql?('Following') %>
+			<td>User: <%= link_to comment.followed.username, User.find(comment.followed_id), :target => "detail" %></td>
+			<% else %>
+			<td>UseCase: <%= link_to (comment.use_case.item + " / " + comment.use_case.purpose), comment.use_case, :target => "detail" %></td>
+			<% end %>
+
+			<td><%= l comment.created_at.in_time_zone("Seoul"), :format => :custom %></td>
+		</tr>
+		<% end %>
+	</table>
+	<% end %>
+</div>
+
+<!-- <b><%= debug @comments %></b> -->
