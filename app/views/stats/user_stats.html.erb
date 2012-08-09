@@ -22,7 +22,7 @@
 <h3>Follower</h3>
 <ul>
 	<% if stats[:followers].empty? %>
-		<b>없음</b>
+	<b>없음</b>
 	<%end %>
 	<% stats[:followers].each do |follower| %>
 	<li>
@@ -49,8 +49,8 @@
 		<td><%= link_to wow.use_case.id, wow.use_case, :target => "link" %></td>
 		<td><%= wow.use_case.item %></td>
 		<td><%= wow.use_case.purpose %></td>
-		<td><%= l wow.created_at, :format => :custom %></td>
-		<td><%= l wow.use_case.created_at, :format => :custom %></td>
+		<td><%= l wow.created_at.in_time_zone('Seoul'), :format => :custom %></td>
+		<td><%= l wow.use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
 	</tr>
 	<% end %>
 </table>
@@ -73,8 +73,8 @@
 		<td><%= link_to metoo.use_case.id, metoo.use_case, :target => "link" %></td>
 		<td><%= metoo.use_case.item %></td>
 		<td><%= metoo.use_case.purpose %></td>
-		<td><%= l metoo.created_at, :format => :custom %></td>
-		<td><%= l metoo.use_case.created_at, :format => :custom %></td>
+		<td><%= l metoo.created_at.in_time_zone('Seoul'), :format => :custom %></td>
+		<td><%= l metoo.use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
 	</tr>
 	<% end %>
 </table>
@@ -97,8 +97,8 @@
 		<td><%= link_to scrap.use_case.id, scrap.use_case, :target => "link" %></td>
 		<td><%= scrap.use_case.item %></td>
 		<td><%= scrap.use_case.purpose %></td>
-		<td><%= l scrap.created_at, :format => :custom %></td>
-		<td><%= l scrap.use_case.created_at, :format => :custom %></td>
+		<td><%= l scrap.created_at.in_time_zone('Seoul'), :format => :custom %></td>
+		<td><%= l scrap.use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
 	</tr>
 	<% end %>
 </table>

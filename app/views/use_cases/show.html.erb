@@ -14,10 +14,7 @@
 	<b>Function:</b>
 	<%= @use_case.purpose %>
 </p>
-<p>
-	<b>올라온 시간:</b>
-	<%= l @use_case.created_at %>
-</p>
+
 <%= link_to 'Edit', edit_use_case_path(@use_case) %> |
 <%= link_to 'Back', use_cases_path %>
 
@@ -26,11 +23,11 @@
 	<input type="checkbox" id="favorite" class="comment_btn" />
 	<label for="favorite">Favorite (<%= @favorites_count %>)</label>
 	<span class="count"></span>
-	
+
 	<input type="checkbox" id="fun" class="comment_btn" />
 	<label for="fun">Fun (<%= @funs_count %>)</label>
 	<span class="count"></span>
-	
+
 	<input type="checkbox" id="metoo" class="comment_btn" />
 	<label for="metoo">Me Too (<%= $metoos_count %>)</label>
 	<span class="count"></span>

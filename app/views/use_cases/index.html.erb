@@ -20,7 +20,7 @@
 		<td><%= use_case.user_group %></td>
 		<td><%= use_case.item %></td>
 		<td><%= use_case.purpose %></td>
-		<td><%= l use_case.created_at, :format => :custom %></td>
+		<td><%= l use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
 		<td><%= link_to 'Show', use_case %></td>
 		<td><%= link_to 'Edit', edit_use_case_path(use_case) %></td>
 		<td><%= link_to 'Destroy', use_case, confirm: 'Are you sure?', method: :delete %></td>
