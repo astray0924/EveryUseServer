@@ -14,6 +14,10 @@
 	<b>Function:</b>
 	<%= @use_case.purpose %>
 </p>
+<p>
+	<b>올라온 시간:</b>
+	<%= l @use_case.created_at %>
+</p>
 <%= link_to 'Edit', edit_use_case_path(@use_case) %> |
 <%= link_to 'Back', use_cases_path %>
 

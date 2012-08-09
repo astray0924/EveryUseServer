@@ -37,18 +37,20 @@
 	</caption>
 	<tr>
 		<th>Writer</th>
-		<th>DateTime</th>
 		<th>UseCase ID</th>
 		<th>UseCase Item</th>
 		<th>UseCase Purpose</th>
+		<th>created at (댓글)</th>
+		<th>created at (usecase)</th>
 	</tr>
-	<% stats[:wows].each do |comment| %>
+	<% stats[:wows].each do |wow| %>
 	<tr>
-		<td><%= comment.use_case.user.username %></td>
-		<td><%= comment.created_at %></td>
-		<td><%= link_to comment.use_case.id, comment.use_case, :target => "link" %></td>
-		<td><%= comment.use_case.item %></td>
-		<td><%= comment.use_case.purpose %></td>
+		<td><%= wow.use_case.user.username %></td>
+		<td><%= link_to wow.use_case.id, wow.use_case, :target => "link" %></td>
+		<td><%= wow.use_case.item %></td>
+		<td><%= wow.use_case.purpose %></td>
+		<td><%= l wow.created_at, :format => :custom %></td>
+		<td><%= l wow.use_case.created_at, :format => :custom %></td>
 	</tr>
 	<% end %>
 </table>
@@ -59,18 +61,20 @@
 	</caption>
 	<tr>
 		<th>Writer</th>
-		<th>DateTime</th>
 		<th>UseCase ID</th>
 		<th>UseCase Item</th>
 		<th>UseCase Purpose</th>
+		<th>created at (댓글)</th>
+		<th>created at (usecase)</th>
 	</tr>
-	<% stats[:metoos].each do |comment| %>
+	<% stats[:metoos].each do |metoo| %>
 	<tr>
-		<td><%= comment.use_case.user.username %></td>
-		<td><%= comment.created_at %></td>
-		<td><%= link_to comment.use_case.id, comment.use_case, :target => "link" %></td>
-		<td><%= comment.use_case.item %></td>
-		<td><%= comment.use_case.purpose %></td>
+		<td><%= metoo.use_case.user.username %></td>
+		<td><%= link_to metoo.use_case.id, metoo.use_case, :target => "link" %></td>
+		<td><%= metoo.use_case.item %></td>
+		<td><%= metoo.use_case.purpose %></td>
+		<td><%= l metoo.created_at, :format => :custom %></td>
+		<td><%= l metoo.use_case.created_at, :format => :custom %></td>
 	</tr>
 	<% end %>
 </table>
@@ -81,18 +85,20 @@
 	</caption>
 	<tr>
 		<th>Writer</th>
-		<th>DateTime</th>
 		<th>UseCase ID</th>
 		<th>UseCase Item</th>
 		<th>UseCase Purpose</th>
+		<th>created at (댓글)</th>
+		<th>created at (usecase)</th>
 	</tr>
-	<% stats[:scraps].each do |comment| %>
+	<% stats[:scraps].each do |scrap| %>
 	<tr>
-		<td><%= comment.use_case.user.username %></td>
-		<td><%= comment.created_at %></td>
-		<td><%= link_to comment.use_case.id, comment.use_case, :target => "link" %></td>
-		<td><%= comment.use_case.item %></td>
-		<td><%= comment.use_case.purpose %></td>
+		<td><%= scrap.use_case.user.username %></td>
+		<td><%= link_to scrap.use_case.id, scrap.use_case, :target => "link" %></td>
+		<td><%= scrap.use_case.item %></td>
+		<td><%= scrap.use_case.purpose %></td>
+		<td><%= l scrap.created_at, :format => :custom %></td>
+		<td><%= l scrap.use_case.created_at, :format => :custom %></td>
 	</tr>
 	<% end %>
 </table>
