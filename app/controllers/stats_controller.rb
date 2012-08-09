@@ -11,40 +11,20 @@ class StatsController < ApplicationController
       @followings = @user.followed_users.all.sort_by { |item| item.id }   # followings
       # @followers = @user.followers.all.sort_by { |item| item.id }         # followers
       
-      @wows = @user.wow.all.sort_by { |item| item.id }.map {|item| [item, "Wow"]}
-      @metoos = @user.metoo.all.sort_by { |item| item.id }.map {|item| [item, "Metoo"]}
-      @scraps = @user.favorite.sort_by { |item| item.id }.map {|item| [item, "Scrap"]}
-      @following_logs = Relationship.where("follower_id = ?", @user_id).map {|item| [item, "Following"]}
+      @wows = @user.wow.all.sort_by { |item| item.id }.map {|item| [item, "GiveWow"]}
+      @metoos = @user.metoo.all.sort_by { |item| item.id }.map {|item| [item, "GiveMetoo"]}
+      @scraps = @user.favorite.sort_by { |item| item.id }.map {|item| [item, "GiveScrap"]}
+      @following_logs = Relationship.where("follower_id = ?", @user_id).map {|item| [item, "StartFollowing"]}
+      @uploads = @user.use_cases.sort_by { |item| item.id }.map {|item| [item, "UploadCase"]}
       
-      @comments = Array.new
-      @comments.concat(@wows)
-      @comments.concat(@metoos)
-      @comments.concat(@scraps)
-      @comments.concat(@following_logs)
-      @comments.sort_by! {|comment| comment[0].created_at}    # comments
+      @activities = Array.new
+      @activities.concat(@wows)
+      @activities.concat(@metoos)
+      @activities.concat(@scraps)
+      @activities.concat(@following_logs)
+      @activities.concat(@uploads)
+      @activities.sort_by! {|activity| activity[0].created_at}    # comments
     end
-    
-    
-    # @users.each do |user| 
-      # username = user.username
-      # @stats[username] = Hash.new
-#       
-      # # follower
-      # followers = user.followers.all 
-      # @stats[username][:followers] = followers.sort_by { |item| item.id }
-#       
-      # # wow
-      # wows = user.wow.all
-      # @stats[username][:wows] = wows.sort_by { |item| item.id }
-#       
-      # # metoo
-      # metoos = user.metoo.all
-      # @stats[username][:metoos] = metoos.sort_by { |item| item.id }
-#       
-      # # scrap 
-      # scraps = user.favorite.all
-      # @stats[username][:scraps] = scraps.sort_by { |item| item.id }
-    # end
     
     respond_to do |format|
       format.html

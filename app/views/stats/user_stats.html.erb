@@ -12,9 +12,9 @@
 
 <div id="stat_result">
 	<% if @stats %>
-	<h2 style="text-align: center; color: blue;"><%= @user.username %>'s Statistic</h2>
+	<h2 style="color: blue;"><%= @user.username %>'s Statistic</h2>
 
-	<h3>Followings</h3>
+	<h3 style="font-size: 1.5em; color: red;">Followings</h3>
 	<ul>
 		<% @followings.each do |following| %>
 		<li>
@@ -23,27 +23,29 @@
 		<% end %>
 	</ul>
 
-	<h3>Comment Logs</h3>
+	<!-- 	<h3>Comment Logs</h3> -->
 	<table class="comment_log">
 		<caption>
-			Comment Logs
+			Activity Logs
 		</caption>
 		<tr>
 			<th>Activity</th>
 			<th>Target</th>
 			<th>Created at</th>
 		</tr>
-		<% @comments.each do |comment, comment_type| %>
+		<% @activities.each do |activity, activity_type| %>
 		<tr>
-			<td><%= comment_type %></td>
+			<td><%= activity_type %></td>
 
-			<% if comment_type.eql?('Following') %>
-			<td>User: <%= link_to comment.followed.username, User.find(comment.followed_id), :target => "detail" %></td>
+			<% if activity_type.eql?('StartFollowing') %>
+			<td style="color: #9933CC;"><%= activity_type %>: <%= link_to activity.followed.username, User.find(activity.followed_id), :target => "detail" %></td>
+			<% elsif activity_type.eql?('UploadCase') %>
+			<td style="color: #669900;"><%= activity_type %>: <%= link_to (activity.item + " / " + activity.purpose), activity, :target => "detail" %></td>
 			<% else %>
-			<td>UseCase: <%= link_to (comment.use_case.item + " / " + comment.use_case.purpose), comment.use_case, :target => "detail" %></td>
+			<td style="color: #CC0000;"><%= activity_type %>: <%= link_to (activity.use_case.item + " / " + activity.use_case.purpose), activity.use_case, :target => "detail" %></td>
 			<% end %>
-
-			<td><%= l comment.created_at.in_time_zone("Seoul"), :format => :custom %></td>
+			
+			<td><%= l activity.created_at.in_time_zone("Seoul"), :format => :custom %></td>
 		</tr>
 		<% end %>
 	</table>
