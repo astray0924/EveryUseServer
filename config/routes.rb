@@ -32,6 +32,7 @@ WikiUse::Application.routes.draw do
   match 'stats/basic' => 'stats#stats'
   match 'stats/advanced' => 'stats#stats_advanced'
   match 'stats/user_stats' => 'stats#user_stats'
+  match 'stats/use_case_stats' => 'stats#use_case_stats'
 
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }

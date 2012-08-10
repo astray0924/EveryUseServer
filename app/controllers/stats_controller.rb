@@ -1,4 +1,20 @@
 class StatsController < ApplicationController
+  def use_case_stats
+    @user_group = params[:user_group]
+    @user_group ||= 'all'
+    
+    @use_cases = UseCase.includes(:user)
+    
+    unless @user_group.eql?('all')
+      @use_cases.select! {|use_case| use_case.user.user_group.eql?(@user_group)}
+    end
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @use_cases }
+    end
+  end
+  
   def user_stats
     @users = User.all
     
