@@ -6,7 +6,7 @@
 <h2>유저 선택</h2>
 <%= form_tag({:action => :user_stats}, {:method => 'get'}) do %>
 <%= label_tag 'user_id', 'Select User:' %>
-<%= select_tag 'user_id', options_from_collection_for_select(@users, "id", "username") %>
+<%= select_tag 'user_id', options_from_collection_for_select(@users, "id", "username", @user_id.to_i) %>
 <%= submit_tag 'Show Stats' %>
 <% end %>
 
