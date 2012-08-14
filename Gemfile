@@ -32,6 +32,10 @@ gem "thin"
 gem 'jquery-rails'
 
 gem 'acts_as_xlsx'
+gem 'axlsx_rails'
+
+gem 'yard'
+gem 'redcarpet'
 
 # gem 'searchlogic'
 

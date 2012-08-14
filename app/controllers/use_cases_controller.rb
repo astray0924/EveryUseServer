@@ -6,96 +6,137 @@ class UseCasesController < ApplicationController
   def index
     @page, @limit = get_pagination_params(params)
 
-  	# parameter: user_group
-  	if params[:user_group]
-  		@use_cases = UseCase.filter_by_user_group(params[:user_group])
-  	else
-  		@use_cases = UseCase.all
-  	end
-      
-  	# if user_id is provided, show only the user's use cases
-  	# it discards the previous sorting/filtering settings
+    # parameter: user_group
+    if params[:user_group]
+      @use_cases = UseCase.filter_by_user_group(params[:user_group])
+    else
+      @use_cases = UseCase.all
+    end
+
+    # if user_id is provided, show only the user's use cases
+    # it discards the previous sorting/filtering settings
     if params[:user_id]
       @use_cases = UseCase.where("user_id = ?", params[:user_id])
     end
-	
-	# parameter: type
-  	if params[:type]
-        type = params[:type].to_s
-  
-        @use_cases = case type
+
+    # parameter: type
+    if params[:type]
+      type = params[:type].to_s
+
+      @use_cases = case type
             when 'item' then @use_cases.sort_by { |use_case| use_case.item.downcase }
             when 'purpose' then @use_cases.sort_by { |use_case| use_case.purpose.downcase }
             when 'time' then @use_cases.sort_by(&:created_at).reverse
             else @use_cases
         end
-      end
-  	
-  	# pagination
-  	if @use_cases
-  		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
-  	end
+    end
+
+    # pagination
+    if @use_cases
+      @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @use_cases }
+      format.xlsx {
+        xlsx_package = UseCase.to_xlsx :name => "UseCases"
+        # , :header_style => {:bg_color => "00",
+          # :fg_color => "FF",
+          # :sz => 16,
+          # :alignment => { :horizontal => :center }},
+        # :style => {:border => Axlsx::STYLE_THIN_BORDER}
+        
+        sheet = xlsx_package.workbook.worksheets.first
+        timestamp = sheet.workbook.styles.add_style :format_code => "YYYY-MM-DD HH:MM:SS"
+        sheet.col_style 5, timestamp, :row_offset => 1
+        
+        wb = xlsx_package.workbook
+        wb.add_worksheet(:name => "Student") do |sheet| 
+          sheet.add_row ["ID", "Writer", "User Group", "Item", "Purpose", "Created at"]
+          
+          UseCase.includes(:user).select {|use_case| use_case.user.user_group.eql?('student')}.reverse.each do |use_case|
+            sheet.add_row [use_case.id, use_case.writer_name, use_case.user_group, use_case.item, use_case.purpose, use_case.created_at]
+            timestamp = sheet.workbook.styles.add_style :format_code => "YYYY-MM-DD HH:MM:SS"
+            sheet.col_style 5, timestamp, :row_offset => 1
+          end
+        end
+        
+        wb.add_worksheet(:name => "Housewife") do |sheet| 
+          sheet.add_row ["ID", "Writer", "User Group", "Item", "Purpose", "Created at"]
+          
+          UseCase.includes(:user).select {|use_case| use_case.user.user_group.eql?('housewife')}.reverse.each do |use_case|
+            sheet.add_row [use_case.id, use_case.writer_name, use_case.user_group, use_case.item, use_case.purpose, use_case.created_at]
+            timestamp = sheet.workbook.styles.add_style :format_code => "YYYY-MM-DD HH:MM:SS"
+            sheet.col_style 5, timestamp, :row_offset => 1
+          end
+        end
+
+        begin
+          temp = Tempfile.new("usecases.xlsx")
+          xlsx_package.serialize temp.path
+          send_file temp.path, :filename => "usecases.xlsx", :type => "application/xlsx"
+        ensure
+          temp.close
+          temp.unlink
+        end
+      }
     end
   end
 
   def top
     @page, @limit = get_pagination_params(params)
-    
-  	# parameter: user_group
-  	if params[:user_group]
-  		@use_cases = UseCase.filter_by_user_group(params[:user_group])
-  	else
-  		@use_cases = UseCase.all
-  	end
-  
-  	# parameter: type
-  	# default ordering is by 'wow'
-  	params[:type] ||= 'wow'
-  	@type = params[:type].to_s
-      if @type == 'wow'
-  		@temp = @use_cases.select{ |use_case| use_case.wows_count > 0 }
-  		@use_cases = @temp.sort_by(&:wows_count).reverse
-      elsif @type == 'metoo'
-  		@temp = @use_cases.select{ |use_case| use_case.metoos_count > 0 }
-  		@use_cases = @temp.sort_by(&:metoos_count).reverse
-      end
-  	
-  	# pagination
-  	if @use_cases
-  		@use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
-  	end
+
+    # parameter: user_group
+    if params[:user_group]
+      @use_cases = UseCase.filter_by_user_group(params[:user_group])
+    else
+      @use_cases = UseCase.all
+    end
+
+    # parameter: type
+    # default ordering is by 'wow'
+    params[:type] ||= 'wow'
+    @type = params[:type].to_s
+    if @type == 'wow'
+      @temp = @use_cases.select{ |use_case| use_case.wows_count > 0 }
+      @use_cases = @temp.sort_by(&:wows_count).reverse
+    elsif @type == 'metoo'
+      @temp = @use_cases.select{ |use_case| use_case.metoos_count > 0 }
+      @use_cases = @temp.sort_by(&:metoos_count).reverse
+    end
+
+    # pagination
+    if @use_cases
+      @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+    end
 
     respond_to do |format|
       format.json { render json: @use_cases }
     end
   end
-  
+
   # newn API
   def groups
     @page, @limit = get_pagination_params(params)
 
-	# parameter: user_group
-	if params[:user_group]
-		@use_cases = UseCase.filter_by_user_group(params[:user_group])
-	else
-		@use_cases = UseCase.all
-	end
-	
-		
-	# parameter: field
-	params[:type] ||= "item" 
+    # parameter: user_group
+    if params[:user_group]
+      @use_cases = UseCase.filter_by_user_group(params[:user_group])
+    else
+      @use_cases = UseCase.all
+    end
+
+    # parameter: field
+    params[:type] ||= "item"
     @field = params[:type].to_s
-	if @field.eql?("item")
-		@use_cases.sort_by(&:item)
-	elsif @field.eql?("purpose")
-		@use_cases.sort_by(&:purpose)
-	end
-	
-	# start grouping
+    if @field.eql?("item")
+      @use_cases.sort_by(&:item)
+    elsif @field.eql?("purpose")
+      @use_cases.sort_by(&:purpose)
+    end
+
+    # start grouping
     @temp = Hash.new
     @use_cases.each do |use_case|
       @title = use_case[@field]
@@ -132,7 +173,7 @@ class UseCasesController < ApplicationController
     @favorites_count = Favorite.where("use_case_id = ?", params[:id]).length
     @wows_count = Wow.where("use_case_id = ?", params[:id]).length
     $metoos_count = Metoo.where("use_case_id = ?", params[:id]).length
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @use_case }

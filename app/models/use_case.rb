@@ -1,4 +1,7 @@
 class UseCase < ActiveRecord::Base
+  # xlsx로 표현하기 위해 플러그인 추가
+  acts_as_xlsx :columns => [:id, :writer_name, :user_group, :item, :purpose, :created_at]
+  
   belongs_to :user, :counter_cache => true
   has_many :favorite, :dependent => :destroy
   has_many :wow, :dependent => :destroy

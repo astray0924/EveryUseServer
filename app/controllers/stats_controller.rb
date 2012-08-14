@@ -44,7 +44,7 @@ class StatsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @stats }
+      format.json { render json: @activities }
     end
   end
   
