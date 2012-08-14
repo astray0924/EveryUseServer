@@ -31,6 +31,8 @@ gem "thin"
 
 gem 'jquery-rails'
 
+gem 'acts_as_xlsx'
+
 # gem 'searchlogic'
 
 group :development, :test do
