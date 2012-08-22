@@ -20,6 +20,10 @@ class StatsController < ApplicationController
       @stats[username]['comment_receive_count'] = comment_receive_count
       @stats[username]['comment_commit_count'] = comment_commit_count
       @stats[username]['score'] = score
+      
+      # sort by various fields
+      # TODO
+      
     end
   end
   

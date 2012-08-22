@@ -15,13 +15,13 @@
 			<th>점수 (글: 10점, 코멘트: 1점)</th>
 		</tr>
 		
-		<% @stats.keys.each do |username| %>
+		<% @stats.each do |username, stats| %>
 		<tr>
 			<td><%= username %></td>
-			<td><%= @stats[username]['use_case_count'] %></td>
-			<td><%= @stats[username]['comment_receive_count'] %></td>
-			<td><%= @stats[username]['comment_commit_count'] %></td>
-			<td><%= @stats[username]['score'] %></td>
+			<td><%= stats['use_case_count'] %></td>
+			<td><%= stats['comment_receive_count'] %></td>
+			<td><%= stats['comment_commit_count'] %></td>
+			<td><%= stats['score'] %></td>
 		</tr>
 		<% end %>
 	</table>
