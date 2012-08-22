@@ -5,7 +5,7 @@
 
 <div class="content">
 	<h2>사용자 활동 통계 및 점수</h2>
-	<table>
+	<table class="cases">
 		<caption>사용자 활동 통계 및 점수</caption>
 		<tr>
 			<th>사용자</th>
@@ -15,6 +15,15 @@
 			<th>점수 (글: 10점, 코멘트: 1점)</th>
 		</tr>
 		
+		<% @stats.keys.each do |username| %>
+		<tr>
+			<td><%= username %></td>
+			<td><%= @stats[username]['use_case_count'] %></td>
+			<td><%= @stats[username]['comment_receive_count'] %></td>
+			<td><%= @stats[username]['comment_commit_count'] %></td>
+			<td><%= @stats[username]['score'] %></td>
+		</tr>
+		<% end %>
 	</table>
 </div>
 

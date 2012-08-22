@@ -4,9 +4,22 @@ class StatsController < ApplicationController
     @stats = Hash.new
     
     @users.each do |user|
-      @stats[user.username] = Hash.new
+      # 계산
+      use_case_count = user.use_cases.length
+      comment_receive_count = 0
+      user.use_cases.each do |use_case|
+        comment_receive_count += (use_case.wow.length + use_case.metoo.length)
+      end
+      comment_commit_count = (user.wow.length + user.metoo.length)
+      score = (use_case_count * 10) + (comment_receive_count * 1) + (comment_commit_count * 1)
       
-      @stats[user.username]['use_case_count'] = user.use_cases.length
+      # 해시에 입력
+      username = user.username
+      @stats[username] = Hash.new
+      @stats[username]['use_case_count'] = use_case_count
+      @stats[username]['comment_receive_count'] = comment_receive_count
+      @stats[username]['comment_commit_count'] = comment_commit_count
+      @stats[username]['score'] = score
     end
   end
   
