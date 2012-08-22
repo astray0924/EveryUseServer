@@ -9,11 +9,6 @@ WikiUse::Application.routes.draw do
       get 'followers'
       get 'feeds'
     end
-    
-    collection do
-      get 'stats_advanced'
-      get 'stats'
-    end
   end
 
   resources :user_sessions
@@ -25,13 +20,11 @@ WikiUse::Application.routes.draw do
       get 'groups'
       get 'top'
       get 'divide_purpose_type'
-      get 'stats_advanced'
     end
   end
 
-  match 'stats/basic' => 'stats#stats'
-  match 'stats/advanced' => 'stats#stats_advanced'
-  match 'stats/user_stats' => 'stats#user_stats'
+  match 'stats/user_activity_log' => 'stats#user_activity_log'
+  match 'stats/user_activity_score' => 'stats#user_activity_score'
   match 'stats/use_case_stats' => 'stats#use_case_stats'
 
   # pagination
