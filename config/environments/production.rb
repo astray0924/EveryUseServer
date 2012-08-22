@@ -12,7 +12,7 @@ WikiUse::Application.configure do
   config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
-  config.assets.compress = true
+  config.assets.compress = false
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
@@ -20,7 +20,7 @@ WikiUse::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
   
-  config.assets.initialize_on_precompile = true
+  config.assets.debug = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
