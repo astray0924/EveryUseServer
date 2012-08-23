@@ -6,11 +6,17 @@ class StatsController < ApplicationController
     @users.each do |user|
       # 계산
       use_case_count = user.use_cases.length
+      
+      #
       comment_receive_count = 0
       user.use_cases.each do |use_case|
         comment_receive_count += (use_case.wow.length + use_case.metoo.length)
       end
+      
+      #
       comment_commit_count = (user.wow.length + user.metoo.length)
+      
+      #
       score = (use_case_count * 10) + (comment_receive_count * 1) + (comment_commit_count * 1)
       
       # 해시에 입력
