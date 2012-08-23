@@ -1,3 +1,13 @@
+<% content_for :head do %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.stats_table').dataTable({
+			'bPaginate': false
+		});
+	});
+</script>
+<% end %>
+
 <h1>사용자 score</h1>
 <p id="notice">
 	<%= notice %>
@@ -5,25 +15,30 @@
 
 <div class="content">
 	<h2>사용자 활동 통계 및 점수</h2>
-	<table class="cases">
-		<caption>사용자 활동 통계 및 점수</caption>
-		<tr>
-			<th>사용자</th>
-			<th>글 올린 수</th>
-			<th>코멘트 받은 수</th>
-			<th>코멘트 한 수</th>
-			<th>점수 (글: 10점, 코멘트: 1점)</th>
-		</tr>
-		
-		<% @stats.each do |username, stats| %>
-		<tr>
-			<td><%= username %></td>
-			<td><%= stats['use_case_count'] %></td>
-			<td><%= stats['comment_receive_count'] %></td>
-			<td><%= stats['comment_commit_count'] %></td>
-			<td><%= stats['score'] %></td>
-		</tr>
-		<% end %>
+	<table class="stats_table">
+		<caption>
+			사용자 활동 통계 및 점수
+		</caption>
+		<tbody>
+			<% @stats.each do |username, stats| %>
+			<tr>
+				<td><%= username %></td>
+				<td><%= stats['use_case_count'] %></td>
+				<td><%= stats['comment_receive_count'] %></td>
+				<td><%= stats['comment_commit_count'] %></td>
+				<td><%= stats['score'] %></td>
+			</tr>
+			<% end %>
+		</tbody>
+		<thead>
+			<tr>
+				<th>사용자</th>
+				<th>글 올린 수</th>
+				<th>코멘트 받은 수</th>
+				<th>코멘트 한 수</th>
+				<th>점수 (글: 10점, 코멘트: 1점)</th>
+			</tr>
+		</thead>
 	</table>
 </div>
 
