@@ -9,12 +9,18 @@ class StatsController < ApplicationController
       
       #
       comment_receive_count = 0
+      wow_receive_count = 0
+      metoo_receive_count = 0
       user.use_cases.each do |use_case|
         comment_receive_count += (use_case.wow.length + use_case.metoo.length)
+        wow_receive_count += use_case.wow.length
+        metoo_receive_count += use_case.metoo.length
       end
       
       #
       comment_commit_count = (user.wow.length + user.metoo.length)
+      wow_commit_count = user.wow.length
+      metoo_commit_count = user.metoo.length
       
       #
       score = (use_case_count * 10) + (comment_receive_count * 1) + (comment_commit_count * 1)
@@ -24,7 +30,11 @@ class StatsController < ApplicationController
       @stats[username] = Hash.new
       @stats[username]['use_case_count'] = use_case_count
       @stats[username]['comment_receive_count'] = comment_receive_count
+      @stats[username]['wow_receive_count'] = wow_receive_count
+      @stats[username]['metoo_receive_count'] = metoo_receive_count
       @stats[username]['comment_commit_count'] = comment_commit_count
+      @stats[username]['wow_commit_count'] = wow_commit_count
+      @stats[username]['metoo_commit_count'] = metoo_commit_count
       @stats[username]['score'] = score
       
       # sort by various fields

@@ -25,7 +25,11 @@
 				<td><%= username %></td>
 				<td><%= stats['use_case_count'] %></td>
 				<td><%= stats['comment_receive_count'] %></td>
+				<td><%= stats['wow_receive_count'] %></td>
+				<td><%= stats['metoo_receive_count'] %></td>
 				<td><%= stats['comment_commit_count'] %></td>
+				<td><%= stats['wow_commit_count'] %></td>
+				<td><%= stats['metoo_commit_count'] %></td>
 				<td><%= stats['score'] %></td>
 			</tr>
 			<% end %>
@@ -35,7 +39,11 @@
 				<th>사용자</th>
 				<th>글 올린 수</th>
 				<th>코멘트 받은 수</th>
+				<th>Wow 받은 수</th>
+				<th>Metoo 받은 수</th>
 				<th>코멘트 한 수</th>
+				<th>Wow 한 수</th>
+				<th>Metoo 한 수</th>
 				<th>점수 (글: 10점, 코멘트: 1점)</th>
 			</tr>
 		</thead>
