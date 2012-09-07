@@ -19,6 +19,7 @@ WikiUse::Application.routes.draw do
       get 'purpose'
       get 'groups'
       get 'top'
+      get 'comment'
       get 'divide_purpose_type'
     end
   end

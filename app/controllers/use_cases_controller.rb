@@ -83,6 +83,29 @@ class UseCasesController < ApplicationController
       }
     end
   end
+  
+  # use_case가 받은 comment 순서대로 정렬
+  def comment
+    @page, @limit = get_pagination_params(params)
+    
+    if params[:type]
+      @type = params[:type].to_s
+    else
+      @type = "wow"
+    end
+    
+    @use_cases = UseCase.all.sort_by { |use_case| use_case[@type + 's_count'] }.reverse
+    
+    # pagination
+    if @use_cases
+      @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+    end
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @use_cases }
+    end
+  end
 
   def top
     @page, @limit = get_pagination_params(params)

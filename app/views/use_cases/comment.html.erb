@@ -1,0 +1,53 @@
+<div style="width: 1000px; margin: auto;">
+	<h1>Sorted by <%= @type %> count</h1>
+
+	<form action="/use_cases/comment" method="get">
+		<select name="type">
+			<option value="wow" <% if @type.eql?('wow') %><%= "selected='selected'" %><% end %>>Wow</option>
+			<option value="metoo" <% if @type.eql?('metoo') %><%= "selected='selected'" %><% end %>>Metoo</option>
+		</select>
+
+		<input type="submit" value="Sort UseCase" />
+	</form>
+
+	<table class='cases'>
+		<tr>
+			<th>Id</th>
+			<th>Photo</th>
+			<th>Writer</th>
+			<th>User Group</th>
+			<th>Product</th>
+			<th>Function</th>
+			<th>Wow Count</th>
+			<th>Metoo Count</th>
+			<th>Created at</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		<% @use_cases.each do |use_case| %>
+		<tr>
+			<td><%= use_case.id %></td>
+			<td><%= image_tag use_case.photo.url(:thumb) %></td>
+			<td><%= use_case.writer_name %></td>
+			<td><%= use_case.user_group %></td>
+			<td><%= use_case.item %></td>
+			<td><%= use_case.purpose %></td>
+			<td><%= use_case.wows_count %></td>
+			<td><%= use_case.metoos_count %></td>
+			<td><%= l use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
+			<td><%= link_to 'Show', use_case %></td>
+			<td><%= link_to 'Edit', edit_use_case_path(use_case) %></td>
+			<td><%= link_to 'Destroy', use_case, confirm: 'Are you sure?', method: :delete %></td>
+		</tr>
+		<% end %>
+	</table>
+
+	<!-- Pagination -->
+	<%= will_paginate @use_cases, :class => 'digg_pagination' %>
+
+	<p>
+		<%= link_to 'New Use case', new_use_case_path %>
+	</p>
+
+</div>
