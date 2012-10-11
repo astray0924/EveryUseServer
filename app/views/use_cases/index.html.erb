@@ -1,7 +1,5 @@
 <h1>Listing use_cases</h1>
 
-<%= link_to 'Export as Excel file', url_for(:format=>"xlsx") %>
-
 <table class='cases'>
 	<tr>
 		<th>Id</th>
@@ -32,7 +30,7 @@
 </table>
 
 <!-- Pagination -->
-<%= will_paginate @use_cases, :class => 'digg_pagination' %>
+<%= will_paginate @use_cases %>
 
 <p>
 	<%= link_to 'New Use case', new_use_case_path %>

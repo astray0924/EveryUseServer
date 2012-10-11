@@ -1,2 +1,0 @@
-UseCase.to_xlsx package: xlsx_package
-wb = xlsx_package.workbook
