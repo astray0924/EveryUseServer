@@ -24,37 +24,37 @@ else
 end
 
 # parse seed JSON
-# seed_file = File.open('db/seed/seed.json', 'r')
-# 
-# seed_file.each do |l|
-	# json = JSON.parse(l)
-# 	
-	# id = json['id']	# 이건 case의 고유 아이디. 일단 받아옴
-	# dummy = File.open("db/seed/photo/dummy.png", 'rb')
-# 	
-	# begin
-		# photo = File.open("db/seed/photo/#{id}.png", 'rb')
-	# rescue
-		# photo = dummy
-	# end
-# 	
-	# user_id = User.where('username = ?', 'olduser')
-	# item = json['item']
-	# purpose = json['purpose']
-	# uploadDateTime = json['uploadDateTime']
-# 	
-	# use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :created_at => uploadDateTime)
-# 	
-	# if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
-	  # if use_case.valid?
-  		# use_case.save()
-    # else
-      # print use_case
-	  # end
-	# end
-# 	
-	# # close the photo file
-	# if !photo.nil?
-		# photo.close
-	# end
-# end
+seed_file = File.open('db/seed/seed.json', 'r')
+
+seed_file.each do |l|
+	json = JSON.parse(l)
+	
+	id = json['id']	# 이건 case의 고유 아이디. 일단 받아옴
+	dummy = File.open("db/seed/photo/dummy.png", 'rb')
+	
+	begin
+		photo = File.open("db/seed/photo/#{id}.png", 'rb')
+	rescue
+		photo = dummy
+	end
+	
+	user_id = User.where('username = ?', 'olduser')
+	item = json['item']
+	purpose = json['purpose']
+	uploadDateTime = json['uploadDateTime']
+	
+	use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :purpose_type => "as", :created_at => uploadDateTime)
+	
+	if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
+	  if use_case.valid?
+  		use_case.save()
+    else
+      print use_case
+	  end
+	end
+	
+	# close the photo file
+	if !photo.nil?
+		photo.close
+	end
+end
