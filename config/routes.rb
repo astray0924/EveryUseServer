@@ -1,4 +1,16 @@
 WikiUse::Application.routes.draw do
+  get "metoo/new"
+
+  get "metoo/destroy"
+
+  get "favorite/new"
+
+  get "favorite/destroy"
+
+  get "wow/new"
+
+  get "wow/destroy"
+
   resources :users do
     resources :use_cases
 
@@ -42,14 +54,9 @@ WikiUse::Application.routes.draw do
   # comments
   match 'comments' => 'comments#show', :via => :get
   
-  match 'comments/favorite' => 'comments#favorite_add', :via => :post
-  match 'comments/favorite/:id' => 'comments#favorite_destroy', :via => :delete
-  
-  match 'comments/wow' => 'comments#wow_add', :via => :post
-  match 'comments/wow/:id' => 'comments#wow_destroy', :via => :delete
-  
-  match 'comments/metoo' => 'comments#metoo_add', :via => :post
-  match 'comments/metoo/:id' => 'comments#metoo_destroy', :via => :delete
+  resources :favorite
+  resources :wow
+  resources :metoo
   
   # relations
   match 'relationship' => 'relationships#show', :via => :get

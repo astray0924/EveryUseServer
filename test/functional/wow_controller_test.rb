@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FavoriteControllerTest < ActionController::TestCase
+class WowControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
