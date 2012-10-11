@@ -39,6 +39,7 @@ class UseCasesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @use_cases }
+    end
   end
   
   # use_case가 받은 comment 순서대로 정렬
