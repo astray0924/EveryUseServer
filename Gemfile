@@ -18,7 +18,10 @@ group :assets do
 end
 
 gem 'authlogic'
-gem 'omniauth'
+gem 'omniauth-identity'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem "paperclip", "~> 3.0"
 
