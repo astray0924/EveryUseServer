@@ -18,6 +18,10 @@ group :assets do
 end
 
 gem 'authlogic'
+gem 'omniauth-identity'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem "paperclip", "~> 3.0"
 
@@ -48,7 +52,7 @@ group :production do
 end
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

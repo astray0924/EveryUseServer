@@ -39,48 +39,6 @@ class UseCasesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @use_cases }
-      format.xlsx {
-        xlsx_package = UseCase.to_xlsx :name => "UseCases"
-        # , :header_style => {:bg_color => "00",
-          # :fg_color => "FF",
-          # :sz => 16,
-          # :alignment => { :horizontal => :center }},
-        # :style => {:border => Axlsx::STYLE_THIN_BORDER}
-        
-        sheet = xlsx_package.workbook.worksheets.first
-        timestamp = sheet.workbook.styles.add_style :format_code => "YYYY-MM-DD HH:MM:SS"
-        sheet.col_style 5, timestamp, :row_offset => 1
-        
-        wb = xlsx_package.workbook
-        wb.add_worksheet(:name => "Student") do |sheet| 
-          sheet.add_row ["ID", "Writer", "User Group", "Item", "Purpose", "Created at"]
-          
-          UseCase.includes(:user).select {|use_case| use_case.user.user_group.eql?('student')}.reverse.each do |use_case|
-            sheet.add_row [use_case.id, use_case.writer_name, use_case.user_group, use_case.item, use_case.purpose, use_case.created_at]
-            timestamp = sheet.workbook.styles.add_style :format_code => "YYYY-MM-DD HH:MM:SS"
-            sheet.col_style 5, timestamp, :row_offset => 1
-          end
-        end
-        
-        wb.add_worksheet(:name => "Housewife") do |sheet| 
-          sheet.add_row ["ID", "Writer", "User Group", "Item", "Purpose", "Created at"]
-          
-          UseCase.includes(:user).select {|use_case| use_case.user.user_group.eql?('housewife')}.reverse.each do |use_case|
-            sheet.add_row [use_case.id, use_case.writer_name, use_case.user_group, use_case.item, use_case.purpose, use_case.created_at]
-            timestamp = sheet.workbook.styles.add_style :format_code => "YYYY-MM-DD HH:MM:SS"
-            sheet.col_style 5, timestamp, :row_offset => 1
-          end
-        end
-
-        begin
-          temp = Tempfile.new("usecases.xlsx")
-          xlsx_package.serialize temp.path
-          send_file temp.path, :filename => "usecases.xlsx", :type => "application/xlsx"
-        ensure
-          temp.close
-          temp.unlink
-        end
-      }
     end
   end
   
@@ -223,6 +181,7 @@ class UseCasesController < ApplicationController
   # POST /use_cases.json
   def create
     params[:use_case][:user_id] = current_user.id   # for test
+    
     @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|

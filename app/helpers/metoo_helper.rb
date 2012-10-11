@@ -1,0 +1,2 @@
+module MetooHelper
+end
