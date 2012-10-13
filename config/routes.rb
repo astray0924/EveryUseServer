@@ -39,7 +39,6 @@ WikiUse::Application.routes.draw do
 
   # comments
   match 'comments' => 'comments#show', :via => :get
-  
   resources :favorite
   resources :wow
   resources :metoo

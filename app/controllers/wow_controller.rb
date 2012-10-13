@@ -1,5 +1,5 @@
 class WowController < ApplicationController
-  def new
+  def create
     @wow = Wow.new(params[:comment])
 
     respond_to do |format|

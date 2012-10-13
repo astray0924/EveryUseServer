@@ -1,5 +1,14 @@
 class FavoriteController < ApplicationController
-  def new
+  def show
+    @favorite = Favorite.find(params[:id])
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @favorite }
+    end
+  end
+  
+  def create
     @favorite = Favorite.new(params[:comment])
 
     respond_to do |format|
