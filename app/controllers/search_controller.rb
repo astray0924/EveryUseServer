@@ -5,8 +5,8 @@ class SearchController < ApplicationController
     @result = Hash.new
 
     if not @query.nil?
-      @search_by_item = UseCase.where("item LIKE ?", "%" + @query + "%");
-      @search_by_purpose = UseCase.where("purpose LIKE ?", "%" + @query + "%");
+      @search_by_item = UseCase.where("item LIKE ?", "%#{@query}%");
+      @search_by_purpose = UseCase.where("purpose LIKE ?", "%#{@query}%");
 
       @grouped_item = Hash.new
       @grouped_purpose = Hash.new
