@@ -9,21 +9,20 @@ class CommentsController < ApplicationController
       @fav = Favorite.where("user_id = ? AND use_case_id = ?", user_id, use_case_id).first
       @wow = Wow.where("user_id = ? AND use_case_id = ?", user_id, use_case_id).first
       @metoo = Metoo.where("user_id = ? AND use_case_id = ?", user_id, use_case_id).first
+      
+      @wow_count = UseCase.find(use_case_id).wows_count
+      @metoo_count = UseCase.find(use_case_id).metoos_count
+
+      @comments = Hash.new
+      @comments[:favorite] = @fav
+      @comments[:wow] = @wow
+      @comments[:metoo] = @metoo
+      @comments[:wow_count] = @wow_count
+      @comments[:metoo_count] = @metoo_count
     else
-      @fav = nil
-      @wow = nil
-      @metoo = nil
+      @comments = nil
     end
 
-    @wow_count = UseCase.find(use_case_id).wows_count
-    @metoo_count = UseCase.find(use_case_id).metoos_count
-
-    @comments = Hash.new
-    @comments[:favorite] = @fav
-    @comments[:wow] = @wow
-    @comments[:metoo] = @metoo
-    @comments[:wow_count] = @wow_count
-    @comments[:metoo_count] = @metoo_count
 
     respond_to do |format|
       format.json { render json: @comments }

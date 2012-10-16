@@ -1,5 +1,5 @@
 class MetooController < ApplicationController
-  def new
+  def create
     @metoo = Metoo.new(params[:comment])
 
     respond_to do |format|

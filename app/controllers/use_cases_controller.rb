@@ -6,17 +6,12 @@ class UseCasesController < ApplicationController
   def index
     @page, @limit = get_pagination_params(params)
 
-    # parameter: user_group
-    if params[:user_group]
-      @use_cases = UseCase.filter_by_user_group(params[:user_group])
-    else
-      @use_cases = UseCase.all
-    end
-
     # if user_id is provided, show only the user's use cases
     # it discards the previous sorting/filtering settings
     if params[:user_id]
       @use_cases = UseCase.where("user_id = ?", params[:user_id])
+    else
+      @use_cases = UseCase.all
     end
 
     # parameter: type
@@ -68,12 +63,7 @@ class UseCasesController < ApplicationController
   def top
     @page, @limit = get_pagination_params(params)
 
-    # parameter: user_group
-    if params[:user_group]
-      @use_cases = UseCase.filter_by_user_group(params[:user_group])
-    else
-      @use_cases = UseCase.all
-    end
+    @use_cases = UseCase.all
 
     # parameter: type
     # default ordering is by 'wow'
@@ -100,13 +90,8 @@ class UseCasesController < ApplicationController
   # newn API
   def groups
     @page, @limit = get_pagination_params(params)
-
-    # parameter: user_group
-    if params[:user_group]
-      @use_cases = UseCase.filter_by_user_group(params[:user_group])
-    else
-      @use_cases = UseCase.all
-    end
+    
+    @use_cases = UseCase.all
 
     # parameter: field
     params[:type] ||= "item"

@@ -1,7 +1,4 @@
 class UseCase < ActiveRecord::Base
-  # xlsx로 표현하기 위해 플러그인 추가
-  acts_as_xlsx :columns => [:id, :writer_name, :user_group, :item, :purpose, :created_at]
-  
   belongs_to :user, :counter_cache => true
   has_many :favorite, :dependent => :destroy
   has_many :wow, :dependent => :destroy
@@ -24,10 +21,6 @@ class UseCase < ActiveRecord::Base
 
   attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
   
-  def UseCase.filter_by_user_group(user_group)
-	return UseCase.includes(:user).all.select{ |use_case| use_case.user.user_group.eql?(user_group) }
-  end
-  
   def as_json(options)
     super(:methods => [:writer_id, :writer_name, :user_group, :converted_file_name])
   end
@@ -44,12 +37,6 @@ class UseCase < ActiveRecord::Base
     else
       @username = User.find(user_id).username
     end
-  end
-  
-  def user_group
-	if not self.user.blank?
-		@user_group = self.user.user_group
-	end
   end
 
   def converted_file_name

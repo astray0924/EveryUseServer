@@ -1,16 +1,4 @@
 WikiUse::Application.routes.draw do
-  get "metoo/new"
-
-  get "metoo/destroy"
-
-  get "favorite/new"
-
-  get "favorite/destroy"
-
-  get "wow/new"
-
-  get "wow/destroy"
-
   resources :users do
     resources :use_cases
 
@@ -36,9 +24,7 @@ WikiUse::Application.routes.draw do
     end
   end
 
-  match 'stats/user_activity_log' => 'stats#user_activity_log'
-  match 'stats/user_activity_score' => 'stats#user_activity_score'
-  match 'stats/use_case_stats' => 'stats#use_case_stats'
+  match 'stats/(:action)(.:format)', :controller => 'stats'
 
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
@@ -53,7 +39,6 @@ WikiUse::Application.routes.draw do
 
   # comments
   match 'comments' => 'comments#show', :via => :get
-  
   resources :favorite
   resources :wow
   resources :metoo
