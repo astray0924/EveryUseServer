@@ -18,11 +18,10 @@ group :assets do
 end
 
 gem 'authlogic'
-gem 'omniauth-identity'
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-
+# gem 'omniauth-identity'
+# gem 'omniauth-twitter'
+# gem 'omniauth-facebook'
+# gem 'omniauth-google-oauth2'
 gem "paperclip", "~> 3.0"
 
 gem "cancan"
@@ -35,8 +34,8 @@ gem "thin"
 
 gem 'jquery-rails'
 
-gem 'acts_as_xlsx'
-gem 'axlsx_rails'
+# gem 'acts_as_xlsx'
+# gem 'axlsx_rails'
 
 gem 'yard'
 gem 'redcarpet'
