@@ -1,4 +1,6 @@
 WikiUse::Application.routes.draw do
+  get "main/index"
+
   resources :users do
     resources :use_cases
 
