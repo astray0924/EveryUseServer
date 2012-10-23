@@ -44,8 +44,6 @@ gem 'axlsx_rails'
 gem 'yard'
 gem 'redcarpet'
 
-# gem 'searchlogic'
-
 group :development, :test do
   gem 'sqlite3'
 end
