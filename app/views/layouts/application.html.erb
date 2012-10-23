@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>WikiUse</title>
+		<title>EveryUse</title>
 		<%= stylesheet_link_tag    "application", :media => "screen" %>
-		<%= stylesheet_link_tag    "pagination", :media => "screen" %>
 		<%= javascript_include_tag "application" %>
 		<%= csrf_meta_tags %>
 		<%= yield :head %>
 	</head>
 	<body>
-		<div id="nav">
+		<div class="container">
+			<!--
+			<div id="nav">
 			<%= link_to "Use Cases", use_cases_path %>
-			<%= link_to "Search", search_path %> | 
+			<%= link_to "Search", search_path %> |
 			<%= link_to "Users", users_path %>
 			<% if current_user %>
-				<%= link_to "Edit Profile", edit_user_path(current_user.id)%>
-				<%= link_to "Logout", :logout%>
-				<%= "Welcome! " + current_user.username %>
+			<%= link_to "Edit Profile", edit_user_path(current_user.id)%>
+			<%= link_to "Logout", :logout%>
+			<%= "Welcome! " + current_user.username %>
 			<% else %>
-				<%= link_to "Register", new_user_path%>
-				<%= link_to "Login", :login %>
+			<%= link_to "Register", new_user_path%>
+			<%= link_to "Login", :login %>
 			<% end %>
-		</div>
-		<%= yield %>
+
+			</div>
+			-->
+			<div class="navbar">
+
+				<div class="navbar-inner">
+					<ul class="nav">
+						<li class="active">
+							<%= link_to "Home", main_index_path %>
+						</li>
+						<li>
+							<%= link_to 'About', main_about_path %>
+						</li>
+						<li>
+							<%= link_to 'View', use_cases_path %>
+						</li>
+					</ul>
+
+					<form class="navbar-form pull-right">
+						<input type="text" name="email" placeholder="E-mail" class="input-small">
+						<input type="password" name="password" placeholder="Password" class="input-small">
+						<button type="submit" class="btn btn-medium btn-danger">
+							Log-in
+						</button>
+						<button type="button" class="btn btn-medium btn-inverse">
+							Sign-in
+						</button>
+					</form>
+				</div>
+
+			</div>
+
+			<%= yield %>
+
 	</body>
 </html>

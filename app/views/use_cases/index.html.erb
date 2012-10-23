@@ -1,35 +1,157 @@
-<h1>Listing use_cases</h1>
+<div class="row">
+	<ul class="nav nav-pills nav-stacked span2">
+		<li>
+			<a href="#">Top Wow</a>
+		</li>
+		<li>
+			<a href="#">Top Me, Too</a>
+		</li>
+		<li>
+			<a href="#">Recent</a>
+		</li>
+	</ul>
 
-<table class='cases'>
+	<div class="content row span10">
+		<ul class="use_cases thumbnails">
+			<li class="span5">
+
+				<div class="thumbnail">
+					<img src="http://placehold.it/300x200" alt="">
+					<div class="caption">
+						<p style="text-align: right;">
+							<span class="usecase-keyword">23</span> Wow <span class="usecase-keyword">15</span> Me, too
+						</p>
+						<p style="text-align: left; font-size: 14pt">
+							I used <span class="usecase-keyword">ipad</span>
+						</p>
+						<p style="text-align: right; font-size: 14pt">
+							As <span class="usecase-keyword">Chopping Board</span>
+						</p>
+						<div class="btn-panel">
+							<button class="btn btn-danger">
+								Wow
+							</button>
+							<button class="btn btn-inverse disabled">
+								Me, too
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</li>
+			<li class="span5">
+
+				<div class="thumbnail">
+					<img src="http://placehold.it/300x200" alt="">
+					<div class="caption">
+						<p style="text-align: right;">
+							<span class="usecase-keyword">23</span> Wow <span class="usecase-keyword">15</span> Me, too
+						</p>
+						<p style="text-align: left; font-size: 14pt">
+							I used <span class="usecase-keyword">ipad</span>
+						</p>
+						<p style="text-align: right; font-size: 14pt">
+							As <span class="usecase-keyword">Chopping Board</span>
+						</p>
+						<div class="btn-panel">
+							<button class="btn btn-danger">
+								Wow
+							</button>
+							<button class="btn btn-inverse">
+								Me, too
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</li>
+			<li class="span5">
+
+				<div class="thumbnail">
+					<img src="http://placehold.it/300x200" alt="">
+					<div class="caption">
+						<p style="text-align: right;">
+							<span class="usecase-keyword">23</span> Wow <span class="usecase-keyword">15</span> Me, too
+						</p>
+						<p style="text-align: left; font-size: 14pt">
+							I used <span class="usecase-keyword">ipad</span>
+						</p>
+						<p style="text-align: right; font-size: 14pt">
+							As <span class="usecase-keyword">Chopping Board</span>
+						</p>
+						<div class="btn-panel">
+							<button class="btn btn-danger">
+								Wow
+							</button>
+							<button class="btn btn-inverse">
+								Me, too
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</li>
+			<li class="span5">
+
+				<div class="thumbnail">
+					<img src="http://placehold.it/300x200" alt="">
+					<div class="caption">
+						<p style="text-align: right;">
+							<span class="usecase-keyword">23</span> Wow <span class="usecase-keyword">15</span> Me, too
+						</p>
+						<p style="text-align: left; font-size: 14pt">
+							I used <span class="usecase-keyword">ipad</span>
+						</p>
+						<p style="text-align: right; font-size: 14pt">
+							As <span class="usecase-keyword">Chopping Board</span>
+						</p>
+						<div class="btn-panel">
+							<button class="btn btn-danger">
+								Wow
+							</button>
+							<button class="btn btn-inverse">
+								Me, too
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</li>
+		</ul>
+	</div>
+
+	<!--
+	<table class='table'>
 	<tr>
-		<th>Id</th>
-		<th>Photo</th>
-		<th>Writer</th>
-		<th>Product</th>
-		<th>Function</th>
-		<th>Created at</th>
-		<th></th>
-		<th></th>
-		<th></th>
+	<th>Id</th>
+	<th>Photo</th>
+	<th>Writer</th>
+	<th>Product</th>
+	<th>Function</th>
+	<th>Created at</th>
+	<th></th>
+	<th></th>
+	<th></th>
 	</tr>
 	<% @use_cases.each do |use_case| %>
 	<tr>
-		<td><%= use_case.id %></td>
-		<td><%= image_tag use_case.photo.url(:thumb) %></td>
-		<td><%= use_case.writer_name %></td>
-		<td><%= use_case.item %></td>
-		<td><%= use_case.purpose %></td>
-		<td><%= l use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
-		<td><%= link_to 'Show', use_case %></td>
-		<td><%= link_to 'Edit', edit_use_case_path(use_case) %></td>
-		<td><%= link_to 'Destroy', use_case, confirm: 'Are you sure?', method: :delete %></td>
+	<td><%= use_case.id %></td>
+	<td><%= image_tag use_case.photo.url(:thumb) %></td>
+	<td><%= use_case.writer_name %></td>
+	<td><%= use_case.item %></td>
+	<td><%= use_case.purpose %></td>
+	<td><%= l use_case.created_at.in_time_zone('Seoul'), :format => :custom %></td>
+	<td><%= link_to 'Show', use_case %></td>
+	<td><%= link_to 'Edit', edit_use_case_path(use_case) %></td>
+	<td><%= link_to 'Destroy', use_case, confirm: 'Are you sure?', method: :delete %></td>
 	</tr>
 	<% end %>
-</table>
+	</table>
 
-<!-- Pagination -->
-<%= will_paginate @use_cases %>
+	<%= will_paginate @use_cases %>
 
-<p>
-	<%= link_to 'New Use case', new_use_case_path %>
-</p>
+	<p>
+		<%= link_to 'New Use case', new_use_case_path %>
+	</p>
+	-->
+</div>

@@ -1,3 +1,27 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.usecase-title {
+  color: #e9867d;
+  font-size: 1.8em;
+}
+
+.table .usecase-title-container {
+  vertical-align: middle;
+}
+
+.usecase-thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+}
+
+.table .usecase-thumbnail-container {
+  padding: 0;
+}
+
+.table .usecase-comment-count {
+  vertical-align: middle;
+  text-align: center;
+  background: url(http://placehold.it/50x50) center no-repeat;
+}

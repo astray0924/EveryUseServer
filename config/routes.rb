@@ -1,5 +1,6 @@
 WikiUse::Application.routes.draw do
   get "main/index"
+  get "main/about"
 
   resources :users do
     resources :use_cases
@@ -99,7 +100,7 @@ WikiUse::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'use_cases#index'
+  root :to => 'main#index'
 
 # See how all your routes lay out with "rake routes"
 
