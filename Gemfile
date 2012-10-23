@@ -1,4 +1,6 @@
-gem 'rails', '3.2.1'
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,6 +23,10 @@ group :assets do
 end
 
 gem 'authlogic'
+gem 'omniauth-identity'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem "paperclip", "~> 3.0"
 
@@ -39,6 +45,8 @@ gem 'axlsx_rails'
 
 gem 'yard'
 gem 'redcarpet'
+
+# gem 'searchlogic'
 
 group :development, :test do
   gem 'sqlite3'
