@@ -3,6 +3,8 @@
 	<head>
 		<title>EveryUse</title>
 		<%= stylesheet_link_tag    "application", :media => "screen" %>
+		<%= javascript_include_tag "http://code.jquery.com/jquery-latest.js" %>
+		<%= javascript_include_tag "bootstrap/bootstrap" %>
 		<%= javascript_include_tag "application" %>
 		<%= csrf_meta_tags %>
 		<%= yield :head %>
@@ -29,7 +31,7 @@
 
 				<div class="navbar-inner">
 					<ul class="nav">
-						<li class="active">
+						<li>
 							<%= link_to "Home", main_index_path %>
 						</li>
 						<li>
@@ -56,6 +58,5 @@
 
 			<%= yield %>
 
-			<script src="http://code.jquery.com/jquery-latest.js"></script>
 	</body>
 </html>
