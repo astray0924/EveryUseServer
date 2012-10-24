@@ -1,6 +1,11 @@
 WikiUse::Application.routes.draw do
+  get "about/index"
+
+  get "about/publication"
+
+  get "about/faq"
+
   get "main/index"
-  get "main/about"
 
   resources :users do
     resources :use_cases
