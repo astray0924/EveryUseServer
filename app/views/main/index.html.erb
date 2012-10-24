@@ -16,37 +16,49 @@
 	<div id="myCarousel" class="carousel slide span10 offset1" data-interval="5000" style="margin-bottom: 0;">
 		<!-- Carousel items -->
 		<div class="carousel-inner">
-
-			<div class="item active">
-				<%= image_tag "carousel/1.jpg" %>
+			<% @carousel_list.each do |use_case| %>
+			<div class="item">
+				<%= image_tag use_case.photo.url(:large) %>
 				<div class="carousel-caption">
 					<h4>First Thumbnail label</h4>
 					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+						<%= "#{use_case}" %>
 					</p>
 				</div>
+			</div>
+			<% end %>
+
+			<!--
+			<div class="item active">
+			<%= image_tag "carousel/1.jpg" %>
+			<div class="carousel-caption">
+			<h4>First Thumbnail label</h4>
+			<p>
+			Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+			</p>
+			</div>
 			</div>
 			<div class="item">
-				<%= image_tag "carousel/2.jpg" %>
-				<div class="carousel-caption">
-					<h4>Second Thumbnail label</h4>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-					</p>
-				</div>
+			<%= image_tag "carousel/2.jpg" %>
+			<div class="carousel-caption">
+			<h4>Second Thumbnail label</h4>
+			<p>
+			Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+			</p>
+			</div>
 			</div>
 			<div class="item">
-				<%= image_tag "carousel/3.jpg" %>
-				<div class="carousel-caption">
-					<h4>Third Thumbnail label</h4>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-					</p>
-				</div>
+			<%= image_tag "carousel/3.jpg" %>
+			<div class="carousel-caption">
+			<h4>Third Thumbnail label</h4>
+			<p>
+			Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+			</p>
 			</div>
+			</div> -->
 
 		</div>
-		
+
 		<!-- Carousel nav -->
 		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
@@ -81,34 +93,43 @@
 			<tr>
 				<th colspan="3" style="color: #ffffff; background-color: #ed3a7a;">Wow</th>
 			</tr>
+			<% @wow_list.each do |use_case| %>
 			<tr>
-				<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
-				<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
+				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:large) %></td>
+				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> by #username Yesterday </span></td>
-				<td class="usecase-comment-count">245</td>
+				<td class="usecase-comment-count"><245><%= use_case.wows_count %></td>
+			</tr>
+			<% end %>
+			<!-- <tr>
+			<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
+			<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
+			<br>
+			<span> by #username Yesterday </span></td>
+			<td class="usecase-comment-count">245</td>
 			</tr>
 			<tr>
-				<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
-				<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
-				<br>
-				<span> by #username Yesterday </span></td>
-				<td class="usecase-comment-count">245</td>
+			<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
+			<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
+			<br>
+			<span> by #username Yesterday </span></td>
+			<td class="usecase-comment-count">245</td>
 			</tr>
 			<tr>
-				<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
-				<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
-				<br>
-				<span> by #username Yesterday </span></td>
-				<td class="usecase-comment-count">245</td>
+			<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
+			<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
+			<br>
+			<span> by #username Yesterday </span></td>
+			<td class="usecase-comment-count">245</td>
 			</tr>
 			<tr>
-				<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
-				<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
-				<br>
-				<span> by #username Yesterday </span></td>
-				<td class="usecase-comment-count">245</td>
-			</tr>
+			<td class="usecase-thumbnail-container"><img alt="" src="http://placehold.it/100x100"></td>
+			<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
+			<br>
+			<span> by #username Yesterday </span></td>
+			<td class="usecase-comment-count">245</td>
+			</tr> -->
 		</table>
 	</div>
 	<div class="span6">

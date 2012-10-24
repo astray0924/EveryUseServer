@@ -42,4 +42,8 @@ class UseCase < ActiveRecord::Base
   def converted_file_name
     @file_name = self.photo.url(:thumb).split('/').last.split('?').first
   end
+  
+  def to_s
+    "#{self.item} #{self.purpose_type} #{self.purpose}"
+  end
 end
