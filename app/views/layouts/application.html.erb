@@ -41,17 +41,26 @@
 							<%= nav_link 'View', use_cases_path %>
 						</li>
 					</ul>
-
+					<% unless current_user %>
 					<form class="navbar-form pull-right">
 						<input type="text" name="email" placeholder="E-mail" class="input-small">
 						<input type="password" name="password" placeholder="Password" class="input-small">
+						
 						<button type="submit" class="btn btn-medium btn-danger">
 							Log-in
 						</button>
+						
 						<button type="button" class="btn btn-medium btn-inverse">
 							Sign-in
 						</button>
 					</form>
+					<% else %>
+					<form class="navbar-form pull-right">
+						<button type="button" class="btn btn-medium btn-danger">
+							Log-out
+						</button>
+					</form>
+					<% end %>
 				</div>
 
 			</div>

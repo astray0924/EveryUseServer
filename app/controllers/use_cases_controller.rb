@@ -83,6 +83,7 @@ class UseCasesController < ApplicationController
     end
 
     respond_to do |format|
+      format.html { render :template => 'use_cases/index' }
       format.json { render json: @use_cases }
     end
   end
