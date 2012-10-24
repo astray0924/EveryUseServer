@@ -1,4 +1,6 @@
 class UseCase < ActiveRecord::Base
+  require 'date'
+  
   belongs_to :user, :counter_cache => true
   has_many :favorite, :dependent => :destroy
   has_many :wow, :dependent => :destroy
@@ -41,6 +43,10 @@ class UseCase < ActiveRecord::Base
 
   def converted_file_name
     @file_name = self.photo.url(:thumb).split('/').last.split('?').first
+  end
+  
+  def get_date
+    self.created_at
   end
   
   def to_s

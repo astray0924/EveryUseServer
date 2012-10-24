@@ -95,11 +95,11 @@
 			</tr>
 			<% @wow_list.each do |use_case| %>
 			<tr>
-				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:large) %></td>
+				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:thumb), :height => '100', :width => '100' %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
-				<span> by #username Yesterday </span></td>
-				<td class="usecase-comment-count"><245><%= use_case.wows_count %></td>
+				<span> <%= "by #{use_case.user.username} #{use_case.get_date}"%> </span></td>
+				<td class="usecase-comment-count"><%= use_case.wows_count %></td>
 			</tr>
 			<% end %>
 			<!-- <tr>
@@ -137,7 +137,16 @@
 			<tr>
 				<th colspan="3" style="color: #ffffff; background-color: #ed3a7a;">Metoo</th>
 			</tr>
+			<% @metoo_list.each do |use_case| %>
 			<tr>
+				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:thumb), :height => '100', :width => '100' %></td>
+				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
+				<br>
+				<span> by #username Yesterday </span></td>
+				<td class="usecase-comment-count"><%= use_case.metoos_count %></td>
+			</tr>
+			<% end %>
+			<!-- <tr>
 				<td class="usecase-thumbnail-container"><img class="usecase-thumbnail" alt="" src="http://placehold.it/100x100"></td>
 				<td class="usecase-title-container"><span class="usecase-title"> Door bar handle to hang towel </span>
 				<br>
@@ -164,7 +173,7 @@
 				<br>
 				<span> by #username Yesterday </span></td>
 				<td class="usecase-comment-count">245</td>
-			</tr>
+			</tr> -->
 		</table>
 	</div>
 </div>

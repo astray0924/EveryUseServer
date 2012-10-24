@@ -8,7 +8,7 @@
 require 'json'
 
 # create new user 'olduser'
-old_user = User.new(username: 'olduser', email: 'old@old.com', password: 'olduser', password_confirmation: 'olduser', user_group: 'housewife')
+old_user = User.new(username: 'olduser', email: 'old@old.com', password: 'olduser', password_confirmation: 'olduser')
 if old_user.valid?
 	old_user.save()
 else
@@ -16,7 +16,7 @@ else
 end
 
 # create test user
-test_user = User.new(username: 'test', email: 'test@test.com', password: 'test', password_confirmation: 'test', user_group: 'student')
+test_user = User.new(username: 'test', email: 'test@test.com', password: 'test', password_confirmation: 'test')
 if test_user.valid?
   test_user.save()
 else
