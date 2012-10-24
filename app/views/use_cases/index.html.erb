@@ -16,7 +16,10 @@
 			<% @use_cases.each do |use_case| %>
 			<li class="span5">
 				<div class="thumbnail" data-usecase-id='<%= use_case.id %>'>
-					<%= image_tag use_case.photo.url(:large), :width => '400', :height => '400' %>
+					<div class="usecase-photo-container">
+						<%= image_tag use_case.photo.url(:large), :class => 'usecase-photo' %>
+					</div>
+					
 					<div class="caption">
 						<!-- # of comments -->
 						<p style="text-align: right;">
