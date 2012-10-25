@@ -3,6 +3,10 @@ class MainController < ApplicationController
     @carousel_list = UseCase.includes(:user).order(:created_at).limit(5)
     @wow_list = UseCase.includes(:user).order(:wows_count).limit(4) 
     @metoo_list = UseCase.includes(:user).order(:metoos_count).limit(4) 
+
+    respond_to do |format|
+      format.html
+    end
   end
 
 end

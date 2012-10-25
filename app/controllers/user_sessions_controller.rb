@@ -6,7 +6,6 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @user_session }
     end
   end
 
@@ -17,10 +16,10 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to use_cases_url, notice: 'Login Successful.' }
+        format.html { redirect_to(:root) }
         format.json { render json: @user_session, status: :created, location: @user_session }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to(:root) }
         format.json { render json: @user_session.errors, status: :unauthorized }
       end
     end
@@ -30,10 +29,10 @@ class UserSessionsController < ApplicationController
   # DELETE /user_sessions/1.json
   def destroy
     @user_session = UserSession.find(params[:id])
-    @user_session.destroy
+    if @user_session then @user_session.destroy end
 
     respond_to do |format|
-      format.html { redirect_to(new_user_session_url, :notice => 'Goodbye!') }
+      format.html { redirect_to(:root) }
       format.json { head :ok }
     end
   end
