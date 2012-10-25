@@ -13,13 +13,14 @@
 
 	<div class="content row span10">
 		<ul class="use_cases thumbnails">
-			<% @use_cases.each do |use_case| %>
+
+			<% @use_cases.each_with_index do |use_case, index| %>
 			<li class="span5">
 				<div class="thumbnail" data-usecase-id='<%= use_case.id %>'>
 					<div class="usecase-photo-container">
 						<%= image_tag use_case.photo.url(:large), :class => 'usecase-photo' %>
 					</div>
-					
+
 					<div class="caption">
 						<!-- # of comments -->
 						<p style="text-align: right;">
