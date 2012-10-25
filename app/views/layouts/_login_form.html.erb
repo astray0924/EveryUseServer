@@ -1,7 +1,8 @@
 <% @user_session = UserSession.new %>
 <%= form_for @user_session, :html => {:class => "navbar-form pull-right"} do |f| %>
-	<%= f.text_field :username, {:placeholder => 'E-mail', :class => 'input-small'} %>
-	<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-small'} %>
+	<%= f.text_field :username, {:placeholder => 'E-mail', :class => 'input-medium'} %>
+	<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-medium'} %>
 	<%= f.submit 'Log-in', :class => 'btn btn-medium btn-danger' %>
 	<%= link_to 'Sign-in', new_user_path, :class => 'btn btn-medium btn-inverse' %>
+	<%= link_to 'Forgot password?', '#', :class => 'btn btn-link' %>
 <% end %>
