@@ -12,6 +12,9 @@
 	</ul>
 
 	<div class="content row span10">
+		<!-- Pagination -->
+		<%= will_paginate @use_cases, :class => 'pagination', :renderer => BootstrapPagination::Rails %>
+		
 		<ul class="use_cases thumbnails">
 
 			<% @use_cases.each_with_index do |use_case, index| %>
@@ -53,5 +56,8 @@
 			<% end %>
 
 		</ul>
+
+		<!-- Pagination -->
+		<%= will_paginate @use_cases, :class => 'pagination', :renderer => BootstrapPagination::Rails %>
 	</div>
 </div>

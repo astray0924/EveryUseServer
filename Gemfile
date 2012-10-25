@@ -33,6 +33,7 @@ gem "paperclip", "~> 3.0"
 gem "cancan"
 
 gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
 
 gem "eventmachine", '1.0.0.beta.4.1', :platforms => [:mswin, :mingw]
 
