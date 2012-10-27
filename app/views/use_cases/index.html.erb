@@ -11,11 +11,11 @@
 		</li>
 	</ul>
 
-	<div class="content row span10">
+	<div class="content row span8 offset1">
 		<ul class="use_cases thumbnails">
 
 			<% @use_cases.each_with_index do |use_case, index| %>
-			<li class="span5">
+			<li class="span4">
 				<% if current_user and use_case.wow.where('user_id = ?', current_user.id).exists? 
 					then user_wow_id = use_case.wow.where('user_id = ?', current_user.id).first.id
 					else user_wow_id = 0 end %>
@@ -69,6 +69,6 @@
 		</ul>
 
 		<!-- Pagination -->
-		<%= will_paginate @use_cases, :class => 'pagination', :renderer => BootstrapPagination::Rails %>
+		<%= will_paginate @use_cases, :class => 'pagination pagination-centered', :renderer => BootstrapPagination::Rails %>
 	</div>
 </div>

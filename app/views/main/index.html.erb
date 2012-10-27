@@ -40,16 +40,29 @@
 	<div class="span10 offset1" style="height: 100px; background-color: #3d3d3d;">
 		<div class="row" style="height: 100%;">
 			<!-- Mobile app -->
-			<div class="span5">
-				<span style="color: white; font-size: 24pt;">Download Mobile App</span>
-				<br>
-				<span style="color: #e7685d; font-size: 18pt;">Install EveryUse to Your mobile phone!</span>
+			<div class="span5" style="padding: 1.8em 0 0 0;">
+				<p style="color: white; font-size: 24pt; margin-left: 100px;">
+					Download Mobile App
+				</p>
+				<p style="color: #e7685d; font-size: 16pt; margin-left: 100px;">
+					Install EveryUse to Your mobile phone!
+				</p>
 			</div>
 
-			<!-- search form -->
-			<form class="navbar-search pull-left span5">
-				<input type="text" class="search-query" placeholder="Search">
-			</form>
+			<!-- Search Form -->
+			<div class="span5">
+				<h3 style="color: white; margin-bottom: 0; margin-left: 60px;">
+					Search Use!
+				</h3>
+				<form class="form-search" style="margin-left: 60px;" method="get" action="#">
+					<div class="input-prepend">
+						<button type="submit" class="btn">
+							Search
+						</button>
+						<input type="text" name="q" class="span2 search-query">
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -65,7 +78,7 @@
 			</tr>
 			<% @wow_list.each do |use_case| %>
 			<tr>
-				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:thumb), :height => '100', :width => '100' %></td>
+				<td class="usecase-thumbnail-container" style="width: 100px; height: 100px;"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date}"%> </span></td>
@@ -82,7 +95,7 @@
 			</tr>
 			<% @metoo_list.each do |use_case| %>
 			<tr>
-				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:thumb), :height => '100', :width => '100' %></td>
+				<td class="usecase-thumbnail-container" style="width: 100px; height: 100px;"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date}" %> </span></td>
