@@ -33,7 +33,6 @@ $('.thumbnails').click(function(event) {
 
 		// 눌린 버튼 state에 따라 comment를 추가/삭제
 		if (button_pressed) {//추가
-
 			if (btn_type == 'wow') {
 				url = base_url + 'wow.json';
 			} else if (btn_type == 'metoo') {
@@ -47,11 +46,6 @@ $('.thumbnails').click(function(event) {
 				'data' : {
 					'comment[user_id]' : user_id,
 					'comment[use_case_id]' : use_case_id
-				},
-				'statusCode' : {
-					'422' : function() {
-						alert('error commenting the article!');
-					}
 				}
 			}).done(function(data) {
 				var comment_id = data.id;
@@ -59,12 +53,15 @@ $('.thumbnails').click(function(event) {
 				// UseCase <div>의 속성을 업데이트 해야함
 				if (btn_type == 'wow') {
 					article.attr('data-user-wow-id', parseInt(comment_id));
+					var comment_count = parseInt(wows_count_container.text());
+					wows_count_container.text(comment_count + 1);
 				} else if ( btn_type = 'metoo') {
 					article.attr('data-user-metoo-id', parseInt(comment_id));
+					var comment_count = parseInt(metoos_count_container.text());
+					metoos_count_container.text(comment_count + 1);
 				}
-				
-				// 여기서는 comment의 갯수 업데이트
-				// data.count
+			}).error(function() {
+				console.log('error commenting the article' + use_case_id);
 			});
 
 		} else {// 삭제
@@ -78,13 +75,19 @@ $('.thumbnails').click(function(event) {
 			$.ajax({
 				'url' : url,
 				'type' : 'delete',
-				'success' : function(data) {
-					// UseCase <div>의 속성을 업데이트 해야함
-					if (btn_type == 'wow') {
-						article.attr('data-user-wow-id', 0);
-					} else if ( btn_type = 'metoo') {
-						article.attr('data-user-metoo-id', 0);
-					}
+				'dataType' : 'json'
+			}).done(function(data) {
+				var comment_count = data;
+
+				// UseCase <div>의 속성을 업데이트 해야함
+				if (btn_type == 'wow') {
+					article.attr('data-user-wow-id', 0);
+					var comment_count = parseInt(wows_count_container.text());
+					wows_count_container.text(comment_count - 1);
+				} else if ( btn_type = 'metoo') {
+					article.attr('data-user-metoo-id', 0);
+					var comment_count = parseInt(metoos_count_container.text());
+					metoos_count_container.text(comment_count - 1);
 				}
 			});
 		}
