@@ -40,7 +40,9 @@
 	<div class="span10 offset1" style="height: 100px; background-color: #3d3d3d;">
 		<div class="row" style="height: 100%;">
 			<!-- Mobile app -->
-			<div class="span5" style="padding: 1.8em 0 0 0;">
+			<div class="span5" style="position: relative; padding: 1.8em 0 0 0;">
+				<a href="https://play.google.com/store/apps/details?id=org.everyuse.android&feature=nav_result#?t=W251bGwsMSwxLDMsIm9yZy5ldmVyeXVzZS5hbmRyb2lkIl0." 
+					style="width: 50px; height: 50px; display: inline; position: absolute; margin-left: 35px"> <%= image_tag 'icon-app-download.png' %> </a>
 				<p style="color: white; font-size: 24pt; margin-left: 100px;">
 					Download Mobile App
 				</p>
@@ -50,10 +52,9 @@
 			</div>
 
 			<!-- Search Form -->
-			<div class="span5">
-				<h3 style="color: white; margin-bottom: 0; margin-left: 60px;">
-					Search Use!
-				</h3>
+			<div class="span5" style="position: relative;">
+				<%= image_tag 'icon-search.png', :style => "position: absolute; width: 50px; height: 50px; background: url('../icon-search.png') center no-repeat; margin-top: 25px;" %>
+				<h3 style="color: white; margin-bottom: 0; margin-left: 60px;"> Search Use! </h3>
 				<form class="form-search" style="margin-left: 60px;" method="get" action="#">
 					<div class="input-prepend">
 						<button type="submit" class="btn">
@@ -82,7 +83,7 @@
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date}"%> </span></td>
-				<td class="usecase-comment-count"><%= use_case.wows_count %></td>
+				<td class="usecase-comment-count" style="width: 100px; height: 100px; padding: 0;"><span><%= use_case.wows_count %></span></td>
 			</tr>
 			<% end %>
 
@@ -99,7 +100,7 @@
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date}" %> </span></td>
-				<td class="usecase-comment-count"><%= use_case.metoos_count %></td>
+				<td class="usecase-comment-count" style="width: 100px; height: 100px; padding: 0;"><span><%= use_case.metoos_count %></span></td>
 			</tr>
 			<% end %>
 
