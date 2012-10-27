@@ -4,7 +4,11 @@ class MetooController < ApplicationController
 
     respond_to do |format|
       if @metoo.save
-        format.json { render json: Metoo.count, status: :created }
+        @result = Hash.new
+        @result[:id] = @metoo.id
+        @result[:count] = Metoo.count
+        
+        format.json { render json: @result, status: :created }
       else
         format.json { render json: @metoo.errors, status: :unprocessable_entity }
       end

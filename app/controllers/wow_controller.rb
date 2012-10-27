@@ -4,7 +4,11 @@ class WowController < ApplicationController
 
     respond_to do |format|
       if @wow.save
-        format.json { render json: Wow.count, status: :created }
+        @result = Hash.new
+        @result[:id] = @wow.id
+        @result[:count] = Wow.count
+        
+        format.json { render json: @result, status: :created }
       else
         format.json { render json: @wow.errors, status: :unprocessable_entity }
       end
