@@ -16,7 +16,19 @@
 
 			<% @use_cases.each_with_index do |use_case, index| %>
 			<li class="span5">
-				<div class="thumbnail" data-usecase-id='<%= use_case.id %>'>
+				<% if current_user and use_case.wow.where('user_id = ?', current_user.id).exists? 
+					then user_wow_id = use_case.wow.where('user_id = ?', current_user.id).first.id
+					else user_wow_id = 0 end %>
+				
+				<% if current_user and use_case.metoo.where('user_id = ?', current_user.id).exists? 
+					then user_metoo_id = use_case.metoo.where('user_id = ?', current_user.id).first.id
+					else user_metoo_id = 0 end %>
+				
+				<div class="thumbnail" 
+					data-usecase-id='<%= use_case.id %>' 
+					data-user-id='<%= current_user ? current_user.id : 0 %>'
+					data-user-wow-id='<%= user_wow_id %>'
+					data-user-metoo-id='<%= user_metoo_id %>'>
 					<div class="usecase-photo-container">
 						<%= image_tag use_case.photo.url(:large), :class => 'usecase-photo' %>
 					</div>
@@ -24,9 +36,9 @@
 					<div class="caption">
 						<!-- # of comments -->
 						<p style="text-align: right;">
-							<%= content_tag :span, use_case.wows_count, :class => 'usecase-keyword' %>
+							<%= content_tag :span, use_case.wows_count, :class => 'usecase-keyword wows-count' %>
 							Wow
-							<%= content_tag :span, use_case.metoos_count, :class => 'usecase-keyword' %>
+							<%= content_tag :span, use_case.metoos_count, :class => 'usecase-keyword metoos-count' %>
 							Metoo
 						</p>
 
@@ -40,10 +52,10 @@
 
 						<!-- comment buttons -->
 						<div class="btn-panel">
-							<button class="btn btn-danger" data-toggle="button">
+							<button class="btn wow btn-danger <%= user_wow_id == 0 ? '' : 'active' %> <%= current_user ? '' : 'disabled' %>" data-toggle="button">
 								Wow
 							</button>
-							<button class="btn btn-inverse" data-toggle="button">
+							<button class="btn metoo btn-inverse <%= user_metoo_id == 0 ? '' : 'active' %> <%= current_user ? '' : 'disabled' %>" data-toggle="button">
 								Me, too
 							</button>
 						</div>
