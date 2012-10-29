@@ -29,14 +29,12 @@ $('.thumbnails').click(function(event) {
 
 	// 서버에 comment 제출
 	if (use_case_id && user_id) {
-		var base_url = "http://localhost:3000/";
-
 		// 눌린 버튼 state에 따라 comment를 추가/삭제
 		if (button_pressed) {//추가
 			if (btn_type == 'wow') {
-				url = base_url + 'wow.json';
+				url = '/wow.json';
 			} else if (btn_type == 'metoo') {
-				url = base_url + 'metoo.json';
+				url = '/metoo.json';
 			}
 
 			$.ajax({
@@ -67,9 +65,9 @@ $('.thumbnails').click(function(event) {
 		} else {// 삭제
 
 			if (btn_type == 'wow') {
-				url = base_url + 'wow/' + user_wow_id + '.json';
+				url = '/wow/' + user_wow_id + '.json';
 			} else if (btn_type == 'metoo') {
-				url = base_url + 'metoo/' + user_metoo_id + '.json';
+				url = '/metoo/' + user_metoo_id + '.json';
 			}
 
 			$.ajax({
