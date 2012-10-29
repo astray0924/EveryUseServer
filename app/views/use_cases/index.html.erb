@@ -11,15 +11,24 @@
 		</li>
 	</ul>
 
-	<div class="content row span10">
-		<!-- Pagination -->
-		<%= will_paginate @use_cases, :class => 'pagination', :renderer => BootstrapPagination::Rails %>
-		
+	<div class="content row span8 offset1">
 		<ul class="use_cases thumbnails">
 
 			<% @use_cases.each_with_index do |use_case, index| %>
-			<li class="span5">
-				<div class="thumbnail" data-usecase-id='<%= use_case.id %>'>
+			<li class="span4">
+				<% if current_user and use_case.wow.where('user_id = ?', current_user.id).exists? 
+					then user_wow_id = use_case.wow.where('user_id = ?', current_user.id).first.id
+					else user_wow_id = 0 end %>
+				
+				<% if current_user and use_case.metoo.where('user_id = ?', current_user.id).exists? 
+					then user_metoo_id = use_case.metoo.where('user_id = ?', current_user.id).first.id
+					else user_metoo_id = 0 end %>
+				
+				<div class="thumbnail" 
+					data-usecase-id='<%= use_case.id %>' 
+					data-user-id='<%= current_user ? current_user.id : 0 %>'
+					data-user-wow-id='<%= user_wow_id %>'
+					data-user-metoo-id='<%= user_metoo_id %>'>
 					<div class="usecase-photo-container">
 						<%= image_tag use_case.photo.url(:large), :class => 'usecase-photo' %>
 					</div>
@@ -27,9 +36,9 @@
 					<div class="caption">
 						<!-- # of comments -->
 						<p style="text-align: right;">
-							<%= content_tag :span, use_case.wows_count, :class => 'usecase-keyword' %>
+							<%= content_tag :span, use_case.wows_count, :class => 'usecase-keyword wows-count' %>
 							Wow
-							<%= content_tag :span, use_case.metoos_count, :class => 'usecase-keyword' %>
+							<%= content_tag :span, use_case.metoos_count, :class => 'usecase-keyword metoos-count' %>
 							Metoo
 						</p>
 
@@ -42,14 +51,16 @@
 						</p>
 
 						<!-- comment buttons -->
+						<% if current_user %>
 						<div class="btn-panel">
-							<button class="btn btn-danger" data-toggle="button">
+							<button class="btn wow btn-danger <%= user_wow_id == 0 ? '' : 'active' %>" data-toggle="button">
 								Wow
 							</button>
-							<button class="btn btn-inverse" data-toggle="button">
+							<button class="btn metoo btn-primary <%= user_metoo_id == 0 ? '' : 'active' %>" data-toggle="button">
 								Me, too
 							</button>
 						</div>
+						<% end %>
 					</div>
 				</div>
 			</li>
@@ -58,6 +69,6 @@
 		</ul>
 
 		<!-- Pagination -->
-		<%= will_paginate @use_cases, :class => 'pagination', :renderer => BootstrapPagination::Rails %>
+		<%= will_paginate @use_cases, :class => 'pagination pagination-centered', :renderer => BootstrapPagination::Rails %>
 	</div>
 </div>

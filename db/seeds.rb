@@ -49,7 +49,7 @@ seed_file.each do |l|
 	  if use_case.valid?
   		use_case.save()
     else
-      print use_case
+      print use_case.errors.full_messages
 	  end
 	end
 	

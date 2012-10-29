@@ -9,9 +9,9 @@ class UseCasesController < ApplicationController
     # if user_id is provided, show only the user's use cases
     # it discards the previous sorting/filtering settings
     if params[:user_id]
-      @use_cases = UseCase.where("user_id = ?", params[:user_id])
+      @use_cases = UseCase.includes(:wow, :metoo, :favorite).where("user_id = ?", params[:user_id])
     else
-      @use_cases = UseCase.all
+      @use_cases = UseCase.includes(:wow, :metoo, :favorite).all
     end
 
     # parameter: type
@@ -30,6 +30,8 @@ class UseCasesController < ApplicationController
     if @use_cases
       @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
     end
+    
+    # 만약 사용자라 로그인한 상태라면, 현재 사용자가 
 
     respond_to do |format|
       format.html # index.html.erb

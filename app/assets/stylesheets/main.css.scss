@@ -17,5 +17,14 @@
 .table .usecase-comment-count {
   vertical-align: middle;
   text-align: center;
-  background: url(http://placehold.it/50x50) center no-repeat;
+  background: url(assets/icon-comment-bg.png) center no-repeat;
+  width: 69px;
+  height: 69px;
+}
+
+.hero-unit {
+  -webkit-box-shadow: 0px 0px 10px #888;
+  -moz-box-shadow: 0px 0px 10px #888;
+  box-shadow: 0px 0px 10px #888;
+  background-color: white;
 }

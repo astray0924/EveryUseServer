@@ -5,9 +5,6 @@ class UseCase < ActiveRecord::Base
   has_many :favorite, :dependent => :destroy
   has_many :wow, :dependent => :destroy
   has_many :metoo, :dependent => :destroy
-  
-  # default order
-  default_scope :order => 'created_at DESC'
 
   has_attached_file :photo, :styles => {:thumb => ["100x100#", :jpg], :large => ["400x400>", :jpg]},
   					:default_style => :thumb,
