@@ -40,5 +40,10 @@
 			<%= javascript_include_tag "http://code.jquery.com/jquery-latest.js" %>
 			<%= javascript_include_tag "bootstrap/bootstrap" %>
 			<%= javascript_include_tag "application" %>
+			<script>
+				$(function() {
+					$('input[placeholder], textarea[placeholder]').placeholder();
+				});
+			</script>
 	</body>
 </html>

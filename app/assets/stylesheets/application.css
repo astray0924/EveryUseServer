@@ -11,4 +11,7 @@
  *= require bootstrap/bootstrap.min
  *= require_self
  *= require_tree .
-*/
+ */
+.placeholder {
+	color: red;
+}
