@@ -19,7 +19,7 @@ class UserSessionsController < ApplicationController
         format.html { redirect_to(:back) }
         format.json { render json: @user_session, status: :created, location: @user_session }
       else
-        format.html { redirect_to(:root) }
+        format.html { redirect_to(:back) }
         format.json { render json: @user_session.errors, status: :unauthorized }
       end
     end
