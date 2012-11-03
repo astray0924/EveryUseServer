@@ -1,4 +1,4 @@
-<!-- 캐치프레이즈-->
+<!-- 罹먯튂�꾨젅�댁쫰-->
 <div class="hero-unit">
 	<h1 style="color: #ed3a7a;">EVERYUSE</h1>
 	<h2 style="color: #3b3b3b;"> Share Your Creative Uses! </h2>
@@ -35,7 +35,7 @@
 	</div>
 </div>
 
-<!-- 앱 소개 패널 -->
+<!-- ���뚭컻 �⑤꼸 -->
 <div class="row" style="margin-top: 0;">
 	<div class="span10 offset1" style="height: 100px; background-color: #3d3d3d;">
 		<div class="row" style="height: 100%;">
@@ -82,7 +82,7 @@
 				<td class="usecase-thumbnail-container" style="width: 100px; height: 100px;"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
-				<span> <%= "by #{use_case.user.username} #{use_case.get_date}"%> </span></td>
+				<span> <%= "by #{use_case.user.username} #{use_case.get_date_string}"%> </span></td>
 				<td class="usecase-comment-count" style="width: 100px; height: 100px; padding: 0;"><span><%= use_case.wows_count %></span></td>
 			</tr>
 			<% end %>
@@ -99,7 +99,7 @@
 				<td class="usecase-thumbnail-container" style="width: 100px; height: 100px;"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
-				<span> <%= "by #{use_case.user.username} #{use_case.get_date}" %> </span></td>
+				<span> <%= "by #{use_case.user.username} #{use_case.get_date_string}" %> </span></td>
 				<td class="usecase-comment-count" style="width: 100px; height: 100px; padding: 0;"><span><%= use_case.metoos_count %></span></td>
 			</tr>
 			<% end %>

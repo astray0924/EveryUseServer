@@ -42,8 +42,16 @@ class UseCase < ActiveRecord::Base
     @file_name = self.photo.url(:thumb).split('/').last.split('?').first
   end
   
-  def get_date
-    self.created_at
+  def get_date_string
+    posted_date = self.created_at
+    
+    if Time.now - posted_date == 1.days.ago
+      date_string = 'Yesterday'
+    elsif Time.now - posted_date == 0.days.ago
+      date_string = 'Today'
+    else
+      date_string = posted_date.strftime('%Y-%d-%m')
+    end
   end
   
   def to_s
