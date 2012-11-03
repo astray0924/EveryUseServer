@@ -33,6 +33,7 @@ gem 'will_paginate-bootstrap'
 
 gem "eventmachine", 
   :git => 'git://github.com/eventmachine/eventmachine.git'
+  
 gem "thin"
 
 gem 'jquery-rails'
