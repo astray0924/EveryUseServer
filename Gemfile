@@ -31,11 +31,6 @@ gem "cancan"
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
-gem "eventmachine", 
-  :git => 'git://github.com/eventmachine/eventmachine.git'
-  
-gem "thin"
-
 gem 'jquery-rails'
 
 gem 'acts_as_xlsx'

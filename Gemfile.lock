@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/eventmachine/eventmachine.git
-  revision: 3c39365435f45c534a317779ae33cf1242b49352
-  specs:
-    eventmachine (1.0.0)
-
-GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 36060be332ffc8408daca5cee20ea5694261105b
   branch: static
@@ -58,6 +52,7 @@ GEM
     axlsx_rails (0.1.2)
       axlsx
       rails (~> 3.1)
+    bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
     cancan (1.6.8)
@@ -69,7 +64,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-    daemons (1.1.9)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -94,7 +88,9 @@ GEM
     mime-types (1.19)
     multi_json (1.3.7)
     multipart-post (1.1.5)
+    mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
+    nokogiri (1.5.5)
     nokogiri (1.5.5-x86-mingw32)
     oauth (0.4.7)
     oauth2 (0.8.0)
@@ -166,11 +162,8 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.6)
     sqlite3 (1.3.6-x86-mingw32)
-    thin (1.5.0)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.12)
@@ -186,6 +179,7 @@ GEM
     yard (0.8.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
@@ -195,7 +189,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   cancan
   coffee-rails (~> 3.2.1)
-  eventmachine!
   jquery-rails
   mysql2
   omniauth-facebook
@@ -207,7 +200,6 @@ DEPENDENCIES
   redcarpet
   sass-rails (~> 3.2.3)
   sqlite3
-  thin
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
   will_paginate (~> 3.0)
