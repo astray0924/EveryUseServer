@@ -1,15 +1,5 @@
 <div class="row">
-	<ul class="nav nav-pills nav-stacked span2">
-		<li>
-			<%= sidebar_link 'Top Wow', top_use_cases_path(:type => 'wow') %>
-		</li>
-		<li>
-			<%= sidebar_link 'Top Me, Too', top_use_cases_path(:type => 'metoo') %>
-		</li>
-		<li>
-			<%= sidebar_link 'Recent', use_cases_path %>
-		</li>
-	</ul>
+	<%= render 'use_cases/sidebar' %>
 
 	<div class="content row span8 offset1">
 		<ul class="use_cases thumbnails">

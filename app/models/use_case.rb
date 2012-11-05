@@ -45,13 +45,13 @@ class UseCase < ActiveRecord::Base
   def get_date_string
     posted_date = self.created_at
     
-    if Time.now - posted_date == 1.days.ago
-      date_string = 'Yesterday'
-    elsif Time.now - posted_date == 0.days.ago
+    if posted_date.today?
       date_string = 'Today'
     else
-      date_string = posted_date.strftime('%Y-%d-%m')
+      date_string = posted_date.strftime('%Y-%m-%d')
     end
+    
+    return date_string
   end
   
   def to_s

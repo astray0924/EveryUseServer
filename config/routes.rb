@@ -27,6 +27,8 @@ WikiUse::Application.routes.draw do
       get 'purpose'
       get 'groups'
       get 'top'
+      get 'top_wow'
+      get 'top_metoo'
       get 'comment'
       get 'divide_purpose_type'
     end
