@@ -15,3 +15,7 @@
 .placeholder {
 	color: red;
 }
+
+body {
+	font-family: "Tahoma", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
