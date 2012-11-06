@@ -17,15 +17,15 @@
 <div class="row">
 	<div id="tiles" class="span12">
 		<% if @gallery_list %>
-		<% @gallery_list.each_with_index do |use_case, index| %>
-		<a href="<%= use_case.photo.url(:large) %>"> 
+			<% @gallery_list.each_with_index do |use_case, index| %>
+	<!-- 		<a href="<%= use_case.photo.url(:large) %>"> 
+			</a> -->
 			<img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>"> 
-		</a>
-		<% end %>
+			<% end %>
 		<% else %>
-		<p>
-			Nothing
-		</p>
+			<p>
+				Nothing
+			</p>
 		<% end %>
 	</div>
 </div>
@@ -109,7 +109,9 @@
 	<script>
 		$(function() {
 			$("#tiles").tilesGallery({
+				width: 1000,
 				height: 500,
+				margin: 5,
 				caption : true,
 				captionOnMouseOver : true,
 				callback : function() {					$("#tiles a").lightBox();
