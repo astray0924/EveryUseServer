@@ -12,6 +12,21 @@ class UsersController < ApplicationController
     end
   end
   
+  def reset_password
+    @email = params[:email]
+    @user = User.where('email = ?', @email)
+    
+    if @user
+      @message = 'Reset email sent!'
+    else
+      @message = 'No user found!'
+    end
+    
+    respond_to do |format|
+      format.html
+    end
+  end
+  
   def feeds
     @user = User.find(params[:id])
     @page, @limit = get_pagination_params(params)

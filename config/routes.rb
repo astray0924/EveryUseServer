@@ -10,6 +10,8 @@ WikiUse::Application.routes.draw do
 
   get "main/index"
 
+  match 'reset_password' => 'users#reset_password', :as => :reset_password
+
   resources :users do
     resources :use_cases
 
@@ -21,6 +23,7 @@ WikiUse::Application.routes.draw do
       get 'feeds'
     end
   end
+  
 
   resources :user_sessions
 
