@@ -1,7 +1,22 @@
 <!-- 罹먯튂�꾨젅�댁쫰-->
 <% content_for :head do %>
-	<%= stylesheet_link_tag "tilesgallery/jquery.tilesgallery", :media => :screen %>
-	<%= stylesheet_link_tag "lightbox/jquery.lightbox-0.5", :media => :screen %>
+<style>
+	.tiles {
+		background: #000;
+	}
+	.tiles img {
+		margin: 0;
+		padding: 0;
+		display: none;
+	}
+	
+	.tiles a {
+		margin: 0;
+		padding: 0;
+	}
+</style>
+<%= stylesheet_link_tag "tilesgallery/jquery.tilesgallery", :media => :screen %>
+<%= stylesheet_link_tag "lightbox/jquery.lightbox-0.5", :media => :screen %>
 <% end %>
 
 <div class="hero-unit">
@@ -15,17 +30,15 @@
 </div>
 
 <div class="row">
-	<div id="tiles" class="span12" style="height: 500px;">
+	<div class="tiles span12" style="height: 500px;">
 		<% if @gallery_list %>
-			<% @gallery_list.each_with_index do |use_case, index| %>
-				<a href="<%= use_case.photo.url(:large) %>"> 
-					<img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>" width="<%= Random.new.rand(300...600) %>"> 
-				</a> 
-			<% end %>
+		<% @gallery_list.each_with_index do |use_case, index| %>
+		<a href="<%= use_case.photo.url(:large) %>"> <img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>" width="<%= Random.new.rand(300...600) %>"> </a>
+		<% end %>
 		<% else %>
-			<p>
-				Nothing
-			</p>
+		<p>
+			Nothing
+		</p>
 		<% end %>
 	</div>
 </div>
@@ -104,19 +117,19 @@
 </div>
 
 <% content_for :body_script do %>
-	<%= javascript_include_tag "tilesgallery/jquery.tilesgallery" %>
-	<%= javascript_include_tag "lightbox/jquery.lightbox-0.5" %>
-	<script>
-		$(function() {
-			$("#tiles").tilesGallery({
-				width: $("#tiles").width(),
-				height: $("#tiles").height(),
-				margin: 5,
-				caption : true,
-				captionOnMouseOver : true,
-				callback : function() {					$("#tiles a").lightBox();
-				}
-			});
-		}); 
-	</script>
+<%= javascript_include_tag "tilesgallery/jquery.tilesgallery" %>
+<%= javascript_include_tag "lightbox/jquery.lightbox-0.5" %>
+<script>
+	$(function() {
+		$(".tiles").tilesGallery({
+			width : $(".tiles").width(),
+			height : $(".tiles").height(),
+			margin : 5,
+			caption : true,
+			captionOnMouseOver : true,
+			callback : function() {
+				$(".tiles a").lightBox();
+			}
+		});	});
+</script>
 <% end %>
