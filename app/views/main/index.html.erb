@@ -1,4 +1,8 @@
 <!-- 罹먯튂�꾨젅�댁쫰-->
+<% content_for :head do %>
+<%= stylesheet_link_tag "jquery-tilegallery/jquery-tilegallery", :media => :screen %>
+<% end %>
+
 <div class="hero-unit">
 	<h1 style="color: #ed3a7a;">EVERYUSE</h1>
 	<h2 style="color: #3b3b3b;"> Share Your Creative Uses! </h2>
@@ -12,27 +16,16 @@
 	</p> -->
 </div>
 
-<div class="row">
-	<div id="myCarousel" class="carousel slide span10 offset1" data-interval="5000" style="margin-bottom: 0;">
-		<!-- Carousel items -->
-		<div class="carousel-inner">
-			<% @carousel_list.each_with_index do |use_case, index| %>
-			<div class="item <%= index == 1 ? 'active' : '' %>">
-				<%= image_tag use_case.photo.url(:large), :width => '400', :height => '400' %>
-				<div class="carousel-caption">
-					<h4>First Thumbnail label</h4>
-					<p>
-						<%= "#{use_case}" %>
-					</p>
-				</div>
-			</div>
-			<% end %>
-		</div>
-
-		<!-- Carousel nav -->
-		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-	</div>
+<div id="tiles" class="row">
+	<% if @gallery_list %>
+	<% @gallery_list.each_with_index do |use_case, index| %>
+	<a href="<%= use_case.photo.url(:large) %>"> <%= image_tag use_case.photo.url(:large), :alt => use_case.to_s %> </a>
+	<% end %>
+	<% else %>
+	<p>
+		Nothing
+	</p>
+	<% end %>
 </div>
 
 <!-- ���뚭컻 �⑤꼸 -->
@@ -41,8 +34,8 @@
 		<div class="row" style="height: 100%;">
 			<!-- Mobile app -->
 			<div class="span5" style="position: relative; padding: 1.8em 0 0 0;">
-				<a href="https://play.google.com/store/apps/details?id=org.everyuse.android&feature=nav_result#?t=W251bGwsMSwxLDMsIm9yZy5ldmVyeXVzZS5hbmRyb2lkIl0." 
-					style="width: 50px; height: 50px; display: inline; position: absolute; margin-left: 35px"> <%= image_tag 'icon-app-download.png' %> </a>
+				<a href="https://play.google.com/store/apps/details?id=org.everyuse.android&feature=nav_result#?t=W251bGwsMSwxLDMsIm9yZy5ldmVyeXVzZS5hbmRyb2lkIl0."
+				style="width: 50px; height: 50px; display: inline; position: absolute; margin-left: 35px"> <%= image_tag 'icon-app-download.png' %> </a>
 				<p style="color: white; font-size: 24pt; margin-left: 100px;">
 					Download Mobile App
 				</p>
@@ -107,3 +100,19 @@
 		</table>
 	</div>
 </div>
+
+<%= javascript_include_tag "jquery-tilegallery/jquery-tilegallery" %>
+<script>
+	$(function() {
+		$(".tiles").tilesGallery({
+			margin : 5,
+			caption : true,
+			captionOnMouseOver : true,
+			verticalAlign : 'middle',
+			horizontalAlign : 'center',
+			callback : function() {
+				
+			}
+		});
+	}); 
+</script>
