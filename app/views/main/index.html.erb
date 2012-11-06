@@ -15,12 +15,12 @@
 </div>
 
 <div class="row">
-	<div id="tiles" class="span12">
+	<div id="tiles" class="span12" style="height: 500px;">
 		<% if @gallery_list %>
 			<% @gallery_list.each_with_index do |use_case, index| %>
-	<!-- 		<a href="<%= use_case.photo.url(:large) %>"> 
-			</a> -->
-			<img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>"> 
+				<a href="<%= use_case.photo.url(:large) %>"> 
+					<img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>" width="<%= Random.new.rand(300...600) %>"> 
+				</a> 
 			<% end %>
 		<% else %>
 			<p>
@@ -109,8 +109,8 @@
 	<script>
 		$(function() {
 			$("#tiles").tilesGallery({
-				width: 1000,
-				height: 500,
+				width: $("#tiles").width(),
+				height: $("#tiles").height(),
 				margin: 5,
 				caption : true,
 				captionOnMouseOver : true,
