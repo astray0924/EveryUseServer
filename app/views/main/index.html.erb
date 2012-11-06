@@ -1,6 +1,7 @@
 <!-- 罹먯튂�꾨젅�댁쫰-->
 <% content_for :head do %>
-<%= stylesheet_link_tag "jquery-tilegallery/jquery-tilegallery", :media => :screen %>
+	<%= stylesheet_link_tag "tilesgallery/jquery.tilesgallery", :media => :screen %>
+	<%= stylesheet_link_tag "lightbox/jquery.lightbox-0.5", :media => :screen %>
 <% end %>
 
 <div class="hero-unit">
@@ -13,21 +14,25 @@
 	</p>
 </div>
 
-<div id="tiles" class="row">
-	<% if @gallery_list %>
-	<% @gallery_list.each_with_index do |use_case, index| %>
-	<a href="<%= use_case.photo.url(:large) %>"> <%= image_tag use_case.photo.url(:large), :alt => use_case.to_s %> </a>
-	<% end %>
-	<% else %>
-	<p>
-		Nothing
-	</p>
-	<% end %>
+<div class="row">
+	<div id="tiles" class="span12">
+		<% if @gallery_list %>
+		<% @gallery_list.each_with_index do |use_case, index| %>
+		<a href="<%= use_case.photo.url(:large) %>"> 
+			<img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>"> 
+		</a>
+		<% end %>
+		<% else %>
+		<p>
+			Nothing
+		</p>
+		<% end %>
+	</div>
 </div>
 
 <!-- ���뚭컻 �⑤꼸 -->
 <div class="row" style="margin-top: 0;">
-	<div class="span10 offset1" style="height: 100px; background-color: #3d3d3d;">
+	<div class="span12" style="height: 100px; background-color: #3d3d3d;">
 		<div class="row" style="height: 100%;">
 			<!-- Mobile app -->
 			<div class="span5" style="position: relative; padding: 1.8em 0 0 0;">
@@ -98,18 +103,18 @@
 	</div>
 </div>
 
-<%= javascript_include_tag "jquery-tilegallery/jquery-tilegallery" %>
-<script>
-	$(function() {
-		$(".tiles").tilesGallery({
-			margin : 5,
-			caption : true,
-			captionOnMouseOver : true,
-			verticalAlign : 'middle',
-			horizontalAlign : 'center',
-			callback : function() {
-				
-			}
-		});
-	}); 
-</script>
+<% content_for :body_script do %>
+	<%= javascript_include_tag "tilesgallery/jquery.tilesgallery" %>
+	<%= javascript_include_tag "lightbox/jquery.lightbox-0.5" %>
+	<script>
+		$(function() {
+			$("#tiles").tilesGallery({
+				height: 500,
+				caption : true,
+				captionOnMouseOver : true,
+				callback : function() {					$("#tiles a").lightBox();
+				}
+			});
+		}); 
+	</script>
+<% end %>
