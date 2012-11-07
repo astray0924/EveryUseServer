@@ -33,7 +33,7 @@
 	<div class="tiles span12" style="height: 500px;">
 		<% if @gallery_list %>
 		<% @gallery_list.each_with_index do |use_case, index| %>
-		<a href="<%= use_case.photo.url(:large) %>"> <img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>" width="<%= Random.new.rand(300...600) %>"> </a>
+		<a href="<%= use_case.photo.url(:large) %>"> <img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>" style="max-width: none;"> </a>
 		<% end %>
 		<% else %>
 		<p>
