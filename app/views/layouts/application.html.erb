@@ -2,15 +2,15 @@
 <html>
 	<head>
 		<title>EveryUse</title>
+		<%= yield :head %>
 		<%= stylesheet_link_tag    "application", :media => "screen" %>
 		<%= stylesheet_link_tag    "bootstrap/bootstrap", :media => "screen" %>
 		<%= csrf_meta_tags %>
-		<%= yield :head %>
 	</head>
 	<body>
 		<div class="container">
+			<!-- NavBar -->
 			<div class="navbar">
-
 				<div class="navbar-inner">
 					<ul class="nav">
 						<li>
@@ -29,10 +29,7 @@
 					<% unless current_user %>
 					<%= render 'layouts/login_form' %>
 					<% else %>
-					<form class="navbar-form pull-right">
-						<span class='lead'  style="font-size: 1.0em; font-weight: bold; position: relative; bottom: -4px; padding-right: 5px;"> <span style="color: #ed3a7a;"><%= current_user.username %></span>,  welcome to EveryUse! </span>
-						<%= link_to "Logout", :logout, :class => "btn btn-medium btn-danger" %>
-					</form>
+					<%= render 'layouts/logout_form' %>
 					<% end %>
 				</div>
 
@@ -47,7 +44,7 @@
 					Copyright 2012 Design Media Lab KAIST. All rights reserved.
 				</div>
 			</div>
-			
+
 		</div>
 
 		<!-- JavaScripts -->
