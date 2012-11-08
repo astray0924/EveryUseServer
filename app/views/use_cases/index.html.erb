@@ -1,11 +1,11 @@
 <div class="row">
 	<%= render 'use_cases/sidebar' %>
 
-	<div class="content row span8 offset1">
+	<div class="content row span10">
 		<ul class="use_cases thumbnails">
 
 			<% @use_cases.each_with_index do |use_case, index| %>
-			<li class="span4">
+			<li class="span5">
 				<% if current_user and use_case.wow.where('user_id = ?', current_user.id).exists? 
 					then user_wow_id = use_case.wow.where('user_id = ?', current_user.id).first.id
 					else user_wow_id = 0 end %>
