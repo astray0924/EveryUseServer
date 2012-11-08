@@ -1,11 +1,16 @@
 WikiUse::Application.routes.draw do
+  get "my_page/shared"
+  get "my_page/commented"
+  get "my_page/scrapped"
+  get "my_page/following"
+
   get "about/index"
-
   get "about/publication"
-
   get "about/faq"
 
   get "main/index"
+
+  match 'reset_password' => 'users#reset_password', :as => :reset_password
 
   resources :users do
     resources :use_cases
@@ -18,6 +23,7 @@ WikiUse::Application.routes.draw do
       get 'feeds'
     end
   end
+  
 
   resources :user_sessions
 
@@ -27,6 +33,8 @@ WikiUse::Application.routes.draw do
       get 'purpose'
       get 'groups'
       get 'top'
+      get 'top_wow'
+      get 'top_metoo'
       get 'comment'
       get 'divide_purpose_type'
     end

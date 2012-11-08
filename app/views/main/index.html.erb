@@ -1,48 +1,63 @@
 <!-- 罹먯튂�꾨젅�댁쫰-->
-<div class="hero-unit">
-	<h1 style="color: #ed3a7a;">EVERYUSE</h1>
-	<h2 style="color: #3b3b3b;"> Share Your Creative Uses! </h2>
-	<p style="color: #3b3b3b;">
-		We often use one object to many different purpose
-		<br>
-		Now Share your own creative uses through EveryUse
-	</p>
-	<!-- <p>
-	<a class="btn btn-primary btn-large"> Learn more </a>
-	</p> -->
+<% content_for :head do %>
+<style>
+	.tiles {
+		background: #000;
+	}
+	.tiles img {
+		margin: 0;
+		padding: 0;
+		display: none;
+		max-width: 999em;
+	}
+
+	.tiles-item .caption {
+		background: transparent url(/assets/tiles/caption.png);
+		color: white;
+		font-size: 12px;
+		margin: 0;
+	}
+</style>
+<%= stylesheet_link_tag "tilesgallery/jquery.tilesgallery", :media => :screen %>
+<%= stylesheet_link_tag "lightbox/jquery.lightbox-0.5", :media => :screen %>
+<% end %>
+
+<div class="row">
+	<div class="span12">
+		<div class="hero-unit">
+			<h1 style="color: #ed3a7a;">EVERYUSE</h1>
+			<h2 style="color: #3b3b3b;"> Share Your Creative Uses! </h2>
+			<p style="color: #3b3b3b;">
+				We often use one object to many different purpose
+				<br>
+				Now Share your own creative uses through EveryUse
+			</p>
+		</div>
+	</div>
 </div>
 
 <div class="row">
-	<div id="myCarousel" class="carousel slide span10 offset1" data-interval="5000" style="margin-bottom: 0;">
-		<!-- Carousel items -->
-		<div class="carousel-inner">
-			<% @carousel_list.each_with_index do |use_case, index| %>
-			<div class="item <%= index == 1 ? 'active' : '' %>">
-				<%= image_tag use_case.photo.url(:large), :width => '400', :height => '400' %>
-				<div class="carousel-caption">
-					<h4>First Thumbnail label</h4>
-					<p>
-						<%= "#{use_case}" %>
-					</p>
-				</div>
-			</div>
-			<% end %>
-		</div>
-
-		<!-- Carousel nav -->
-		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	<div class="tiles span12" style="height: 500px;">
+		<% if @gallery_list %>
+		<% @gallery_list.each_with_index do |use_case, index| %>
+		<a href="<%= use_case.photo.url(:large) %>"> <img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>"> </a>
+		<% end %>
+		<% else %>
+		<p>
+			Nothing
+		</p>
+		<% end %>
 	</div>
 </div>
 
 <!-- ���뚭컻 �⑤꼸 -->
 <div class="row" style="margin-top: 0;">
-	<div class="span10 offset1" style="height: 100px; background-color: #3d3d3d;">
+	<div class="span12" style="height: 100px; background-color: #3d3d3d;">
 		<div class="row" style="height: 100%;">
 			<!-- Mobile app -->
-			<div class="span5" style="position: relative; padding: 1.8em 0 0 0;">
-				<a href="https://play.google.com/store/apps/details?id=org.everyuse.android&feature=nav_result#?t=W251bGwsMSwxLDMsIm9yZy5ldmVyeXVzZS5hbmRyb2lkIl0." 
-					style="width: 50px; height: 50px; display: inline; position: absolute; margin-left: 35px"> <%= image_tag 'icon-app-download.png' %> </a>
+			<div class="span6" style="position: relative; padding: 1.8em 0 0 0;">
+				<a href="https://play.google.com/store/apps/details?id=org.everyuse.android&feature=nav_result#?t=W251bGwsMSwxLDMsIm9yZy5ldmVyeXVzZS5hbmRyb2lkIl0."
+				style="width: 50px; height: 50px; display: inline; position: absolute; margin-left: 35px"> <%= image_tag 'icon-app-download.png' %> </a>
 				<p style="color: white; font-size: 24pt; margin-left: 100px;">
 					Download Mobile App
 				</p>
@@ -52,8 +67,8 @@
 			</div>
 
 			<!-- Search Form -->
-			<div class="span5" style="position: relative;">
-				<%= image_tag 'icon-search.png', :style => "position: absolute; width: 50px; height: 50px; background: url('../icon-search.png') center no-repeat; margin-top: 25px;" %>
+			<div class="span6" style="position: relative;">
+				<%= image_tag 'icon-search.png', :style => "position: absolute; width: 50px; height: 50px; margin-top: 25px;" %>
 				<h3 style="color: white; margin-bottom: 0; margin-left: 60px;"> Search Use! </h3>
 				<form class="form-search" style="margin-left: 60px;" method="get" action="#">
 					<div class="input-prepend">
@@ -69,13 +84,13 @@
 </div>
 
 <!-- Top panel -->
-<h2 style="color: #ed3a7a;"><strong>TOP</strong> Ranked Uses</h2>
+<h2 style="color: #ed3a7a; font-size: 20pt;"><strong>TOP</strong> Ranked Uses</h2>
 
 <div class="row">
 	<div class="span6">
 		<table class="table table-hover">
 			<tr>
-				<th colspan="3" style="color: #ffffff; background-color: #ed3a7a;">Wow</th>
+				<th colspan="3" style="color: #ffffff; background-color: #ed3a7a; font-size: 20pt;">Wow</th>
 			</tr>
 			<% @wow_list.each do |use_case| %>
 			<tr>
@@ -92,7 +107,7 @@
 	<div class="span6">
 		<table class="table table-hover">
 			<tr>
-				<th colspan="3" style="color: #ffffff; background-color: #ed3a7a;">Metoo</th>
+				<th colspan="3" style="color: #ffffff; background-color: #ed3a7a; font-size: 20pt;">Metoo</th>
 			</tr>
 			<% @metoo_list.each do |use_case| %>
 			<tr>
@@ -107,4 +122,21 @@
 		</table>
 	</div>
 </div>
-</div>
+
+<% content_for :body_script do %>
+<%= javascript_include_tag "tilesgallery/jquery.tilesgallery" %>
+<%= javascript_include_tag "lightbox/jquery.lightbox-0.5" %>
+<script>
+	$(function() {
+		$(".tiles").tilesGallery({
+			width : $(".tiles").width(),
+			height : $(".tiles").height(),
+			margin : 5,
+			caption : true,
+			captionOnMouseOver : true,
+			callback : function() {
+				$(".tiles a").lightBox();
+			}
+		});	}); 
+</script>
+<% end %>

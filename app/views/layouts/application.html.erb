@@ -2,14 +2,15 @@
 <html>
 	<head>
 		<title>EveryUse</title>
-		<%= stylesheet_link_tag    "application", :media => "screen" %>
-		<%= csrf_meta_tags %>
 		<%= yield :head %>
+		<%= stylesheet_link_tag    "application", :media => "screen" %>
+		<%= stylesheet_link_tag    "bootstrap/bootstrap", :media => "screen" %>
+		<%= csrf_meta_tags %>
 	</head>
 	<body>
 		<div class="container">
+			<!-- NavBar -->
 			<div class="navbar">
-
 				<div class="navbar-inner">
 					<ul class="nav">
 						<li>
@@ -21,14 +22,14 @@
 						<li>
 							<%= nav_link 'View', use_cases_path %>
 						</li>
+						<li>
+							<%= nav_link 'My Use', my_page_shared_path %>
+						</li>
 					</ul>
 					<% unless current_user %>
 					<%= render 'layouts/login_form' %>
 					<% else %>
-					<form class="navbar-form pull-right">
-						<span class='lead'  style="font-size: 1.0em; font-weight: bold; position: relative; bottom: -4px; padding-right: 5px;"> <span style="color: #ed3a7a;"><%= current_user.username %></span>,  welcome to EveryUse! </span>
-						<%= link_to "Logout", :logout, :class => "btn btn-medium btn-danger" %>
-					</form>
+					<%= render 'layouts/logout_form' %>
 					<% end %>
 				</div>
 
@@ -36,14 +37,25 @@
 
 			<%= yield %>
 
-			<!-- JavaScripts -->
-			<%= javascript_include_tag "http://code.jquery.com/jquery-latest.js" %>
-			<%= javascript_include_tag "bootstrap/bootstrap" %>
-			<%= javascript_include_tag "application" %>
-			<script>
-				$(function() {
-					$('input[placeholder], textarea[placeholder]').placeholder();
-				});
-			</script>
+			<div class="row">
+				<div id="footer" class="span12">
+					Address: #255 N25 Department of Industrial design, KAIST 291 Daehakro, Yuseong-gu, Daejeon 305-701, Republic of Korea.
+					Contact: ~~~~@~~~~.com
+					Copyright 2012 Design Media Lab KAIST. All rights reserved.
+				</div>
+			</div>
+
+		</div>
+
+		<!-- JavaScripts -->
+		<%= javascript_include_tag "http://code.jquery.com/jquery-latest.js" %>
+		<%= javascript_include_tag "bootstrap/bootstrap" %>
+		<%= javascript_include_tag "application" %>
+		<script>
+			$(function() {
+				$('input[placeholder], textarea[placeholder]').placeholder();
+			});
+		</script>
+		<%= yield :body_script %>
 	</body>
 </html>

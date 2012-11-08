@@ -30,32 +30,32 @@ class UseCasesController < ApplicationController
     if @use_cases
       @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
     end
-    
-    # 만약 사용자라 로그인한 상태라면, 현재 사용자가 
+
+    # 만약 사용자라 로그인한 상태라면, 현재 사용자가
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @use_cases }
     end
   end
-  
+
   # use_case가 받은 comment 순서대로 정렬
   def comment
     @page, @limit = get_pagination_params(params)
-    
+
     if params[:type]
       @type = params[:type].to_s
     else
       @type = "wow"
     end
-    
+
     @use_cases = UseCase.all.sort_by { |use_case| use_case[@type + 's_count'] }.reverse
-    
+
     # pagination
     if @use_cases
       @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
     end
-    
+
     respond_to do |format|
       format.html
       format.json { render json: @use_cases }
@@ -90,10 +90,40 @@ class UseCasesController < ApplicationController
     end
   end
 
+  def top_wow
+    @page, @limit = get_pagination_params(params)
+    @use_cases = UseCase.all.select{ |use_case| use_case.wows_count > 0 }.sort_by(&:wows_count).reverse
+
+    # pagination
+    if @use_cases
+      @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+    end
+
+    respond_to do |format|
+      format.html { render :template => 'use_cases/index' }
+      format.json { render json: @use_cases }
+    end
+  end
+
+  def top_metoo
+    @page, @limit = get_pagination_params(params)
+    @use_cases = UseCase.all.select{ |use_case| use_case.metoos_count > 0 }.sort_by(&:metoos_count).reverse
+
+    # pagination
+    if @use_cases
+      @use_cases = @use_cases.paginate(:page => @page, :per_page => @limit)
+    end
+
+    respond_to do |format|
+      format.html { render :template => 'use_cases/index' }
+      format.json { render json: @use_cases }
+    end
+  end
+
   # newn API
   def groups
     @page, @limit = get_pagination_params(params)
-    
+
     @use_cases = UseCase.all
 
     # parameter: field
@@ -169,7 +199,7 @@ class UseCasesController < ApplicationController
   # POST /use_cases.json
   def create
     params[:use_case][:user_id] = current_user.id   # for test
-    
+
     @use_case = UseCase.new(params[:use_case])
 
     respond_to do |format|

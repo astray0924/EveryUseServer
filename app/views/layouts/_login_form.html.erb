@@ -1,12 +1,13 @@
 <% @user_session = UserSession.new %>
+
 <%= form_for @user_session, :html => {:class => "navbar-form pull-right"} do |f| %>
-<%= f.label :username, :style => "display: none;" %>
-<%= f.text_field :username, {:placeholder => 'E-mail', :class => 'input-medium'} %>
-
-<%= f.label :password, :style => "display: none;" %>
-<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-medium'} %>
-
-<%= f.submit 'Log-in', :class => 'btn btn-medium btn-danger' %>
-<%= link_to 'Sign-up', new_user_path, :class => 'btn btn-medium btn-inverse' %>
-<%= link_to 'Forgot password?', '#', :class => 'btn btn-link' %>
+	<%= f.label :username, :style => "display: none;" %>
+	<%= f.text_field :username, {:placeholder => 'E-mail', :class => 'input-medium'} %>
+	
+	<%= f.label :password, :style => "display: none;" %>
+	<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-medium'} %>
+	
+	<%= f.submit 'Log-in', :class => 'btn btn-medium btn-danger' %>
+	<%= link_to 'Sign-up', new_user_path, :class => 'btn btn-medium btn-inverse' %>
+	<%= link_to 'Forgot password?', reset_password_path, :class => 'btn btn-link', :style => "font-size: 0.9em;" %>
 <% end %>
