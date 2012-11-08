@@ -10,6 +10,13 @@
 		display: none;
 		max-width: 999em;
 	}
+
+	.tiles-item .caption {
+		background: transparent url(/assets/tiles/caption.png);
+		color: white;
+		font-size: 12px;
+		margin: 0;
+	}
 </style>
 <%= stylesheet_link_tag "tilesgallery/jquery.tilesgallery", :media => :screen %>
 <%= stylesheet_link_tag "lightbox/jquery.lightbox-0.5", :media => :screen %>
@@ -29,9 +36,7 @@
 	<div class="tiles span12" style="height: 500px;">
 		<% if @gallery_list %>
 		<% @gallery_list.each_with_index do |use_case, index| %>
-		<a href="<%= use_case.photo.url(:large) %>"> 
-			<img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>"> 
-		</a>
+		<a href="<%= use_case.photo.url(:large) %>"> <img src="<%= use_case.photo.url(:large) %>" alt="<%= use_case.to_s %>"> </a>
 		<% end %>
 		<% else %>
 		<p>
@@ -128,6 +133,6 @@
 			callback : function() {
 				$(".tiles a").lightBox();
 			}
-		});	});
+		});	}); 
 </script>
 <% end %>
