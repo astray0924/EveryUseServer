@@ -10,8 +10,6 @@ WikiUse::Application.routes.draw do
 
   get "main/index"
 
-  match 'reset_password' => 'users#reset_password', :as => :reset_password
-
   resources :users do
     resources :use_cases
 
@@ -63,6 +61,8 @@ WikiUse::Application.routes.draw do
   match 'relationship' => 'relationships#show', :via => :get
   match 'relationship' => 'relationships#create', :via => :post
   match 'relationship/:id' => 'relationships#destroy', :via => :delete
+  
+  resources :password_resets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

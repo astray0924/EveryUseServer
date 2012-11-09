@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011100154) do
+ActiveRecord::Schema.define(:version => 20121109162551) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -77,7 +77,11 @@ ActiveRecord::Schema.define(:version => 20121011100154) do
     t.integer  "favorites_count",     :default => 0,  :null => false
     t.integer  "wows_count",          :default => 0,  :null => false
     t.integer  "metoos_count",        :default => 0,  :null => false
+    t.string   "perishable_token",    :default => "", :null => false
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
 
   create_table "wows", :force => true do |t|
     t.integer  "user_id"

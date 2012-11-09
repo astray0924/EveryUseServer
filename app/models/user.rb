@@ -11,18 +11,17 @@ class User < ActiveRecord::Base
   has_many :followed_users, :through => :relationships, :source => :followed
 
   has_many :reverse_relationships, :foreign_key => "followed_id",
-                                   :class_name =>  "Relationship",
-                                   :dependent =>   :destroy
+  :class_name =>  "Relationship",
+  :dependent =>   :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
 
   # validation
   validates :username, :uniqueness => true, :presence => true
   validates :email, :uniqueness => true, :presence => true
   validates :password, :presence => true
-  
+
   # default order
   default_scope :order => 'created_at DESC'
-  
   def feeds
     @feeds = Array.new
 
@@ -43,5 +42,10 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
+  end
+
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)
   end
 end
