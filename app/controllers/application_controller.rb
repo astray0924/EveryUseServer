@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper :all
   helper_method :current_user, :current_user_session, :get_pagination_params
-  filter_parameter_logging :password, :password_confirmation
+#  filter_parameter_logging :password, :password_confirmation
 
   # set per_page globally
   WillPaginate.per_page = 10
