@@ -5,46 +5,68 @@
 		<%= yield :head %>
 		<%= stylesheet_link_tag    "application", :media => "screen" %>
 		<%= stylesheet_link_tag    "bootstrap/bootstrap", :media => "screen" %>
+		<style>
+			.container {
+				min-height: 400px;
+			}
+
+			.footer {
+				border-top: 2px groove #d3d3d3;
+				background: #F3F3F3;
+				margin-top: 50px;
+				padding: 30px 0;
+			}
+
+			.footer p {
+				color: #999;
+				font-size: 14px;
+				padding: 0 4px 0 0;
+				text-align: center;
+			}
+		</style>
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
+		<!-- NavBar -->
+		<div class="navbar">
+			<div class="navbar-inner">
+				<ul class="nav">
+					<li>
+						<%= nav_link "Home", main_index_path %>
+					</li>
+					<li>
+						<%= nav_link 'About', about_index_path %>
+					</li>
+					<li>
+						<%= nav_link 'View', use_cases_path %>
+					</li>
+					<li>
+						<%= nav_link 'My Use', my_page_shared_path %>
+					</li>
+				</ul>
+				<% unless current_user %>
+				<%= render 'layouts/login_form' %>
+				<% else %>
+				<%= render 'layouts/logout_form' %>
+				<% end %>
+			</div>
+
+		</div>
+
 		<div class="container">
-			<!-- NavBar -->
-			<div class="navbar">
-				<div class="navbar-inner">
-					<ul class="nav">
-						<li>
-							<%= nav_link "Home", main_index_path %>
-						</li>
-						<li>
-							<%= nav_link 'About', about_index_path %>
-						</li>
-						<li>
-							<%= nav_link 'View', use_cases_path %>
-						</li>
-						<li>
-							<%= nav_link 'My Use', my_page_shared_path %>
-						</li>
-					</ul>
-					<% unless current_user %>
-					<%= render 'layouts/login_form' %>
-					<% else %>
-					<%= render 'layouts/logout_form' %>
-					<% end %>
-				</div>
-
-			</div>
-
 			<%= yield %>
+		</div>
 
-			<div class="row">
-				<div id="footer" class="span12">
-					Address: #255 N25 Department of Industrial design, KAIST 291 Daehakro, Yuseong-gu, Daejeon 305-701, Republic of Korea.
-					Contact: ~~~~@~~~~.com
-					Copyright 2012 Design Media Lab KAIST. All rights reserved.
-				</div>
-			</div>
-
+		<div class="footer">
+			<p class="footer-text">
+				Address: #255 N25 Department of Industrial design, KAIST 291 Daehakro, Yuseong-gu, Daejeon 305-701, Republic of Korea.
+			</p>
+			<p class="footer-text">
+				Contact: <a href="mailto:everyuse.kaist@gmail.com">everyuse.kaist@gmail.com</a>
+			</p>
+			<p class="footer-text">
+				Copyright 2012 Design Media Lab KAIST. All rights reserved.
+			</p>
 		</div>
 
 		<!-- JavaScripts -->
