@@ -1,8 +1,12 @@
 class PasswordResetsController < ApplicationController
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
-  before_filter :require_no_user  
+  before_filter :require_no_user
 
   def new
+    render
+  end
+
+  def edit
     render
   end
 
@@ -11,7 +15,7 @@ class PasswordResetsController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
       flash[:notice] = "Password successfully updated"
-      redirect_to account_url
+      redirect_to root_url
     else
       render :action => :edit
     end
