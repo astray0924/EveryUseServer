@@ -3,10 +3,10 @@
 	<%= flash[:error] %>
 </div>
 <% end %>
-<%= debug(flash) %>
+
 <h1>Change My Password</h1>
 
-<% form_for @user, :url => edit_password_reset_path, :method => :put do |f| %>
+<%= form_for @user, :url => password_reset_path, :method => :put do |f| %>
 <%= f.label :password %>
 <%= f.password_field :password %>
 
