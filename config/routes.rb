@@ -38,8 +38,6 @@ WikiUse::Application.routes.draw do
     end
   end
 
-  match 'stats/(:action)(.:format)', :controller => 'stats'
-
   # pagination
   # match ':controller/page/:page' => ':controller#index', :via => :get, :constraints => { :page => /\d+/ }
   # match ':controller/:action/page/:page' => ':controller#:action', :via => :get, :constraints => { :page => /\d+/ }
