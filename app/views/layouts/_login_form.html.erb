@@ -7,7 +7,7 @@
 	<%= f.label :password, :style => "display: none;" %>
 	<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-medium'} %>
 	
-	<%= f.submit 'Log-in', :class => 'btn btn-medium btn-danger' %>
-	<%= link_to 'Sign-up', new_user_path, :class => 'btn btn-medium btn-inverse' %>
+	<%= f.submit 'Log-in', :class => 'btn btn-small btn-danger' %>
+	<%= link_to 'Sign-up', new_user_path, :class => 'btn btn-small btn-inverse' %>
 	<%= link_to 'Forgot password?', new_password_reset_path, :class => 'btn btn-link', :style => "font-size: 0.9em;" %>
 <% end %>
