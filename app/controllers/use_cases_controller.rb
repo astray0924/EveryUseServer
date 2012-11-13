@@ -14,6 +14,9 @@ class UseCasesController < ApplicationController
       @use_cases = UseCase.includes(:wow, :metoo, :favorite).all
     end
 
+    # Sort by created_at
+    @use_cases = @use_cases.sort_by(&:created_at).reverse
+
     # parameter: type
     if params[:type]
       type = params[:type].to_s
@@ -21,7 +24,6 @@ class UseCasesController < ApplicationController
       @use_cases = case type
             when 'item' then @use_cases.sort_by { |use_case| use_case.item.downcase }
             when 'purpose' then @use_cases.sort_by { |use_case| use_case.purpose.downcase }
-            when 'time' then @use_cases.sort_by(&:created_at).reverse
             else @use_cases
         end
     end
