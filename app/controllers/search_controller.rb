@@ -9,6 +9,7 @@ class SearchController < ApplicationController
 
       # build result object
       @result[:q] = @q
+      @result[:result_count] = @search_by_item.length + @search_by_purpose.length
       @result[:item] = @search_by_item
       @result[:purpose] = @search_by_purpose
     end
