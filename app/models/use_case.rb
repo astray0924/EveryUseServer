@@ -55,6 +55,6 @@ class UseCase < ActiveRecord::Base
   end
   
   def to_s
-    "#{self.item} #{self.purpose_type} #{self.purpose}"
+    "#{self.item} #{self.purpose} #{self.purpose_type}"
   end
 end

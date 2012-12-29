@@ -17,6 +17,9 @@ group :assets do
     :branch => 'static'
 end
 
+gem 'eventmachine'
+gem 'thin'
+
 gem 'authlogic'
 gem 'omniauth-identity'
 gem 'omniauth-twitter'
