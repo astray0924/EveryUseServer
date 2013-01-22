@@ -1,9 +1,10 @@
-<h1>Search#Index</h1>
-<form action="<%= search_path %>" method="get">
-	<input type="search" name="q" />
-	<input type="submit" value="Search" />
+<form class="form-search" action="<%= search_path %>" method="get" style="width: 400px; margin: 0 auto; position: relative; left: 60px;">
+  <input type="text" class="input-medium search-query">
+  <button type="submit" class="btn">Search</button>
 </form>
 
+<%= display_usecase_list(UseCase.all[1, 10]) %>
+<!--
 <h2>Search by Item</h2>
 <% if not @result[:item].blank? %>
 <% @result[:item].each do |use_case| %>
@@ -21,3 +22,4 @@
 </p>
 <% end %>
 <% end %>
+-->
