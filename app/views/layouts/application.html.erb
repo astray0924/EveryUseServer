@@ -27,54 +27,59 @@
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
-		<!-- NavBar -->
-		<div class="navbar">
-			<div class="navbar-inner">
-				<ul class="nav">
-					<li>
-						<%= nav_link "Home", main_index_path %>
-					</li>
-					<li>
-						<%= nav_link 'About', about_index_path %>
-					</li>
-					<li>
-						<%= nav_link 'View', use_cases_path %>
-					</li>
-					<li>
-						<%= nav_link 'My Use', my_page_shared_path %>
-					</li>
-				</ul>
-				<% unless current_user %>
-				<%= render 'layouts/login_form' %>
-				<% else %>
-				<%= render 'layouts/logout_form' %>
-				<% end %>
-			</div>
-
-		</div>
-
 		<div class="container">
+			<!-- NavBar -->
+			<div class="navbar">
+				<div class="navbar-inner">
+					<ul class="nav">
+						<li>
+							<%= nav_link "Home", main_index_path %>
+						</li>
+						<li>
+							<%= nav_link 'About', about_index_path %>
+						</li>
+						<li>
+							<%= nav_link 'View', use_cases_path %>
+						</li>
+						<li>
+							<%= nav_link 'My Use', my_page_shared_path %>
+						</li>
+					</ul>
+					<% unless current_user %>
+					<%= render 'layouts/login_form' %>
+					<% else %>
+					<%= render 'layouts/logout_form' %>
+					<% end %>
+				</div>
+			</div>
+			
 			<div class="alert-container row">
 				<!-- error -->
 				<% if flash[:error] %>
 				<div class="alert alert-error span12">
-					<button type="button" class="close" data-dismiss="alert">x</button>
+					<button type="button" class="close" data-dismiss="alert">
+						x
+					</button>
 					<%= flash[:error] %>
 				</div>
 				<% end %>
-				
+
 				<!-- warning -->
 				<% if flash[:warning] %>
 				<div class="alert span12">
-					<button type="button" class="close" data-dismiss="alert">x</button>
+					<button type="button" class="close" data-dismiss="alert">
+						x
+					</button>
 					<%= flash[:warning] %>
 				</div>
 				<% end %>
-				
+
 				<!-- notice -->
 				<% if flash[:notice] %>
 				<div class="alert alert-info span12">
-					<button type="button" class="close" data-dismiss="alert">x</button>
+					<button type="button" class="close" data-dismiss="alert">
+						x
+					</button>
 					<%= flash[:notice] %>
 				</div>
 				<% end %>
