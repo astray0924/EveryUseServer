@@ -61,13 +61,13 @@
 				<p style="color: white; font-size: 24pt; margin-left: 100px;">
 					Download Mobile App
 				</p>
-				<p style="color: #e7685d; font-size: 16pt; margin-left: 100px;">
+				<p style="color: #e7685d; font-size: 14pt; margin-left: 100px;">
 					Install EveryUse to Your mobile phone!
 				</p>
 			</div>
 
 			<!-- Search Form -->
-			<div class="span6" style="position: relative;">
+			<div class="span6" style="position: relative; left: 70px;">
 				<%= image_tag 'icon-search.png', :style => "position: absolute; width: 50px; height: 50px; margin-top: 25px;" %>
 				<h3 style="color: white; margin-bottom: 0; margin-left: 60px;"> Search Use! </h3>
 				<form class="form-search" style="margin-left: 60px;" method="get" action="<%= search_path %>">
@@ -94,11 +94,11 @@
 			</tr>
 			<% @wow_list.each do |use_case| %>
 			<tr>
-				<td class="usecase-thumbnail-container" style="width: 100px; height: 100px;"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
+				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date_string}"%> </span></td>
-				<td class="usecase-comment-count" style="width: 100px; height: 100px; padding: 0;"><span><%= use_case.wows_count %></span></td>
+				<td class="usecase-comment-count wow"><span><%= use_case.wows_count %></span></td>
 			</tr>
 			<% end %>
 
@@ -111,11 +111,11 @@
 			</tr>
 			<% @metoo_list.each do |use_case| %>
 			<tr>
-				<td class="usecase-thumbnail-container" style="width: 100px; height: 100px;"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
+				<td class="usecase-thumbnail-container"><%= image_tag use_case.photo.url(:thumb), :class => "usecase-photo-thumb" %></td>
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date_string}" %> </span></td>
-				<td class="usecase-comment-count" style="width: 100px; height: 100px; padding: 0;"><span><%= use_case.metoos_count %></span></td>
+				<td class="usecase-comment-count metoo"><span><%= use_case.metoos_count %></span></td>
 			</tr>
 			<% end %>
 

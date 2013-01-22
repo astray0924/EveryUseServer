@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .usecase-title {
   color: #e9867d;
-  font-size: 16pt;
+  font-size: 15pt;
+  font-weight: bold;
 }
 
 .table .usecase-title-container {
@@ -12,14 +13,24 @@
 
 .table .usecase-thumbnail-container {
   padding: 0;
+  width: 100px; 
+  height: 100px;
 }
 
 .table .usecase-comment-count {
   vertical-align: middle;
   text-align: center;
-  background: url(assets/icon-comment-bg.png) center no-repeat;
-  width: 69px;
-  height: 69px;
+  width: 100px;
+  height: 100px;
+  padding: 0;
+}
+
+.wow {
+  background: url('icon-comment-bg-wow.png') center no-repeat;
+}
+
+.metoo {
+  background: url('icon-comment-bg-metoo.png') center no-repeat;
 }
 
 .hero-unit {
