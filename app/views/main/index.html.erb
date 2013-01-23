@@ -98,7 +98,7 @@
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date_string}"%> </span></td>
-				<td class="usecase-comment-count wow"><span><%= use_case.wows_count %></span></td>
+				<td class="usecase-comment-count wow-count"><span><%= use_case.wows_count %></span></td>
 			</tr>
 			<% end %>
 
@@ -115,7 +115,7 @@
 				<td class="usecase-title-container"><span class="usecase-title"> <%= "#{use_case}" %></span>
 				<br>
 				<span> <%= "by #{use_case.user.username} #{use_case.get_date_string}" %> </span></td>
-				<td class="usecase-comment-count metoo"><span><%= use_case.metoos_count %></span></td>
+				<td class="usecase-comment-count metoo-count"><span><%= use_case.metoos_count %></span></td>
 			</tr>
 			<% end %>
 
