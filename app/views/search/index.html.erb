@@ -21,9 +21,10 @@
 		</form>
 
 		<h2 id="item">Search by Item</h2>
-		<%= display_usecase_list(UseCase.all[1, 10]) %>
+		<%= display_usecase_list(@result[:item], 5) %>
 
 		<h2 id="purpose">Search by Purpose</h2>
+		<%= display_usecase_list(@result[:purpose], 5) %>
 	</div>
 </div>
 <!--

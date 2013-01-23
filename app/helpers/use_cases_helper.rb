@@ -1,8 +1,8 @@
 module UseCasesHelper
-  def display_usecase_list(use_cases)
+  def display_usecase_list(use_cases, span_width)
     content_tag(:ul, :class => "use_cases thumbnails") do
       use_cases.collect do |use_case|
-        content_tag(:li, :class => "span5") do 
+        content_tag(:li, :class => "span" + span_width.to_s) do 
           user_wow_id = get_wow_id(use_case, current_user)
           user_metoo_id = get_metoo_id(use_case, current_user)
           
@@ -55,14 +55,14 @@ module UseCasesHelper
                 if current_user
                   content_tag(:div, :class => 'btn-panel') do
                     # wow button
-                    content_tag(:button, :class => 'btn wow btn-danger', 
+                    content_tag(:button, :class => 'btn wow btn-danger ' + (user_wow_id == 0 ? '' : 'active'), 
                     'data-toggle' => 'button') do
                       content_tag(:i, "", :class => 'icon-thumbs-up').html_safe + 
                       " Wow"
                     end.html_safe + 
                     
                     # metoo button
-                    content_tag(:button, :class => 'btn metoo btn-primary', 
+                    content_tag(:button, :class => 'btn metoo btn-primary ' + (user_metoo_id == 0 ? '' : 'active'), 
                     'data-toggle' => 'button', 
                     :style => "margin-left: 5px;") do
                       content_tag(:i, "", :class => 'icon-thumbs-up').html_safe + 
@@ -85,7 +85,7 @@ module UseCasesHelper
     end
   end
   
-  def get_metoo_id(use_case, user_id)
+  def get_metoo_id(use_case, current_user)
     if current_user and use_case.metoo.where('user_id = ?', current_user.id).exists? 
       id = use_case.metoo.where('user_id = ?', current_user.id).first.id
     else
