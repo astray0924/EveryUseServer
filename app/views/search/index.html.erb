@@ -27,22 +27,3 @@
 		<%= display_usecase_list(@result[:purpose], 5) %>
 	</div>
 </div>
-<!--
-<h2>Search by Item</h2>
-<% if not @result[:item].blank? %>
-<% @result[:item].each do |use_case| %>
-<p>
-<%= use_case.as_json nil %>
-</p>
-<% end %>
-<% end %>
-
-<h2>Search by Purpose</h2>
-<% if not @result[:item].blank? %>
-<% @result[:purpose].each do |use_case| %>
-<p>
-<%= use_case.as_json nil %>
-</p>
-<% end %>
-<% end %>
--->

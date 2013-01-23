@@ -1,0 +1,12 @@
+<div class="row">
+	<%= render 'my_page/sidebar' %>
+	
+	<div class="span10">
+		<h1><%= @title %></h1>
+		<%= display_usecase_list(@use_cases, 5) %>
+		
+		<!-- Pagination -->
+		<%= will_paginate @use_cases, :class => 'pagination pagination-centered', :renderer => BootstrapPagination::Rails %>
+	</div>
+</div>
+
