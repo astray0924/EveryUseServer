@@ -1,8 +1,8 @@
 <div class="row">
 
 	<div class="span2">
-		<ul class="nav nav-pills nav-stacked">
-			<li class="active">
+		<ul class="nav nav-pills nav-stacked" id="search_nav">
+			<li>
 				<a href="#item">Item</a>
 			</li>
 			<li>
@@ -12,7 +12,7 @@
 		</ul>
 	</div>
 
-	<div class="content row span10">
+	<div class="content span10" data-spy="scroll" data-target="#search_nav" data-offset="0">
 		<form class="form-search" action="<%= search_path %>" method="get" style="width: 400px; margin: 0 auto; position: relative; left: 60px;">
 			<input type="text" class="input-medium search-query">
 			<button type="submit" class="btn">

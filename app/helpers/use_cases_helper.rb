@@ -63,7 +63,8 @@ module UseCasesHelper
                     
                     # metoo button
                     content_tag(:button, :class => 'btn metoo btn-primary', 
-                    'data-toggle' => 'button') do
+                    'data-toggle' => 'button', 
+                    :style => "margin-left: 5px;") do
                       content_tag(:i, "", :class => 'icon-thumbs-up').html_safe + 
                       " Me, too"
                     end.html_safe
