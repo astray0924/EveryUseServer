@@ -46,5 +46,11 @@ class MyPageController < ApplicationController
   end
 
   def following
+    @followings = current_user.followed_users
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @followings }
+    end
   end
 end
