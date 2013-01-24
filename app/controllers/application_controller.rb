@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper :all
   helper_method :current_user, :current_user_session, :get_pagination_params
-#  filter_parameter_logging :password, :password_confirmation
+  #  filter_parameter_logging :password, :password_confirmation
 
   # set per_page globally
   WillPaginate.per_page = 10
@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
       store_location
       flash[:notice] = "You must be logged in to access this page"
       redirect_to new_user_session_url
-      return false
+    return false
     end
   end
 
@@ -50,12 +50,12 @@ class ApplicationController < ActionController::Base
       store_location
       flash[:notice] = "You must be logged out to access this page"
       redirect_to root_url
-      return false
+    return false
     end
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
   end
 
   def redirect_back_or_default(default)

@@ -1,4 +1,6 @@
 class MyPageController < ApplicationController
+  before_filter :require_user
+  
   def shared
     @title = "Shared"
     @page, @limit = get_pagination_params(params)
@@ -6,7 +8,7 @@ class MyPageController < ApplicationController
     if !current_user
       @use_cases = []
     else
-      @use_cases = UseCase.where('user_id = ?', current_user.id).paginate(:page => @page, :per_page => @limit)
+      @use_cases = UseCase.includes(:wow, :metoo, :favorite).where('user_id = ?', current_user.id).paginate(:page => @page, :per_page => @limit)
     end
 
     respond_to do |format|
