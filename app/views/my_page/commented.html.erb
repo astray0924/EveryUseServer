@@ -1,0 +1,12 @@
+<div class="row">
+	<%= render 'my_page/sidebar' %>
+	
+	<div class="span10">
+		<h1>Wow</h1>
+		<%= display_usecase_list(@use_cases[:wow], 5) %>
+	
+		<h1>Me, too</h1>
+		<%= display_usecase_list(@use_cases[:metoo], 5) %>
+	</div>
+</div>
+
