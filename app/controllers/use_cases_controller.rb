@@ -1,6 +1,6 @@
 class UseCasesController < ApplicationController
   helper :all
-  before_filter :require_login, :only => [:new, :edit, :create, :update]
+  # before_filter :require_login, :only => [:new, :edit, :create, :update]
   # GET /use_cases
   # GET /use_cases.json
   def index
@@ -235,7 +235,7 @@ class UseCasesController < ApplicationController
   # DELETE /use_cases/1.json
   def destroy
     @use_case = UseCase.find(params[:id])
-    @use_case.destroy
+    @use_case.destroy unless @use_case.blank?
 
     respond_to do |format|
       format.html { redirect_to use_cases_url }
