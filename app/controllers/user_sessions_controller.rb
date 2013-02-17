@@ -36,7 +36,7 @@ class UserSessionsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+
   # 2주 동안 로그인 유지
   def remember_me_for
     2.weeks

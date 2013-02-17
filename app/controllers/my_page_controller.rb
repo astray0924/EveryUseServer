@@ -1,5 +1,6 @@
 class MyPageController < ApplicationController
   before_filter :require_user
+  
   def shared
     @title = "Shared"
     @page, @limit = get_pagination_params(params)
