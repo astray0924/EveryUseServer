@@ -10,8 +10,8 @@ module UseCasesHelper
             :class => "thumbnail", 
             'data-usecase-id' => use_case.id,
             'data-user-id' => current_user ? current_user.id : 0,
-            'data-user-wow-id' => user_wow_id},
-            'data-user-metoo-id' => user_metoo_id) do
+            'data-user-wow-id' => user_wow_id,
+            'data-user-metoo-id' => user_metoo_id}) do
               
               content_tag(:div, :class => 'usecase-photo-container') do
                 image_tag(use_case.photo.url(:large), :class => 'usecase-photo')
