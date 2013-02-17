@@ -193,7 +193,6 @@ DEPENDENCIES
   binding_of_caller
   cancan
   coffee-rails (~> 3.2.1)
-  eventmachine
   jquery-rails
   meta_request
   mysql2
