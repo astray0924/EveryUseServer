@@ -1,5 +1,9 @@
 module UseCasesHelper
   def display_usecase_list(use_cases, span_width)
+    if use_cases.blank?
+      return nil
+    end
+    
     content_tag(:ul, :class => "use_cases thumbnails") do
       use_cases.collect do |use_case|
         content_tag(:li, :class => "span" + span_width.to_s) do 
