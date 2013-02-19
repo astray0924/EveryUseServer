@@ -1,11 +1,13 @@
 module UseCasesHelper
+  require 'enumerator'
+  
   def display_usecase_list(use_cases, span_width)
     if use_cases.blank?
       return nil
     end
     
     content_tag(:ul, :class => "use_cases thumbnails") do
-      use_cases.collect do |use_case|
+      use_cases.collect.with_index do |use_case, index|
         content_tag(:li, :class => "span" + span_width.to_s) do 
           user_wow_id = get_wow_id(use_case, current_user)
           user_metoo_id = get_metoo_id(use_case, current_user)
@@ -18,6 +20,7 @@ module UseCasesHelper
             'data-user-metoo-id' => user_metoo_id}) do
               
               content_tag(:div, :class => 'usecase-photo-container') do
+                content_tag(:span, index + 1, :style => 'font-style: bold; font-size: 1.2em; color: #0099cc; display: block;') + 
                 image_tag(use_case.photo.url(:large), :class => 'usecase-photo')
               end + 
               

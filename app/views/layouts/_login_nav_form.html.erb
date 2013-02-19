@@ -2,10 +2,10 @@
 
 <%= form_for @user_session, :html => {:class => "navbar-form pull-right"} do |f| %>
 	<%= f.label :username, :style => "display: none;" %>
-	<%= f.text_field :username, {:placeholder => 'E-mail', :class => 'input-medium'} %>
+	<%= f.text_field :username, {:placeholder => 'E-mail', :class => 'input-small'} %>
 	
 	<%= f.label :password, :style => "display: none;" %>
-	<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-medium'} %>
+	<%= f.password_field :password, {:placeholder => 'Password', :class => 'input-small'} %>
 	
 	<%= f.submit 'Log-in', :class => 'btn btn-small btn-danger' %>
 	<%= link_to 'Sign-up', new_user_path, :class => 'btn btn-small btn-inverse' %>
