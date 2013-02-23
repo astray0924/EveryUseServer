@@ -22,8 +22,9 @@ test:
 
 production:
   adapter: mysql2
-  host: localhost
-  username: everyuse
+  socket: mysql
+  host: 127.0.0.1
+  username: root
   password: everyuse123!
   database: everyuse
   encoding: utf8
