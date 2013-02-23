@@ -1,5 +1,8 @@
 class UseCase < ActiveRecord::Base
   require 'date'
+  require 'FileUtils'
+
+  attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
 
   belongs_to :user, :counter_cache => true
   has_many :favorite, :dependent => :destroy
@@ -7,9 +10,9 @@ class UseCase < ActiveRecord::Base
   has_many :metoo, :dependent => :destroy
 
   has_attached_file :photo, :styles => {:thumb => ["100x100#", :jpg], :large => ["400x400>", :jpg]},
-  					:default_style => :thumb,
-                    :url => "/:attachment/:id/:style/:basename.:extension",
-                    :path => ":rails_root/public/:attachment/:id/:style/:basename.:extension"
+  :default_style => :thumb,
+  :url => "/:attachment/:id/:basename_:style.:extension",
+  :path => ":rails_root/public/:attachment/:id/:basename_:style.:extension"
 
   # belongs_to
   belongs_to :ref_all, :class_name => "UseCase", :foreign_key => "ref_all_id"
@@ -23,7 +26,12 @@ class UseCase < ActiveRecord::Base
   validates :item, :presence => true, :length => { :maximum => 35 }
   validates :purpose, :presence => true, :length => { :maximum => 40 }
 
-  attr_accessor :current_user_favorite, :current_user_wow, :current_user_metoo
+  after_save :generate_image_using_id
+
+  def generate_image_using_id
+    path = self.photo.path(:original)
+    FileUtils.cp(path, File.join(File.dirname(path), self.id.to_s + File.extname(path)))
+  end
 
   def as_json(options)
     super(:methods => [:writer_id, :writer_name, :user_group, :converted_file_name])
