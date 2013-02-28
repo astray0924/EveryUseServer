@@ -27,7 +27,7 @@ class SearchController < ApplicationController
     @result = if @q.blank? || @attr.blank? || !UseCase.column_names.include?(@attr)
       nil
     else
-      UseCase.all(:conditions => ["#{@attr} LIKE ?", "#{@q}%"], :limit => 5, :order => @attr).map {|use_case| use_case[@attr] }
+      UseCase.all(:conditions => ["#{@attr} LIKE ?", "#{@q}%"], :limit => 5, :order => @attr).map {|use_case| use_case[@attr] }.uniq
     end
 
     respond_to do |format|
