@@ -34,7 +34,7 @@ class UseCase < ActiveRecord::Base
   end
 
   def as_json(options)
-    super(:methods => [:writer_id, :writer_name, :user_group, :converted_file_name])
+    super(:methods => [:writer_id, :writer_name, :user_group, :photo_file_name_large, :photo_file_name_thumb])
   end
 
   def writer_id
@@ -50,9 +50,13 @@ class UseCase < ActiveRecord::Base
       @username = User.find(user_id).username
     end
   end
-
-  def converted_file_name
-    @file_name = self.photo.url(:thumb).split('/').last.split('?').first
+  
+  def photo_file_name_large
+    self.photo.url(:large).split('/').last.split('?').first
+  end
+  
+  def photo_file_name_thumb
+    self.photo.url(:thumb).split('/').last.split('?').first
   end
 
   def get_date_string
