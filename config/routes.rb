@@ -47,7 +47,8 @@ WikiUse::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
   # search
-  match 'search' => 'search#index', :as => :search
+  match 'search' => 'search#index', :as => :search, :via => :get
+  match 'search/query_suggestion' => 'search#query_suggestion', :as => :query_suggestion, :via => :get
 
   # comments
   match 'comments' => 'comments#show', :via => :get
