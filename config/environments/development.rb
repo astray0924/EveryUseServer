@@ -34,6 +34,9 @@ WikiUse::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # serve static assets
+  config.serve_static_assets = true
 
   # ActionMailer 설정 (Gmail)
   config.action_mailer.perform_deliveries = true

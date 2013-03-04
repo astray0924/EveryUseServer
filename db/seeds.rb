@@ -55,4 +55,4 @@ seed_file.each do |l|
 	if !photo.nil?
 		photo.close
 	end
-end
+end
