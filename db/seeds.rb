@@ -26,6 +26,7 @@ end
 # parse seed JSON
 seed_file = File.open('db/seed/seed.json', 'r')
 
+@user_id = User.where('username = ?', 'olduser').first.id
 seed_file.each do |l|
 	json = JSON.parse(l)
 	
@@ -38,20 +39,17 @@ seed_file.each do |l|
 		photo = dummy
 	end
 	
-	user_id = User.where('username = ?', 'olduser')
 	item = json['item']
 	purpose = json['purpose']
 	uploadDateTime = json['uploadDateTime']
 	
-	use_case = UseCase.new(:user_id => user_id, :item => item, :purpose => purpose, :photo => photo, :purpose_type => "as", :created_at => uploadDateTime)
+	use_case = UseCase.new(:user_id => @user_id, :item => item, :purpose => purpose, :photo => photo, :purpose_type => "as", :created_at => uploadDateTime)
 	
-	if !UseCase.where("item = ? AND purpose = ?", item, purpose).exists?
-	  if use_case.valid?
-  		use_case.save()
-    else
-      print use_case.errors.full_messages
-	  end
-	end
+  if use_case.valid?
+		use_case.save()
+  else
+    print use_case.errors.full_messages
+  end
 	
 	# close the photo file
 	if !photo.nil?
