@@ -20,7 +20,7 @@ module UseCasesHelper
             'data-user-metoo-id' => user_metoo_id}) do
               
               content_tag(:div, :class => 'usecase-photo-container') do
-                content_tag(:span, index + 1, :style => 'font-style: bold; font-size: 1.2em; color: #0099cc; display: block;') + 
+                # content_tag(:span, index + 1, :style => 'font-style: bold; font-size: 1.2em; color: #0099cc; display: block;') + 
                 image_tag(use_case.photo.url(:large), :class => 'usecase-photo')
               end + 
               
