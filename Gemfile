@@ -12,20 +12,19 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'twitter-bootstrap-rails',
-    :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git',
-    :branch => 'static'
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'static'
 end
 
 gem 'thin'
 
 gem 'authlogic'
+gem 'scrypt'
 
-gem "paperclip", "~> 3.0"
+gem "paperclip"
 
 gem "cancan"
 
-gem 'will_paginate', '~> 3.0'
+gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
 gem 'jquery-rails'
@@ -35,7 +34,7 @@ gem 'redcarpet'
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
 end

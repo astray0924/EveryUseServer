@@ -23,8 +23,8 @@ class UseCase < ActiveRecord::Base
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/bmp']
   validates :user_id, :presence => true
-  validates :item, :presence => true, :length => { :maximum => 35 }
-  validates :purpose, :presence => true, :length => { :maximum => 40 }
+  validates :item, :presence => true, :length => { :maximum => 50 }
+  validates :purpose, :presence => true, :length => { :maximum => 100 }
 
   after_save :generate_image_using_id
 
