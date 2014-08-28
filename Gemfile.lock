@@ -59,7 +59,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.1)
+    coffee-script-source (1.8.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     erubis (2.7.0)
